@@ -13,10 +13,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        String mathieu = "mathieu";
-        String test = "val";
-        boolean vrai = true;
-        String oui = "test";
         var javaVersion = SystemInfo.javaVersion();
         var javafxVersion = SystemInfo.javafxVersion();
 
