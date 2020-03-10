@@ -1,8 +1,6 @@
 package com.tyjohtech;
 
-import classes.Element;
-import classes.ChaineProd;
-import classes.Usine;
+import classes.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
