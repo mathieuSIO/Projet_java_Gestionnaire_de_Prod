@@ -19,7 +19,7 @@ public class App extends Application {
         var javaVersion = SystemInfo.javaVersion();
         var javafxVersion = SystemInfo.javafxVersion();
 
-        var label = new Label("Hello , JavaFX : " + unelem.getCodeE());
+        var label = new Label("Bienvenue sur le logiciel GestionProd " + unelem.getCodeE());
         var scene = new Scene(new StackPane(label), 640, 480);
         stage.setScene(scene);
         stage.show();
