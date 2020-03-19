@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -44,7 +45,11 @@ public class App extends Application {
 		addButton.setMinWidth(100);
 		GridPane.setConstraints(addButton, 3, 2);
 		
-		grid.getChildren().addAll(tableArea, taskName, priority, addButton);
+		Button cancelButton = new Button("Cancel");
+		cancelButton.setMinWidth(100);
+		GridPane.setConstraints(cancelButton, 3, 3);
+		
+		grid.getChildren().addAll(tableArea, taskName, priority, addButton, cancelButton);
 		
 		Scene scene = new Scene(grid, 600, 400);
 		
