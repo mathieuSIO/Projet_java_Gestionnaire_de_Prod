@@ -3,10 +3,13 @@ package com.tyjohtech;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -49,7 +52,13 @@ public class App extends Application {
 		cancelButton.setMinWidth(100);
 		GridPane.setConstraints(cancelButton, 3, 3);
 		
-		grid.getChildren().addAll(tableArea, taskName, priority, addButton, cancelButton);
+		HBox progressArea = new HBox();
+		progressArea.getChildren().addAll(new Label("Progress"),
+									   new Spinner<Integer>(0, 100, 0),
+									   new CheckBox("Completed"));
+		GridPane.setConstraints(progressArea, 1, 3, 2, 1);
+		
+		grid.getChildren().addAll(tableArea, taskName, priority, addButton, cancelButton, progressArea);
 		
 		Scene scene = new Scene(grid, 600, 400);
 		
