@@ -1,12 +1,15 @@
 package com.tyjohtech;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -28,10 +31,16 @@ public class App extends Application {
 		grid.setHgap(20);
 		grid.setGridLinesVisible(false);
 		
-		Label tableArea = new Label("This is where tasks table will come");
-		tableArea.setMinWidth(600);
+		TableView table = new TableView();
+		table.setMinHeight(300);
+		table.setMinWidth(550);
 		
-		GridPane.setConstraints(tableArea, 1, 1, 3, 1);
+		TableColumn column1 = new TableColumn("Priority");
+		TableColumn column2 = new TableColumn("Description");
+		TableColumn column3 = new TableColumn("Progress");
+		table.getColumns().addAll(column1, column2, column3);
+		
+		GridPane.setConstraints(table, 1, 1, 3, 1);
 		
 		TextField taskName = new TextField();
 		taskName.setPromptText("Enter task name");
@@ -56,9 +65,10 @@ public class App extends Application {
 		progressArea.getChildren().addAll(new Label("Progress"),
 									   new Spinner<Integer>(0, 100, 0),
 									   new CheckBox("Completed"));
+		progressArea.setAlignment(Pos.CENTER_RIGHT);
+		progressArea.setSpacing(10);
 		GridPane.setConstraints(progressArea, 1, 3, 2, 1);
-		
-		grid.getChildren().addAll(tableArea, taskName, priority, addButton, cancelButton, progressArea);
+		grid.getChildren().addAll(table, taskName, priority, addButton, cancelButton, progressArea);
 		
 		Scene scene = new Scene(grid, 600, 400);
 		
