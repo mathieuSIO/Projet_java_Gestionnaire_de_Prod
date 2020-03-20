@@ -14,8 +14,8 @@ public class Element {
     private String nomE;
     private String qteE;
     private String unite;
-    private float prixA;
-    private float prixV;
+	private String prixA;
+    private String prixV;
     
 
     /// LES GETTEURS
@@ -31,15 +31,21 @@ public class Element {
     public String getUnite() {
         return unite;
     }
-    public float getPrixA() {
+    public String getPrixA() {
         return prixA;
     }
-    public float getPrixV() {
+    public void setPrixA(String prixA) {
+		this.prixA = prixA;
+	}
+    public String getPrixV() {
         return prixV;
     }
+	public void setPrixV(String prixV) {
+		this.prixV = prixV;
+	}
 
     /// LE CONSTRUCTEUR
-    public Element(String codeE, String nomE, String qteE, String unite, float prixA, float prixV) {
+    public Element(String codeE, String nomE, String qteE, String unite, String prixA, String prixV) {
         this.codeE = codeE;
         this.nomE = nomE;
         this.qteE = qteE;
@@ -52,6 +58,10 @@ public class Element {
         codeE = "Test liaison entre classes et affichage";
     }
     /// LES METHODES
+    
+    public String toString() {
+    	return this.codeE + " " + this.nomE + " " + this.qteE + " " + this.unite + " " + this.prixA + "€ " + this.prixV + "€";
+    }
     
 
 }

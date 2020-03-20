@@ -86,7 +86,7 @@ public class Usine{
         Iterator<Element> it = lesAchats.iterator();
         while (it.hasNext()) {
             Element e = it.next();
-            somme += e.getPrixA();
+            somme += Integer.parseInt(e.getPrixA());
         }
         return somme;
     }
