@@ -1,15 +1,18 @@
 package classes;
 
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-
 public class CSVReader {
 
 	public static void main(String[] args) throws IOException{
+		
+
+		
 		File csvFile = new File("C:/Users/Ly/Documents/L3MIASHS/S6/csvprojet/elements.csv");
 			BufferedReader br = new BufferedReader(new FileReader(csvFile));
 			String line = "";
