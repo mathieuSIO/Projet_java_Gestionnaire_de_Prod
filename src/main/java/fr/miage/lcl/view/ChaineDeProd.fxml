@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane minHeight="500.0" minWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane minHeight="500.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="283.0" layoutY="14.0" text="Chaine de Production" AnchorPane.leftAnchor="283.0" AnchorPane.rightAnchor="282.0" AnchorPane.topAnchor="10.0">
          <font>
@@ -27,8 +26,11 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="14.0" layoutY="428.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Acceuil" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <Button layoutX="14.0" layoutY="428.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Accueil" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
       <Button defaultButton="true" layoutX="736.0" layoutY="436.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Import.csv" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
       <Button layoutX="428.0" layoutY="386.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Planifier" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="428.0" AnchorPane.rightAnchor="372.0" />
    </children>
+   <padding>
+      <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+   </padding>
 </AnchorPane>
