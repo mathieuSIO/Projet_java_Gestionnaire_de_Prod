@@ -40,7 +40,7 @@ public class MainApp extends Application {
 
 		initRootLayout();
 
-		showChaineDeProd();
+//		showChaineDeProd();
 	}
 
 	public void initRootLayout() {
@@ -59,17 +59,17 @@ public class MainApp extends Application {
 		}
 	}
 
-	public void showChaineDeProd() {
-		try {
-			// Load person overview.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/ChaineDeProd.fxml"));
-			AnchorPane chaineProd = (AnchorPane) loader.load();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void showChaineDeProd() {
+//		try {
+//			// Load person overview.
+//			FXMLLoader loader = new FXMLLoader();
+//			loader.setLocation(MainApp.class.getResource("view/ChaineDeProd.fxml"));
+//			AnchorPane chaineProd = (AnchorPane) loader.load();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	public Stage getPrimaryStage() {
 		return primaryStage;

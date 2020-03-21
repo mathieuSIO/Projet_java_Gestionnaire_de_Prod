@@ -133,6 +133,8 @@ public class CSVReader {
 				for (int i = 0; i < tabEntree.length; i = i + 2) {
 					supprimerParentheses(tabEntree, i);
 					Element element = trouverElementEnFonctionDuCode(listeElements, tabEntree[i]);
+					System.out.println("Element : " + element.getCode());
+					System.out.println("Float : " + Float.parseFloat(tabEntree[i + 1]));
 					mapEntree.put(element, Float.parseFloat(tabEntree[i + 1]));
 				}
 
