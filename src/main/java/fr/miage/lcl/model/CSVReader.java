@@ -96,23 +96,25 @@ public class CSVReader {
 		}
 	}
 
-	public final static String CHEMIN_FIC_ELEMENTS = "./elements.csv";
-	public final static String CHEMIN_FIC_CHAINES = "./chaines.csv";
-	public final static String CHEMIN_FIC_PRIX = "./prix.csv";
-	
-	
-	//Liste qui recupere les eléménts
-	static ArrayList<Element> mesElement = new ArrayList<Element>();
-	
-	public static void getLesElem()throws IOException {
-		//On recupere les eléments depuis un csv
-		File csvFileE = new File(CHEMIN_FIC_ELEMENTS);
-		BufferedReader br = new BufferedReader(new FileReader(csvFileE));
-		
-		//On saute la premiere ligne qui est le libelle des colonnes
-		String sautLigne = br.readLine();
-		
-		String line = "";
+	/**
+	 * Permet de trouver l'élément correspondant au code passé en paramètre, dans la
+	 * liste des elements
+	 * 
+	 * @param listeElement
+	 * @param code
+	 * @return
+	 */
+	private static Element trouverElementEnFonctionDuCode(List<Element> listeElement, String code) {
+		for (Element element : listeElement) {
+			if (element.getCode().compareTo(code) == 0) {
+				return element;
+			}
+		}
+		return null;
+	}
+
+	public static ArrayList<ChaineProd> lireChaine(ArrayList<Element> listeElements) {
+		FileInputStream ficChaine;
 		try {
 			ficChaine = new FileInputStream(CSVReader.CHEMIN_FIC_CHAINES_CSV);
 			BufferedReader srcChaine = new BufferedReader(new InputStreamReader(ficChaine));
@@ -180,38 +182,70 @@ public class CSVReader {
 				return chaine;
 			}
 		}
-		
-		//On recupere les prix des éléments depuis un csv
-		File csvFileP = new File(CHEMIN_FIC_PRIX);
-		BufferedReader brP = new BufferedReader(new FileReader(csvFileP));
-		
-		//On saute la premiere ligne du prix qui est le libelle des colonnes
-		String sautLigneP = brP.readLine();
-		
-		String lineP = "";
+		return null;
+	}
+
+	/**
+	 * Permet de retourner une map décrivant le nombre de demande par Element
+	 * 
+	 * @return
+	 */
+	private static HashMap<Element, Integer> getMapDemandeParElement(ArrayList<Element> listeElement) {
+		FileInputStream ficPrix;
 		try {
-			while((lineP=brP.readLine())!=null ) {
-				String[] countP = lineP.split(";");
-				for (Element element : mesElement) {
-					if(element.getCodeE().compareTo(countP[0]) == 0) {
-						element.setPrixA(countP[1]);
-						element.setPrixV(countP[2]);
-					}
+			ficPrix = new FileInputStream(CSVReader.CHEMIN_FIC_PRIX_CSV);
+			BufferedReader srcDemande = new BufferedReader(new InputStreamReader(ficPrix));
+
+			String ligneDemande;
+			ligneDemande = srcDemande.readLine();
+
+			HashMap<Element, Integer> mapDemandeParElement = new HashMap<Element, Integer>();
+
+			while ((ligneDemande = srcDemande.readLine()) != null) {
+				String[] tab = ligneDemande.split(";");
+				Element element = trouverElementEnFonctionDuCode(listeElement, tab[0]);
+				if (tab[3].compareTo("NA") != 0) {
+					mapDemandeParElement.put(element, Integer.parseInt(tab[3]));
 				}
 			}
-			
-		}	catch(FileNotFoundException e) {
+			srcDemande.close();
+			return mapDemandeParElement;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
+
 	}
-		
-	public static void afficherLesElem() {
-		for (Element E : mesElement) {
-			System.out.println(E.toString());
+
+	/**
+	 * Permet de connaitre la demande pour un element passé en paramètre
+	 * 
+	 * @return
+	 */
+	public static Integer getDemandePourUnElement(Element element) {
+		// Permet de parcourir la map des demande des elements
+		try {
+			// Permet de parcourir la hashmap connaissant la demande pour chaque element
+			for (Entry<Element, Integer> e : CSVReader.getMapDemandeParElement(CSVReader.definirElements())
+					.entrySet()) {
+				System.out.println("Passage obucles");
+				if (element.getCode().compareTo(e.getKey().getCode()) == 0) {
+					System.out.println("e.getValue : " + e.getValue());
+					return e.getValue();
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	}
-	public static void main(String[] args) throws IOException{ 
-		getLesElem();
-		afficherLesElem();
+		// Si on a pas trouvé, alors l'element n'a pas de demande --> on retourne 0
+		return 0;
 	}
 }
