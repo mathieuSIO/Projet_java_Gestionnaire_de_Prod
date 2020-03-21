@@ -10,13 +10,17 @@ import java.util.ArrayList;
 
 public class CSVReader {
 
+	public final static String CHEMIN_FIC_ELEMENTS = "./elements.csv";
+	public final static String CHEMIN_FIC_CHAINES = "./chaines.csv";
+	public final static String CHEMIN_FIC_PRIX = "./prix.csv";
+	
+	
 	//Liste qui recupere les eléménts
 	static ArrayList<Element> mesElement = new ArrayList<Element>();
-		
-	public static void main(String[] args) throws IOException{ 
-		
+	
+	public static void getLesElem()throws IOException {
 		//On recupere les eléments depuis un csv
-		File csvFileE = new File("./elements.csv");
+		File csvFileE = new File(CHEMIN_FIC_ELEMENTS);
 		BufferedReader br = new BufferedReader(new FileReader(csvFileE));
 		
 		//On saute la premiere ligne qui est le libelle des colonnes
@@ -34,7 +38,7 @@ public class CSVReader {
 		}
 		
 		//On recupere les prix des éléments depuis un csv
-		File csvFileP = new File("./prix.csv");
+		File csvFileP = new File(CHEMIN_FIC_PRIX);
 		BufferedReader brP = new BufferedReader(new FileReader(csvFileP));
 		
 		//On saute la premiere ligne du prix qui est le libelle des colonnes
@@ -51,13 +55,19 @@ public class CSVReader {
 					}
 				}
 			}
-			for (Element E : mesElement) {
-				System.out.println(E.toString());
-			}
 			
 		}	catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
 		
+	public static void afficherLesElem() {
+		for (Element E : mesElement) {
+			System.out.println(E.toString());
+		}
+	}
+	public static void main(String[] args) throws IOException{ 
+		getLesElem();
+		afficherLesElem();
 	}
 }
