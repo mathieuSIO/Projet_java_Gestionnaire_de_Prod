@@ -1,4 +1,4 @@
-package classes;
+package fr.miage.lcl.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
