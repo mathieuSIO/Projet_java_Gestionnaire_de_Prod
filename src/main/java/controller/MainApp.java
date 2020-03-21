@@ -23,8 +23,8 @@ public class MainApp extends Application {
 	public MainApp() {
 		
 		// code de yaya avec modification sur le nom des classes
-		ArrayList<Element> listeElement = GestionFichierModel.lireStocks();
-		List<Model> listeChaine = GestionFichierModel.lireChaine(listeElement);
+//		ArrayList<Element> listeElement = GestionFichierModel.lireStocks();
+//		List<Model> listeChaine = GestionFichierModel.lireChaine(listeElement);
 	}
 
 	@Override
