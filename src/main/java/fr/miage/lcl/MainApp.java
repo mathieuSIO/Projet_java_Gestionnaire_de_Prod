@@ -60,10 +60,6 @@ public class MainApp extends Application {
             loader.setLocation(MainApp.class.getResource("view/ChaineDeProd.fxml"));
             AnchorPane chaineProd = (AnchorPane) loader.load();
 
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(chaineProd);
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
