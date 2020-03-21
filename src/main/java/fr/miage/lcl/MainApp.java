@@ -1,5 +1,6 @@
 package fr.miage.lcl;
 
+
 import fr.miage.lcl.model.Element;
 import model.Model;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class MainApp extends Application {
 
 		initRootLayout();
 
-	//	showPersonOverview();
+		showChaineDeProd();
 	}
 	
 	public void initRootLayout() {
@@ -52,7 +53,21 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	public void showChaineDeProd() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/ChaineDeProd.fxml"));
+            AnchorPane chaineProd = (AnchorPane) loader.load();
 
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(chaineProd);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
