@@ -1,45 +1,99 @@
 package fr.miage.lcl.model;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-public class ChaineProd{
-    /// Les attributs
-    private String codeC;
-    private String nomC;
-    private int niveauA;
-    private HashMap<Element, Integer> entrees;
-    private HashMap<Element, Integer> sorties;
+import fr.miage.lcl.outil.ConverterProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.MapProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleMapProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 
-    /// LES GETTEURS
-    public String getCodeC() {
-        return codeC;
-    }
+public class ChaineProd {
+	/// Les attributs
+	private StringProperty code;
+	private StringProperty nom;
+	private IntegerProperty niveauActivation;
+	private MapProperty<Element, Float> entrees;
+	private MapProperty<Element, Float> sorties;
 
-    public String getNomC() {
-        return nomC;
-    }
+	/// Constructeur
 
-    public int getNiveauA() {
-        return niveauA;
-    }
+	public ChaineProd(String code, String nom, Map<Element, Float> mapE,
+			Map<Element, Float> mapS) {
+		this.code = new SimpleStringProperty(code);
+		this.nom = new SimpleStringProperty(nom);
 
-    public HashMap<Element, Integer> getEntrees() {
-        return entrees;
-    }
+		MapProperty<Element, Float> mapEntree = new SimpleMapProperty<Element, Float>(
+				FXCollections.observableHashMap());
+		mapEntree.putAll(mapE);
+		this.entrees = mapEntree;
 
-    public HashMap<Element, Integer> getSorties() {
-        return sorties;
-    }
+		MapProperty<Element, Float> mapSortie = new SimpleMapProperty<Element, Float>(
+				FXCollections.observableHashMap());
+		mapSortie.putAll(mapS);
+		this.sorties = mapSortie;
+		this.niveauActivation = new SimpleIntegerProperty(0);
+	}
 
-    /// Constructeur
+	public String toString() {
+		String chaine = "[\nCode de la chaine : " + this.code + "\n nom : " + this.nom;
 
-    public ChaineProd(String codeC, String nomC, int niveauA, HashMap<Element, Integer> entrees, HashMap<Element, Integer> sorties) {
-        this.codeC = codeC;
-        this.nomC = nomC;
-        this.niveauA = niveauA;
-        this.entrees = entrees;
-        this.sorties = sorties;
-    }
+		chaine = chaine + "\n Entrées : ";
+		Set<Element> setElementEntree = this.entrees.keySet();
+		for (Element e : setElementEntree) {
+			chaine = chaine + "\n " + this.entrees.get(e) + " " + e.getUnite() + " " + e.getNom();
+		}
+		chaine = chaine + "\n Sorties : ";
+		Set<Element> setElementSortie = this.sorties.keySet();
+		for (Element e : setElementSortie) {
+			chaine = chaine + "\n " + this.sorties.get(e) + " " + e.getUnite() + " " + e.getNom();
+		}
 
-    /// LES METHODES
+		chaine = chaine + "]";
+		return chaine;
+	}
+	public String getCode() {
+		return ConverterProperty.stringPropertyToString(this.code);
+	}
+
+	public StringProperty getCodeProperty() {
+		StringProperty sp = new SimpleStringProperty(this.getCode());
+		return sp;
+	}
+
+	public void setCode(String code) {
+		this.code = ConverterProperty.stringToStringProperty(code);
+	}
+
+	public Integer getNiveauActivation() {
+		return ConverterProperty.integerPropertyToInteger(this.niveauActivation);
+	}
+
+	public IntegerProperty getNiveauActivationProperty() {
+		IntegerProperty ip = new SimpleIntegerProperty(this.getNiveauActivation());
+		return ip;
+	}
+
+	public void setNiveauActivation(Integer niveau) {
+		this.niveauActivation = ConverterProperty.integerToIntegerProperty(niveau);
+	}
+
+	public String getNom() {
+		return ConverterProperty.stringPropertyToString(this.nom);
+	}
+
+	public StringProperty getNomProperty() {
+		StringProperty sp = new SimpleStringProperty(this.getNom());
+		return sp;
+	}
+
+	public void setNom(String nom) {
+		this.nom = ConverterProperty.stringToStringProperty(nom);
+	}
+	
 }
