@@ -1,6 +1,6 @@
 package fr.miage.lcl;
 
-import model.Element;
+import fr.miage.lcl.model.Element;
 import model.Model;
 import java.io.IOException;
 import java.util.ArrayList;
