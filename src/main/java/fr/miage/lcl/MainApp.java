@@ -20,14 +20,17 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 	private ObservableList<ChaineProd> chaineProductionData = FXCollections.observableArrayList();
+	private ObservableList<Element> elementData = FXCollections.observableArrayList();
+
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 
 	public MainApp() {
-
 		// code de yaya avec modification sur le nom des classes
 		ArrayList<Element> listeElement = CSVReader.lireStocks();
 		List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
+
+		elementData = FXCollections.observableArrayList(listeElement);
 	}
 
 	@Override
@@ -55,17 +58,19 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-	public void showChaineDeProd() {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/ChaineDeProd.fxml"));
-            AnchorPane chaineProd = (AnchorPane) loader.load();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	public void showChaineDeProd() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/ChaineDeProd.fxml"));
+			AnchorPane chaineProd = (AnchorPane) loader.load();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
