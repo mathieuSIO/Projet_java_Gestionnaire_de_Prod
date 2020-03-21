@@ -17,7 +17,7 @@ public class CSVReader {
 	public static void main(String[] args) throws IOException{
 		
 		//On recupere les eléments depuis un csv
-		File csvFileE = new File("C:/Users/MathieuCarvajal/Desktop/projetJAVA/elements.csv");
+		File csvFileE = new File("./elements.csv");
 		BufferedReader br = new BufferedReader(new FileReader(csvFileE));
 		
 		//On saute la premiere ligne qui est le libelle des colonnes
