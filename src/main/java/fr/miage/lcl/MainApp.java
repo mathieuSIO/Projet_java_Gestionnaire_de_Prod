@@ -1,5 +1,7 @@
 package fr.miage.lcl;
 
+import fr.miage.lcl.model.CSVReader;
+import fr.miage.lcl.model.ChaineProd;
 
 import fr.miage.lcl.model.Element;
 import model.Model;
@@ -17,15 +19,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
-
+	private ObservableList<ChaineProd> chaineProductionData = FXCollections.observableArrayList();
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 
 	public MainApp() {
-		
+
 		// code de yaya avec modification sur le nom des classes
-//		ArrayList<Element> listeElement = GestionFichierModel.lireStocks();
-//		List<Model> listeChaine = GestionFichierModel.lireChaine(listeElement);
+		ArrayList<Element> listeElement = CSVReader.lireStocks();
+		List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
 	}
 
 	@Override
@@ -37,7 +39,7 @@ public class MainApp extends Application {
 
 		showChaineDeProd();
 	}
-	
+
 	public void initRootLayout() {
 		try {
 			// Load root layout from fxml file.
