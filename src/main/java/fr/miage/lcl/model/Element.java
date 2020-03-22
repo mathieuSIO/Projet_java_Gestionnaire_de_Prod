@@ -8,60 +8,91 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Element {
-	
-    /// LES ATTRIBUTS
-    private String codeE;
-    private String nomE;
-    private String qteE;
-    private String unite;
-	private String prixA;
-    private String prixV;
-    
 
-    /// LES GETTEURS
-    public String getCodeE() {
-        return codeE;
-    }
-    public String getNomE() {
-        return nomE;
-    }
-    public String getQteE() {
-        return qteE;
-    }
-    public String getUnite() {
-        return unite;
-    }
-    public String getPrixA() {
-        return prixA;
-    }
-    public void setPrixA(String prixA) {
-		this.prixA = prixA;
-	}
-    public String getPrixV() {
-        return prixV;
-    }
-	public void setPrixV(String prixV) {
-		this.prixV = prixV;
+	/// LES ATTRIBUTS
+	private String code;
+	private String nom;
+	private int quantite;
+	private String unite;
+	private float prixAchat;
+	private float prixVente;
+
+	/**
+	 * Constructeur Element
+	 * 
+	 * @param code
+	 * @param nom
+	 * @param quantite
+	 * @param unite
+	 */
+	public Element(String code, String nom, int quantite, String unite) {
+		this.code = code;
+		this.nom = nom;
+		this.unite = unite;
+		this.quantite = quantite;
+		this.prixAchat = 0;
+		this.prixVente = 0;
 	}
 
-    /// LE CONSTRUCTEUR
-    public Element(String codeE, String nomE, String qteE, String unite, String prixA, String prixV) {
-        this.codeE = codeE;
-        this.nomE = nomE;
-        this.qteE = qteE;
-        this.unite = unite;
-        this.prixA = prixA;
-        this.prixV = prixV;
-    }
+	public void destocker(int quantiteADestocker) {
+		this.quantite = this.quantite - quantiteADestocker;
+	}
 
-    public Element(){
-        codeE = "Test liaison entre classes et affichage";
-    }
-    /// LES METHODES
-    
-    public String toString() {
-    	return this.codeE + " " + this.nomE + " " + this.qteE + " " + this.unite + " " + this.prixA + "€ " + this.prixV + "€";
-    }
-    
+	public void stocker(int quantiteAStocker) {
+		this.quantite = this.quantite + quantiteAStocker;
+	}
+
+	public String toString() {
+		return "\n[Code : " + this.code + "\n Nom : " + this.nom + "\n Unite : " + this.unite + "\n Quantite : "
+				+ this.quantite + "\n Prix Achat : " + this.prixAchat + "\n Prix vente : " + this.prixVente + "]\n";
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public String getUnite() {
+		return unite;
+	}
+
+	public int getQuantite() {
+		return quantite;
+	}
+
+	public float getPrixAchat() {
+		return prixAchat;
+	}
+
+	public float getPrixVente() {
+		return prixVente;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public void setUnite(String unite) {
+		this.unite = unite;
+	}
+
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
+
+	public void setPrixAchat(float prixAchat) {
+		this.prixAchat = prixAchat;
+	}
+
+	public void setPrixVente(float prixVente) {
+		this.prixVente = prixVente;
+	}
 
 }

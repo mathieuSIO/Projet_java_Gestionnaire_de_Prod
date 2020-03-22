@@ -1,5 +1,7 @@
 package fr.miage.lcl;
 
+import fr.miage.lcl.model.CSVReader;
+import fr.miage.lcl.model.ChaineProd;
 
 import fr.miage.lcl.model.Element;
 import fr.miage.lcl.view.AccueilController;
@@ -18,15 +20,18 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
+	private ObservableList<ChaineProd> chaineProductionData = FXCollections.observableArrayList();
+	private ObservableList<Element> elementData = FXCollections.observableArrayList();
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 
 	public MainApp() {
-		
 		// code de yaya avec modification sur le nom des classes
-//		ArrayList<Element> listeElement = GestionFichierModel.lireStocks();
-//		List<Model> listeChaine = GestionFichierModel.lireChaine(listeElement);
+		ArrayList<Element> listeElement = CSVReader.lireStocks();
+		List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
+
+		elementData = FXCollections.observableArrayList(listeElement);
 	}
 
 	@Override
@@ -35,16 +40,9 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("GestionProd");
 
 		initRootLayout();
-<<<<<<< Updated upstream
-
-		showChaineDeProd();
-=======
 		showAccueil();
-//		showChaineDeProd();
-//		showStock();
->>>>>>> Stashed changes
 	}
-	
+
 	public void initRootLayout() {
 		try {
 			// Load root layout from fxml file.
@@ -60,18 +58,7 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-	public void showChaineDeProd() {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/ChaineDeProd.fxml"));
-            AnchorPane chaineProd = (AnchorPane) loader.load();
 
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(chaineProd);
-
-<<<<<<< Updated upstream
-=======
 	public void showAccueil() {
 		try {
 			// Load root layout from fxml file.
@@ -117,12 +104,7 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
->>>>>>> Stashed changes
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
