@@ -1,5 +1,6 @@
 package fr.miage.lcl;
 
+import java.util.Set;
 import fr.miage.lcl.model.CSVReader;
 import fr.miage.lcl.model.ChaineProd;
 
@@ -10,6 +11,7 @@ import fr.miage.lcl.view.StockOverviewController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -21,24 +23,29 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
-	private ObservableList<ChaineProd> chaineProductionData = FXCollections.observableArrayList();
 	private ObservableList<Element> elementData = FXCollections.observableArrayList();
+	private ObservableList<ChaineProd> chaineData = FXCollections.observableArrayList();
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	ArrayList<Element> listeElement = CSVReader.lireStocks();
+	ArrayList<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
 
 	public MainApp() {
-		// code de yaya avec modification sur le nom des classes
-
-		// List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
-		System.out.println("Prix de vente element 1 : " + listeElement.get(0));
 		elementData = FXCollections.observableArrayList(listeElement);
+		chaineData = FXCollections.observableArrayList(listeChaine);
 	}
 
 	public ObservableList<Element> getElem() {
 		return elementData;
 	}
+	
+	public ObservableList<ChaineProd> getChaine() {
+		
+		return chaineData;
+	}
+	
+
 
 	@Override
 	public void start(Stage primaryStage) {
