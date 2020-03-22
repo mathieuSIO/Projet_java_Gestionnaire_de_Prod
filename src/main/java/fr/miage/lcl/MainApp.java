@@ -4,6 +4,7 @@ import fr.miage.lcl.model.CSVReader;
 import fr.miage.lcl.model.ChaineProd;
 
 import fr.miage.lcl.model.Element;
+import fr.miage.lcl.view.AccueilController;
 import model.Model;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,8 +40,7 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("GestionProd");
 
 		initRootLayout();
-
-//		showChaineDeProd();
+		showAccueil();
 	}
 
 	public void initRootLayout() {
@@ -59,17 +59,51 @@ public class MainApp extends Application {
 		}
 	}
 
-//	public void showChaineDeProd() {
-//		try {
-//			// Load person overview.
-//			FXMLLoader loader = new FXMLLoader();
-//			loader.setLocation(MainApp.class.getResource("view/ChaineDeProd.fxml"));
-//			AnchorPane chaineProd = (AnchorPane) loader.load();
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public void showAccueil() {
+		try {
+			// Load root layout from fxml file.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/Accueil.fxml"));
+			AnchorPane accueil = (AnchorPane) loader.load();
+
+			rootLayout.setCenter(accueil);
+			AccueilController controller = loader.getController();
+			controller.setMainApp(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void showStock() {
+		try {
+			// Load root layout from fxml file.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/StockOverview.fxml"));
+			AnchorPane stock = (AnchorPane) loader.load();
+
+			// Show the scene containing the root layout.
+			Scene scene = new Scene(stock);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void showChaineDeProdOverview() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/ChaineDeProdOverview.fxml"));
+			AnchorPane chaineProd = (AnchorPane) loader.load();
+			
+			Scene scene = new Scene(chaineProd);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public Stage getPrimaryStage() {
 		return primaryStage;
