@@ -6,7 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class AccueilController {
+public class AccueilOverviewController {
 
 	@FXML
 	private Button viewStock;
@@ -23,7 +23,7 @@ public class AccueilController {
 	/**
 	 * The constructor. The constructor is called before the initialize() method.
 	 */
-	public AccueilController() {
+	public AccueilOverviewController() {
 	}
 
 	/**
@@ -38,9 +38,21 @@ public class AccueilController {
 				mainApp.showStock();
 			}
 		};
-		
-		// event associé au bouton
+		EventHandler<ActionEvent> eventAccederCommande = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mainApp.showCommande();
+			}
+		};
+//		EventHandler<ActionEvent> eventAccederStock = new EventHandler<ActionEvent>() {
+//			public void handle(ActionEvent event) {
+//				mainApp.showStock();
+//			}
+//		};
+//		// event associé au bouton
 		viewStock.setOnAction(eventAccederStock);
+//		viewProd.setOnAction(eventAccederStock);
+		viewCommande.setOnAction(eventAccederCommande);
+
 	}
 
 	/**
