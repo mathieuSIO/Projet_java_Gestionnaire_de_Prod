@@ -35,6 +35,9 @@ public class ChaineDeProdController {
 	private TableColumn<ChaineProd, Map> sortiesC;
 	
 	@FXML
+	private TableColumn<ChaineProd, Number> level;
+	
+	@FXML
 	private Button goAccueil;
 
 	private MainApp mainApp;
@@ -61,6 +64,7 @@ public class ChaineDeProdController {
 		nomC.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
 		entreesC.setCellValueFactory(cellData -> cellData.getValue().getEntreesCodeQuantite());
 		sortiesC.setCellValueFactory(cellData -> cellData.getValue().getSortieCodeQuantite());
+		level.setCellValueFactory(cellData -> cellData.getValue().getLevelProperty());
 	}
 
 	public void setMainApp(MainApp mainApp) {

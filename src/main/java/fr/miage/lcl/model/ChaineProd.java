@@ -20,12 +20,14 @@ public class ChaineProd {
 	private IntegerProperty niveauActivation;
 	private MapProperty<Element, Float> entrees;
 	private MapProperty<Element, Float> sorties;
+	private int activationLevel;
 
 	/// Constructeur
 
 	public ChaineProd(String code, String nom, Map<Element, Float> mapE, Map<Element, Float> mapS) {
 		this.code = new SimpleStringProperty(code);
 		this.nom = new SimpleStringProperty(nom);
+		this.activationLevel = 0;
 
 		MapProperty<Element, Float> mapEntree = new SimpleMapProperty<Element, Float>(
 				FXCollections.observableHashMap());
@@ -89,6 +91,15 @@ public class ChaineProd {
 
 	public StringProperty getNomProperty() {
 		StringProperty sp = new SimpleStringProperty(this.getNom());
+		return sp;
+	}
+	
+	public IntegerProperty getLevel() {
+		return ConverterProperty.integerToIntegerProperty(this.activationLevel);
+	}
+	
+	public IntegerProperty getLevelProperty() {
+		IntegerProperty sp = this.getLevel();
 		return sp;
 	}
 
