@@ -23,8 +23,7 @@ public class ChaineProd {
 
 	/// Constructeur
 
-	public ChaineProd(String code, String nom, Map<Element, Float> mapE,
-			Map<Element, Float> mapS) {
+	public ChaineProd(String code, String nom, Map<Element, Float> mapE, Map<Element, Float> mapS) {
 		this.code = new SimpleStringProperty(code);
 		this.nom = new SimpleStringProperty(nom);
 
@@ -57,6 +56,7 @@ public class ChaineProd {
 		chaine = chaine + "]";
 		return chaine;
 	}
+
 	public String getCode() {
 		return ConverterProperty.stringPropertyToString(this.code);
 	}
@@ -95,5 +95,57 @@ public class ChaineProd {
 	public void setNom(String nom) {
 		this.nom = ConverterProperty.stringToStringProperty(nom);
 	}
+
+	public MapProperty getEntreesProperty() {
+		MapProperty sp = new SimpleMapProperty(entrees);
+		return sp;
+	}
+
+	public MapProperty getSortiesProperty() {
+		MapProperty sp = new SimpleMapProperty(sorties);
+		return sp;
+	}
+
+	/**
+	 * Permet de retourner une hashmap contenant toutes les entrées (code, quantité)
+	 * associé à la chaine
+	 * 
+	 * @return [(E001,2);(E002,4);(E025,18)...]
+	 */
+	public MapProperty getEntreesCodeQuantite() {
+		// On crée une hashMap
+		Map mapCodeQuantite = new HashMap();
+
+		// On parcourt les entrées
+		for (Element element : this.entrees.keySet()) {
+			mapCodeQuantite.put(element.getCode(), this.entrees.get(element));
+		}
+
+		MapProperty map = new SimpleMapProperty(FXCollections.observableHashMap());
+		map.putAll(mapCodeQuantite);
+
+		return map;
+	}
 	
+	/**
+	 * Permet de retourner une hashmap contenant toutes les sorties (code, quantité)
+	 * associé à la chaine
+	 * 
+	 * @return [(E001,2);(E002,4);(E025,18)...]
+	 */
+	public MapProperty getSortieCodeQuantite() {
+		// On crée une hashMap
+		Map mapCodeQuantite = new HashMap();
+
+		// On parcourt les entrées
+		for (Element element : this.sorties.keySet()) {
+			mapCodeQuantite.put(element.getCode(), this.sorties.get(element));
+		}
+
+		MapProperty map = new SimpleMapProperty(FXCollections.observableHashMap());
+		map.putAll(mapCodeQuantite);
+
+		return map;
+	}
+
 }

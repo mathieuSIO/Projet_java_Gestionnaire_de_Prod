@@ -1,15 +1,18 @@
 package fr.miage.lcl;
 
+import java.util.Set;
 import fr.miage.lcl.model.CSVReader;
 import fr.miage.lcl.model.ChaineProd;
 
 import fr.miage.lcl.model.Element;
 import fr.miage.lcl.view.AccueilController;
+import fr.miage.lcl.view.ChaineDeProdController;
 import fr.miage.lcl.view.StockOverviewController;
 import model.Model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -21,24 +24,29 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
-	private ObservableList<ChaineProd> chaineProductionData = FXCollections.observableArrayList();
 	private ObservableList<Element> elementData = FXCollections.observableArrayList();
+	private ObservableList<ChaineProd> chaineData = FXCollections.observableArrayList();
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	ArrayList<Element> listeElement = CSVReader.lireStocks();
+	ArrayList<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
 
 	public MainApp() {
-		// code de yaya avec modification sur le nom des classes
-
-		// List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
-		System.out.println("Prix de vente element 1 : " + listeElement.get(0));
 		elementData = FXCollections.observableArrayList(listeElement);
+		chaineData = FXCollections.observableArrayList(listeChaine);
 	}
 
 	public ObservableList<Element> getElem() {
 		return elementData;
 	}
+	
+	public ObservableList<ChaineProd> getChaine() {
+		
+		return chaineData;
+	}
+	
+
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -47,9 +55,9 @@ public class MainApp extends Application {
 
 		initRootLayout();
 
-		showStock();
-		// showChaineDeProd();
-		// showAccueil();
+		// showStock();
+		 showChaineDeProd();
+		 //showAccueil();
 
 	}
 
@@ -84,16 +92,17 @@ public class MainApp extends Application {
 		}
 	}
 
-	public void showChaineDeProdOverview() {
+	public void showChaineDeProd() {
 		try {
-			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/ChaineDeProdOverview.fxml"));
 			AnchorPane chaineProd = (AnchorPane) loader.load();
 
-			Scene scene = new Scene(chaineProd);
-			primaryStage.setScene(scene);
-			primaryStage.show();
+
+			rootLayout.setCenter(chaineProd);
+
+			ChaineDeProdController controller = loader.getController();
+			controller.setMainApp(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
