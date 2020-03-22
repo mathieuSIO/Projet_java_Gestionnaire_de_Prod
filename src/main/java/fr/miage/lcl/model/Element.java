@@ -1,4 +1,5 @@
 package fr.miage.lcl.model;
+
 import java.io.BufferedReader;
 
 import fr.miage.lcl.outil.ConverterProperty;
@@ -35,11 +36,12 @@ public class Element {
 	 */
 	public Element(String code, String nom, int quantite, String unite) {
 		this.code = ConverterProperty.stringToStringProperty(code);
-		this.nom = ConverterProperty.stringToStringProperty(nom);;
-		this.unite = ConverterProperty.stringToStringProperty(unite);;
+		this.nom = ConverterProperty.stringToStringProperty(nom);
+		this.unite = ConverterProperty.stringToStringProperty(unite);
 		this.quantite = ConverterProperty.integerToIntegerProperty(quantite);
+		this.prixAchat = new SimpleFloatProperty(0);
+		this.prixVente = new SimpleFloatProperty(0);
 	}
-
 
 	public String toString() {
 		return "\n[Code : " + this.code + "\n Nom : " + this.nom + "\n Unite : " + this.unite + "\n Quantite : "
@@ -49,7 +51,7 @@ public class Element {
 	public String getCode() {
 		return ConverterProperty.stringPropertyToString(code);
 	}
-	
+
 	public StringProperty getCodeProperty() {
 		StringProperty sp = new SimpleStringProperty(this.getCode());
 		return sp;
@@ -58,7 +60,7 @@ public class Element {
 	public String getNom() {
 		return ConverterProperty.stringPropertyToString(nom);
 	}
-	
+
 	public StringProperty getNomProperty() {
 		StringProperty sp = new SimpleStringProperty(this.getNom());
 		return sp;
@@ -67,7 +69,7 @@ public class Element {
 	public String getUnite() {
 		return ConverterProperty.stringPropertyToString(unite);
 	}
-	
+
 	public StringProperty getUniteProperty() {
 		StringProperty sp = new SimpleStringProperty(this.getUnite());
 		return sp;
@@ -76,26 +78,25 @@ public class Element {
 	public Integer getQuantite() {
 		return ConverterProperty.integerPropertyToInteger(quantite);
 	}
-	
+
 	public IntegerProperty getQuantiteProperty() {
 		return ConverterProperty.integerToIntegerProperty(getQuantite());
 	}
 
-	
 	public float getPrixAchat() {
 		return ConverterProperty.floatPropertyToFloat(prixAchat);
-		}
+	}
 
-	public FloatProperty getPrixAchatProperty(){
+	public FloatProperty getPrixAchatProperty() {
 		FloatProperty sp = new SimpleFloatProperty(this.getPrixAchat());
 		return sp;
 	}
-	
+
 	public float getPrixVente() {
 		return ConverterProperty.floatPropertyToFloat(prixVente);
 	}
 
-	public FloatProperty getPrixVenteProperty(){
+	public FloatProperty getPrixVenteProperty() {
 		FloatProperty sp = new SimpleFloatProperty(this.getPrixVente());
 		return sp;
 	}
@@ -107,7 +108,5 @@ public class Element {
 	public void setPrixVente(float prixVente) {
 		this.prixVente = ConverterProperty.floatToFloatProperty(prixVente);
 	}
-	
-
 
 }
