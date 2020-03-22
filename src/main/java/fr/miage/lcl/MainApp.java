@@ -5,7 +5,7 @@ import fr.miage.lcl.model.ChaineProd;
 
 import fr.miage.lcl.model.Element;
 import fr.miage.lcl.view.AccueilController;
-
+import fr.miage.lcl.view.StockOverviewController;
 import model.Model;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,22 +79,6 @@ public class MainApp extends Application {
 			rootLayout.setCenter(accueil);
 			AccueilController controller = loader.getController();
 			controller.setMainApp(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void showStock() {
-		try {
-			// Load root layout from fxml file.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/StockOverview.fxml"));
-			AnchorPane stock = (AnchorPane) loader.load();
-
-			// Show the scene containing the root layout.
-			Scene scene = new Scene(stock);
-			primaryStage.setScene(scene);
-			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
