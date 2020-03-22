@@ -73,7 +73,7 @@ public class MainApp extends Application {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/Accueil.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/AccueilOverview.fxml"));
 			AnchorPane accueil = (AnchorPane) loader.load();
 
 			rootLayout.setCenter(accueil);
