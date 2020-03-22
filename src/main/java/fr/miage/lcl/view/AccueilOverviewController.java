@@ -43,16 +43,15 @@ public class AccueilOverviewController {
 				mainApp.showCommande();
 			}
 		};
-//		EventHandler<ActionEvent> eventAccederStock = new EventHandler<ActionEvent>() {
-//			public void handle(ActionEvent event) {
-//				mainApp.showStock();
-//			}
-//		};
-//		// event associé au bouton
+		EventHandler<ActionEvent> eventAccederProd = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mainApp.showChaineDeProd();
+			}
+		};
+		// event associé au bouton
 		viewStock.setOnAction(eventAccederStock);
-//		viewProd.setOnAction(eventAccederStock);
+		viewProd.setOnAction(eventAccederProd);
 		viewCommande.setOnAction(eventAccederCommande);
-
 	}
 
 	/**
