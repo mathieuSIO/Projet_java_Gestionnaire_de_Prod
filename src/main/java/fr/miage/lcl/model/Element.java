@@ -1,6 +1,14 @@
 package fr.miage.lcl.model;
-
 import java.io.BufferedReader;
+
+import fr.miage.lcl.outil.ConverterProperty;
+import javafx.beans.property.FloatProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,12 +18,12 @@ import java.util.ArrayList;
 public class Element {
 
 	/// LES ATTRIBUTS
-	private String code;
-	private String nom;
-	private int quantite;
-	private String unite;
-	private float prixAchat;
-	private float prixVente;
+	private StringProperty code;
+	private StringProperty nom;
+	private StringProperty unite;
+	private IntegerProperty quantite;
+	private FloatProperty prixAchat;
+	private FloatProperty prixVente;
 
 	/**
 	 * Constructeur Element
@@ -26,21 +34,12 @@ public class Element {
 	 * @param unite
 	 */
 	public Element(String code, String nom, int quantite, String unite) {
-		this.code = code;
-		this.nom = nom;
-		this.unite = unite;
-		this.quantite = quantite;
-		this.prixAchat = 0;
-		this.prixVente = 0;
+		this.code = ConverterProperty.stringToStringProperty(code);
+		this.nom = ConverterProperty.stringToStringProperty(nom);;
+		this.unite = ConverterProperty.stringToStringProperty(unite);;
+		this.quantite = ConverterProperty.integerToIntegerProperty(quantite);
 	}
 
-	public void destocker(int quantiteADestocker) {
-		this.quantite = this.quantite - quantiteADestocker;
-	}
-
-	public void stocker(int quantiteAStocker) {
-		this.quantite = this.quantite + quantiteAStocker;
-	}
 
 	public String toString() {
 		return "\n[Code : " + this.code + "\n Nom : " + this.nom + "\n Unite : " + this.unite + "\n Quantite : "
@@ -48,51 +47,67 @@ public class Element {
 	}
 
 	public String getCode() {
-		return code;
+		return ConverterProperty.stringPropertyToString(code);
+	}
+	
+	public StringProperty getCodeProperty() {
+		StringProperty sp = new SimpleStringProperty(this.getCode());
+		return sp;
 	}
 
 	public String getNom() {
-		return nom;
+		return ConverterProperty.stringPropertyToString(nom);
+	}
+	
+	public StringProperty getNomProperty() {
+		StringProperty sp = new SimpleStringProperty(this.getNom());
+		return sp;
 	}
 
 	public String getUnite() {
-		return unite;
+		return ConverterProperty.stringPropertyToString(unite);
+	}
+	
+	public StringProperty getUniteProperty() {
+		StringProperty sp = new SimpleStringProperty(this.getUnite());
+		return sp;
 	}
 
-	public int getQuantite() {
-		return quantite;
+	public Integer getQuantite() {
+		return ConverterProperty.integerPropertyToInteger(quantite);
+	}
+	
+	public IntegerProperty getQuantiteProperty() {
+		return ConverterProperty.integerToIntegerProperty(getQuantite());
 	}
 
+	
 	public float getPrixAchat() {
-		return prixAchat;
-	}
+		return ConverterProperty.floatPropertyToFloat(prixAchat);
+		}
 
+	public FloatProperty getPrixAchatProperty(){
+		FloatProperty sp = new SimpleFloatProperty(this.getPrixAchat());
+		return sp;
+	}
+	
 	public float getPrixVente() {
-		return prixVente;
+		return ConverterProperty.floatPropertyToFloat(prixVente);
 	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public void setUnite(String unite) {
-		this.unite = unite;
-	}
-
-	public void setQuantite(int quantite) {
-		this.quantite = quantite;
+	public FloatProperty getPrixVenteProperty(){
+		FloatProperty sp = new SimpleFloatProperty(this.getPrixVente());
+		return sp;
 	}
 
 	public void setPrixAchat(float prixAchat) {
-		this.prixAchat = prixAchat;
+		this.prixAchat = ConverterProperty.floatToFloatProperty(prixAchat);
 	}
 
 	public void setPrixVente(float prixVente) {
-		this.prixVente = prixVente;
+		this.prixVente = ConverterProperty.floatToFloatProperty(prixVente);
 	}
+	
+
 
 }

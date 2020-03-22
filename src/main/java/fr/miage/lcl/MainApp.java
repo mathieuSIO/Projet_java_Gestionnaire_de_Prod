@@ -4,6 +4,7 @@ import fr.miage.lcl.model.CSVReader;
 import fr.miage.lcl.model.ChaineProd;
 
 import fr.miage.lcl.model.Element;
+import fr.miage.lcl.view.StockOverviewController;
 import model.Model;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,13 +25,18 @@ public class MainApp extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
+	ArrayList<Element> listeElement = CSVReader.lireStocks();
 
 	public MainApp() {
 		// code de yaya avec modification sur le nom des classes
-		ArrayList<Element> listeElement = CSVReader.lireStocks();
-		List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
-
+		
+		//List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
+		
 		elementData = FXCollections.observableArrayList(listeElement);
+	}
+	
+	public ObservableList<Element> getElem(){
+		return elementData;
 	}
 
 	@Override
@@ -39,8 +45,8 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("GestionProd");
 
 		initRootLayout();
-
-		showChaineDeProd();
+		showStock();
+		//showChaineDeProd();
 	}
 
 	public void initRootLayout() {
@@ -63,14 +69,33 @@ public class MainApp extends Application {
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/ChaineDeProd.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/ChaineDeProdOverview.fxml"));
 			AnchorPane chaineProd = (AnchorPane) loader.load();
+			
+			rootLayout.setCenter(chaineProd);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	public void showStock() {
+		try {
+			
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/StockOverview.fxml"));
+			AnchorPane leStock = (AnchorPane) loader.load();
+			
+			rootLayout.setCenter(leStock);
+			
+			StockOverviewController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
