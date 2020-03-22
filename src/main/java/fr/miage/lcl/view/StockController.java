@@ -1,5 +1,5 @@
 package fr.miage.lcl.view;
 
-public class ViewController {
+public class StockController {
 
 }
