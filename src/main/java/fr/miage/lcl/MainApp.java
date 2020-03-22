@@ -5,6 +5,7 @@ import fr.miage.lcl.model.ChaineProd;
 
 import fr.miage.lcl.model.Element;
 import fr.miage.lcl.view.AccueilController;
+
 import model.Model;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,13 +26,18 @@ public class MainApp extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
+	ArrayList<Element> listeElement = CSVReader.lireStocks();
 
 	public MainApp() {
 		// code de yaya avec modification sur le nom des classes
-		ArrayList<Element> listeElement = CSVReader.lireStocks();
-		List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
-
+		
+		//List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
+		
 		elementData = FXCollections.observableArrayList(listeElement);
+	}
+	
+	public ObservableList<Element> getElem(){
+		return elementData;
 	}
 
 	@Override
@@ -40,7 +46,11 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("GestionProd");
 
 		initRootLayout();
+
+		showStock();
+		//showChaineDeProd();
 		showAccueil();
+
 	}
 
 	public void initRootLayout() {
@@ -97,14 +107,33 @@ public class MainApp extends Application {
 			loader.setLocation(MainApp.class.getResource("view/ChaineDeProdOverview.fxml"));
 			AnchorPane chaineProd = (AnchorPane) loader.load();
 			
+
 			Scene scene = new Scene(chaineProd);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	public void showStock() {
+		try {
+			
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/StockOverview.fxml"));
+			AnchorPane leStock = (AnchorPane) loader.load();
+			
+			rootLayout.setCenter(leStock);
+			
+			StockOverviewController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}

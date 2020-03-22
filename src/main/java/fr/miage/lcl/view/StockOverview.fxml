@@ -8,23 +8,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="500.0" minWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.lcl.view.StockOverviewController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="283.0" layoutY="14.0" text="Stock de l'usine" AnchorPane.leftAnchor="283.0" AnchorPane.rightAnchor="282.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="33.0" />
          </font>
       </Label>
-      <TableView layoutX="267.0" layoutY="150.0" prefHeight="200.0" prefWidth="400.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="267.0" AnchorPane.rightAnchor="233.0" AnchorPane.topAnchor="150.0">
+      <TableView fx:id="personTable" layoutX="123.0" layoutY="136.0" prefHeight="200.0" prefWidth="569.0" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="123.0" AnchorPane.rightAnchor="208.0" AnchorPane.topAnchor="136.0">
         <columns>
-          <TableColumn prefWidth="100.0" text="ID" />
-          <TableColumn prefWidth="100.0" text="Nom" />
-            <TableColumn prefWidth="100.0" text="QTE" />
-            <TableColumn prefWidth="100.0" text="Unité" />
+          <TableColumn fx:id="code" prefWidth="100.0" text="ID" />
+          <TableColumn fx:id="nom" prefWidth="100.0" text="Nom" />
+            <TableColumn fx:id="qte" prefWidth="100.0" text="QTE" />
+            <TableColumn fx:id="unite" prefWidth="100.0" text="Unité" />
+            <TableColumn fx:id="prixA" prefWidth="75.0" text="PrixAchat" />
+            <TableColumn fx:id="prixV" prefWidth="75.0" text="PrixVente" />
         </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
       </TableView>
       <Button layoutX="14.0" layoutY="428.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Acceuil" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
       <Button defaultButton="true" layoutX="736.0" layoutY="436.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Import.csv" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
