@@ -1,6 +1,9 @@
 package fr.miage.lcl.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,6 +25,8 @@ public class StockOverviewController {
     private TableColumn<Element, Number> prixA;
     @FXML
     private TableColumn<Element, Number> prixV;
+    @FXML
+    private Button goAccueil;
 
 
     // Reference to the main application.
@@ -40,6 +45,18 @@ public class StockOverviewController {
      */
     @FXML
     private void initialize() {
+    	//Initialize button
+		// on crée l'event
+		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mainApp.showAccueil();
+			}
+		};
+		
+		// event associé au bouton
+		goAccueil.setOnAction(eventAccederAccueil);
+    	
+    	
         // Initialize the person table with the two columns.
         code.setCellValueFactory(cellData -> cellData.getValue().getCodeProperty());
         nom.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
