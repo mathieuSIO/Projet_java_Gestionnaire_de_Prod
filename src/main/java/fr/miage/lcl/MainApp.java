@@ -6,6 +6,7 @@ import fr.miage.lcl.model.ChaineProd;
 
 import fr.miage.lcl.model.Element;
 import fr.miage.lcl.view.AccueilOverviewController;
+import fr.miage.lcl.view.ChaineDeProdController;
 import fr.miage.lcl.view.CommandeOverviewController;
 import fr.miage.lcl.view.StockOverviewController;
 import java.io.IOException;
@@ -55,7 +56,7 @@ public class MainApp extends Application {
 		initRootLayout();
 
 		//showStock();
-		// showChaineDeProd();
+		//showChaineDeProd();
 		 showAccueil();
 
 	}
@@ -96,9 +97,10 @@ public class MainApp extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/ChaineDeProdOverview.fxml"));
 			AnchorPane chaineProd = (AnchorPane) loader.load();
-			Scene scene = new Scene(chaineProd);
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			
+			rootLayout.setCenter(chaineProd);
+			ChaineDeProdController controller = loader.getController();
+			controller.setMainApp(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();

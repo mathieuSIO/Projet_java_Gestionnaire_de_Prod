@@ -3,7 +3,10 @@ package fr.miage.lcl.view;
 import fr.miage.lcl.model.ChaineProd;
 import fr.miage.lcl.model.Element;
 import javafx.beans.property.MapProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -30,8 +33,11 @@ public class ChaineDeProdController {
 
 	@FXML
 	private TableColumn<ChaineProd, Map> sortiesC;
+	
+	@FXML
+	private Button goAccueil;
 
-	private MainApp MainApp;
+	private MainApp mainApp;
 
 	public void ChaineDeprod() {
 
@@ -39,6 +45,17 @@ public class ChaineDeProdController {
 
 	@FXML
 	private void initialize() {
+    	//Initialize button
+		// on crée l'event
+		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mainApp.showAccueil();
+			}
+		};
+		
+		// event associé au bouton
+		goAccueil.setOnAction(eventAccederAccueil);
+		
 		// Initialize the person table with the two columns.
 		codeC.setCellValueFactory(cellData -> cellData.getValue().getCodeProperty());
 		nomC.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
@@ -47,7 +64,7 @@ public class ChaineDeProdController {
 	}
 
 	public void setMainApp(MainApp mainApp) {
-		this.MainApp = mainApp;
+		this.mainApp = mainApp;
 		chaineTable.setItems(mainApp.getChaine());
 
 	}
