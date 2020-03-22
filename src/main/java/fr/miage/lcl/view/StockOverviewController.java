@@ -58,6 +58,7 @@ public class StockOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
+        
         personTable.setItems(mainApp.getElem());
     }
 }

@@ -30,13 +30,13 @@ public class MainApp extends Application {
 
 	public MainApp() {
 		// code de yaya avec modification sur le nom des classes
-		
-		//List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
-		
+
+		// List<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
+		System.out.println("Prix de vente element 1 : " + listeElement.get(0));
 		elementData = FXCollections.observableArrayList(listeElement);
 	}
-	
-	public ObservableList<Element> getElem(){
+
+	public ObservableList<Element> getElem() {
 		return elementData;
 	}
 
@@ -48,8 +48,8 @@ public class MainApp extends Application {
 		initRootLayout();
 
 		showStock();
-		//showChaineDeProd();
-		showAccueil();
+		// showChaineDeProd();
+		// showAccueil();
 
 	}
 
@@ -83,14 +83,13 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showChaineDeProdOverview() {
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/ChaineDeProdOverview.fxml"));
 			AnchorPane chaineProd = (AnchorPane) loader.load();
-			
 
 			Scene scene = new Scene(chaineProd);
 			primaryStage.setScene(scene);
@@ -103,14 +102,14 @@ public class MainApp extends Application {
 
 	public void showStock() {
 		try {
-			
+
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/StockOverview.fxml"));
 			AnchorPane leStock = (AnchorPane) loader.load();
-			
+
 			rootLayout.setCenter(leStock);
-			
+
 			StockOverviewController controller = loader.getController();
 			controller.setMainApp(this);
 
@@ -118,6 +117,7 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
