@@ -6,26 +6,20 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class AccueilController {
-
-	@FXML
-	private Button viewStock;
-
-	@FXML
-	private Button viewProd;
+public class CommandeOverviewController {
 	
 	@FXML
-	private Button viewCommande;
+	private Button viewAccueil;
 	
 	// Reference to the main application.
 	private MainApp mainApp;
-
+	
 	/**
 	 * The constructor. The constructor is called before the initialize() method.
 	 */
-	public AccueilController() {
+	public CommandeOverviewController() {
 	}
-
+	
 	/**
 	 * Initializes the controller class. This method is automatically called after
 	 * the fxml file has been loaded.
@@ -33,23 +27,20 @@ public class AccueilController {
 	@FXML
 	private void initialize() {
 		// on crée l'event
-		EventHandler<ActionEvent> eventAccederStock = new EventHandler<ActionEvent>() {
+		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				mainApp.showStock();
+				mainApp.showAccueil();
 			}
 		};
 		
 		// event associé au bouton
-		viewStock.setOnAction(eventAccederStock);
+		viewAccueil.setOnAction(eventAccederAccueil);
 	}
-
-	/**
-	 * Is called by the main application to give a reference back to itself.
-	 * 
-	 * @param mainApp
-	 */
+	
 	public void setMainApp(MainApp mainApp) {
+		// TODO Auto-generated method stub
 		this.mainApp = mainApp;
+
 	}
 
 }

@@ -5,10 +5,9 @@ import fr.miage.lcl.model.CSVReader;
 import fr.miage.lcl.model.ChaineProd;
 
 import fr.miage.lcl.model.Element;
-import fr.miage.lcl.view.AccueilController;
-import fr.miage.lcl.view.ChaineDeProdController;
+import fr.miage.lcl.view.AccueilOverviewController;
+import fr.miage.lcl.view.CommandeOverviewController;
 import fr.miage.lcl.view.StockOverviewController;
-import model.Model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +54,9 @@ public class MainApp extends Application {
 
 		initRootLayout();
 
-		// showStock();
-		 showChaineDeProd();
-		 //showAccueil();
+		//showStock();
+		// showChaineDeProd();
+		 showAccueil();
 
 	}
 
@@ -79,13 +78,12 @@ public class MainApp extends Application {
 
 	public void showAccueil() {
 		try {
-			// Load root layout from fxml file.
+
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/AccueilOverview.fxml"));
 			AnchorPane accueil = (AnchorPane) loader.load();
-
 			rootLayout.setCenter(accueil);
-			AccueilController controller = loader.getController();
+			AccueilOverviewController controller = loader.getController();
 			controller.setMainApp(this);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -94,15 +92,13 @@ public class MainApp extends Application {
 
 	public void showChaineDeProd() {
 		try {
+			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/ChaineDeProdOverview.fxml"));
 			AnchorPane chaineProd = (AnchorPane) loader.load();
-
-
-			rootLayout.setCenter(chaineProd);
-
-			ChaineDeProdController controller = loader.getController();
-			controller.setMainApp(this);
+			Scene scene = new Scene(chaineProd);
+			primaryStage.setScene(scene);
+			primaryStage.show();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -112,13 +108,10 @@ public class MainApp extends Application {
 	public void showStock() {
 		try {
 
-			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/StockOverview.fxml"));
 			AnchorPane leStock = (AnchorPane) loader.load();
-
 			rootLayout.setCenter(leStock);
-
 			StockOverviewController controller = loader.getController();
 			controller.setMainApp(this);
 
@@ -127,6 +120,21 @@ public class MainApp extends Application {
 		}
 	}
 
+	public void showCommande() {
+		try {
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/CommandeOverview.fxml"));
+			AnchorPane commande = (AnchorPane) loader.load();
+			rootLayout.setCenter(commande);
+			CommandeOverviewController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
