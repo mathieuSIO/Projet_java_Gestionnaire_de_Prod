@@ -8,6 +8,7 @@ import fr.miage.lcl.model.Element;
 import fr.miage.lcl.view.AccueilOverviewController;
 import fr.miage.lcl.view.ChaineDeProdController;
 import fr.miage.lcl.view.CommandeOverviewController;
+import fr.miage.lcl.view.PersonnelOverviewController;
 import fr.miage.lcl.view.StockOverviewController;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -130,6 +131,21 @@ public class MainApp extends Application {
 			AnchorPane commande = (AnchorPane) loader.load();
 			rootLayout.setCenter(commande);
 			CommandeOverviewController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void showPersonnel() {
+		try {
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/PersonnelOverview.fxml"));
+			AnchorPane personnel = (AnchorPane) loader.load();
+			rootLayout.setCenter(personnel);
+			PersonnelOverviewController controller = loader.getController();
 			controller.setMainApp(this);
 
 		} catch (IOException e) {

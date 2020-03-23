@@ -17,6 +17,9 @@ public class AccueilOverviewController {
 	@FXML
 	private Button viewCommande;
 	
+	@FXML
+	private Button viewPersonnel;
+	
 	// Reference to the main application.
 	private MainApp mainApp;
 
@@ -48,10 +51,16 @@ public class AccueilOverviewController {
 				mainApp.showChaineDeProd();
 			}
 		};
+		EventHandler<ActionEvent> eventAccederPersonnel = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mainApp.showPersonnel();
+			}
+		};
 		// event associé au bouton
 		viewStock.setOnAction(eventAccederStock);
 		viewProd.setOnAction(eventAccederProd);
 		viewCommande.setOnAction(eventAccederCommande);
+		viewPersonnel.setOnAction(eventAccederPersonnel);
 	}
 
 	/**
