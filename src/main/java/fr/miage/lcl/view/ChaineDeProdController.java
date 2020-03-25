@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -39,6 +40,12 @@ public class ChaineDeProdController {
 	
 	@FXML
 	private Button goAccueil;
+	
+	@FXML
+	private TextArea levelChange;
+	
+	@FXML
+	private Button changeLevel;
 
 	private MainApp mainApp;
 
