@@ -27,15 +27,19 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 	private ObservableList<Element> elementData = FXCollections.observableArrayList();
 	private ObservableList<ChaineProd> chaineData = FXCollections.observableArrayList();
+	private ObservableList<ChaineProd> chainePrevision = FXCollections.observableArrayList();
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	ArrayList<Element> listeElement = CSVReader.lireStocks();
 	ArrayList<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
+	ArrayList<ChaineProd> listeChaineP = CSVReader.lireChaine(listeElement);
+
 
 	public MainApp() {
 		elementData = FXCollections.observableArrayList(listeElement);
 		chaineData = FXCollections.observableArrayList(listeChaine);
+		
 	}
 
 	public ObservableList<Element> getElem() {
@@ -47,6 +51,20 @@ public class MainApp extends Application {
 		return chaineData;
 	}
 	
+	public void setniveau(ChaineProd lachaine, String n){
+		for(ChaineProd c : listeChaineP) {
+			if(c.getCode().equals(lachaine.getCode())) {
+				c.setActivationLevel(Integer.parseInt(n));
+			}
+
+		}
+		
+	}
+	
+	public ObservableList<ChaineProd> getChaineP() {
+		chainePrevision = FXCollections.observableArrayList(listeChaineP);
+		return chainePrevision;
+	}
 
 
 	@Override
