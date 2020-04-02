@@ -43,6 +43,8 @@ public class ChaineDeProdController {
 	
 	@FXML
 	private Button changeLevel;
+	
+	public ChaineProd laChaine = new ChaineProd();
 
 	private MainApp mainApp;
 
@@ -74,6 +76,8 @@ public class ChaineDeProdController {
 		changeLevel.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	String newLv = levelChange.getText();
+		    	changerNiveau(laChaine, newLv);
+
 		    }
 		});
 	}
@@ -86,16 +90,17 @@ public class ChaineDeProdController {
 		 ObservableList<ChaineProd> selected;
 		 int lvI = 0;
 		    selected = chaineTable.getSelectionModel().getSelectedItems();
-		    System.out.println(selected.toString());
+		    //System.out.println(selected.toString());
 		    for (ChaineProd cp : selected) {
-		    	System.out.println(cp.toString());
+		    	//System.out.println(cp.toString());
 		    	
 		    	//On recupere la valeur du niveau
 		        IntegerProperty lv = cp.getLevel();
 		        
 		        //On met transforme la valeur en int
 		        lvI = lv.getValue().intValue();
-		        
+		        laChaine = cp;
+		        //System.out.println(laChaine.toString());
 		    }
 		    
 		    
@@ -108,5 +113,13 @@ public class ChaineDeProdController {
 		this.mainApp = mainApp;
 		chaineTable.setItems(mainApp.getChaine());
 
+	}
+	
+	public void changerNiveau(ChaineProd lachaine, String n){
+		System.out.println(n);
+		mainApp.setniveau(lachaine, n);
+		chaineTable.refresh();
+		chaineTable.setItems(mainApp.getChaineP());
+		
 	}
 }

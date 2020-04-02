@@ -24,6 +24,12 @@ public class ChaineProd {
 
 	/// Constructeur
 
+	public ChaineProd() {
+		
+	}
+	public ChaineProd(String C) {
+		this.code = new SimpleStringProperty(C);
+	}
 	public ChaineProd(String code, String nom, Map<Element, Float> mapE, Map<Element, Float> mapS) {
 		this.code = new SimpleStringProperty(code);
 		this.nom = new SimpleStringProperty(nom);
@@ -112,6 +118,14 @@ public class ChaineProd {
 	public IntegerProperty getLevelProperty() {
 		IntegerProperty sp = this.getLevel();
 		return sp;
+	}
+
+	public int getActivationLevel() {
+		return activationLevel;
+	}
+
+	public void setActivationLevel(int activationLevel) {
+		this.activationLevel = activationLevel;
 	}
 
 	public void setNom(String nom) {
