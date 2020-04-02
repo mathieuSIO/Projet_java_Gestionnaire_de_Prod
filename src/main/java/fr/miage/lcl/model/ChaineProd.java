@@ -17,7 +17,7 @@ public class ChaineProd {
 	/// Les attributs
 	private StringProperty code;
 	private StringProperty nom;
-	private IntegerProperty niveauActivation;
+	//private IntegerProperty niveauActivation;
 	private MapProperty<Element, Float> entrees;
 	private MapProperty<Element, Float> sorties;
 	private int activationLevel;
@@ -38,9 +38,12 @@ public class ChaineProd {
 				FXCollections.observableHashMap());
 		mapSortie.putAll(mapS);
 		this.sorties = mapSortie;
-		this.niveauActivation = new SimpleIntegerProperty(0);
+		//this.niveauActivation = new SimpleIntegerProperty(10);
 	}
 
+	/**
+	 * Permet d'afficher ce que contient la chaine de production
+	 */
 	public String toString() {
 		String chaine = "[\nCode de la chaine : " + this.code + "\n nom : " + this.nom;
 
@@ -55,7 +58,7 @@ public class ChaineProd {
 			chaine = chaine + "\n " + this.sorties.get(e) + " " + e.getUnite() + " " + e.getNom();
 		}
 
-		chaine = chaine + "]";
+		chaine = chaine + "\n" + " Niveau :  " + this.getLevel().getValue().intValue() + " ]";
 		return chaine;
 	}
 
@@ -72,8 +75,8 @@ public class ChaineProd {
 		this.code = ConverterProperty.stringToStringProperty(code);
 	}
 
-	public Integer getNiveauActivation() {
-		return ConverterProperty.integerPropertyToInteger(this.niveauActivation);
+	public int getNiveauActivation() {
+		return this.activationLevel;
 	}
 
 	public IntegerProperty getNiveauActivationProperty() {
@@ -81,9 +84,9 @@ public class ChaineProd {
 		return ip;
 	}
 
-	public void setNiveauActivation(Integer niveau) {
-		this.niveauActivation = ConverterProperty.integerToIntegerProperty(niveau);
-	}
+//	public void setNiveauActivation(Integer niveau) {
+//		this.niveauActivation = ConverterProperty.integerToIntegerProperty(niveau);
+//	}
 
 	public String getNom() {
 		return ConverterProperty.stringPropertyToString(this.nom);
@@ -97,6 +100,14 @@ public class ChaineProd {
 	public IntegerProperty getLevel() {
 		return ConverterProperty.integerToIntegerProperty(this.activationLevel);
 	}
+	
+	/**
+	 * Permet de mettre à jour le niveau
+	 * @param lv 
+	 */
+//	public void setLevel(int lv) {
+//		this.niveauActivation = ConverterProperty.integerToIntegerProperty(lv);
+//	}
 	
 	public IntegerProperty getLevelProperty() {
 		IntegerProperty sp = this.getLevel();
