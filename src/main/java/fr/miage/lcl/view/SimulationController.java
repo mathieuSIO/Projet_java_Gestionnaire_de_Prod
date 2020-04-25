@@ -15,7 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class ChaineDeProdController {
+public class SimulationController {
 
 	@FXML
 	private TableView<ChaineProd> chaineTable;
@@ -39,13 +39,14 @@ public class ChaineDeProdController {
 	private Button goAccueil;
 	
 	@FXML
+	private Button viewChaineProd;
+	
+	@FXML
 	private TextField levelChange;
 	
 	@FXML
 	private Button changeLevel;
-	
-	@FXML
-	private Button viewSimulation;
+
 	
 	public ChaineProd laChaine = new ChaineProd();
 
@@ -65,16 +66,15 @@ public class ChaineDeProdController {
 			}
 		};
 		
-		EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
+		EventHandler<ActionEvent> eventAccederProd = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				mainApp.showSimulation();
+				mainApp.showChaineDeProd();
 			}
 		};
-		
 		// event associé au bouton
 		goAccueil.setOnAction(eventAccederAccueil);
-		viewSimulation.setOnAction(eventAccederSimulation);
-		
+		viewChaineProd.setOnAction(eventAccederProd);
+
 		// Initialize the person table with the two columns.
 		codeC.setCellValueFactory(cellData -> cellData.getValue().getCodeProperty());
 		nomC.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
@@ -83,13 +83,8 @@ public class ChaineDeProdController {
 		level.setCellValueFactory(cellData -> cellData.getValue().getLevelProperty());
 		
 		//On appuie sur le bouton pour changer le niveau
-		changeLevel.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	String newLv = levelChange.getText();
-		    	changerNiveau(laChaine, newLv);
+		
 
-		    }
-		});
 		
 		
 	}
@@ -123,15 +118,10 @@ public class ChaineDeProdController {
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-		chaineTable.setItems(mainApp.getChaineP());
+		chaineTable.setItems(mainApp.getChaineActiveObservable());
+		chaineTable.refresh();
 
 	}
 	
-	public void changerNiveau(ChaineProd lachaine, String n){
-		System.out.println(n);
-		mainApp.setniveau(lachaine, n);
-		chaineTable.refresh();
-		chaineTable.setItems(mainApp.getChaineP());
-		
-	}
+
 }

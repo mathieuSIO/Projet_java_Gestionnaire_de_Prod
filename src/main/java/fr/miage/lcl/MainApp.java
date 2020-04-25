@@ -9,6 +9,7 @@ import fr.miage.lcl.view.AccueilOverviewController;
 import fr.miage.lcl.view.ChaineDeProdController;
 import fr.miage.lcl.view.CommandeOverviewController;
 import fr.miage.lcl.view.PersonnelOverviewController;
+import fr.miage.lcl.view.SimulationController;
 import fr.miage.lcl.view.StockOverviewController;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,20 +29,27 @@ public class MainApp extends Application {
 	private ObservableList<Element> elementData = FXCollections.observableArrayList();
 	private ObservableList<ChaineProd> chaineData = FXCollections.observableArrayList();
 	private ObservableList<ChaineProd> chainePrevision = FXCollections.observableArrayList();
+	
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	ArrayList<Element> listeElement = CSVReader.lireStocks();
 	ArrayList<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
 	ArrayList<ChaineProd> listeChaineP = CSVReader.lireChaine(listeElement);
-
+	ArrayList<ChaineProd> lesChainesActives = new ArrayList<ChaineProd>();
 
 	public MainApp() {
 		elementData = FXCollections.observableArrayList(listeElement);
 		chaineData = FXCollections.observableArrayList(listeChaine);
+
 		
 	}
 
+	
+	public ArrayList<ChaineProd> getListeChaineP(){
+		return listeChaineP;
+	}
+	
 	public ObservableList<Element> getElem() {
 		return elementData;
 	}
@@ -51,6 +59,17 @@ public class MainApp extends Application {
 		return chaineData;
 	}
 	
+	
+	public ObservableList<ChaineProd> getChaineActiveObservable() {
+		lesChainesActives.clear();
+		lesChainesActives = this.getChainesActives();
+	    ObservableList<ChaineProd> chaineA = FXCollections.observableArrayList();
+		chaineA = FXCollections.observableArrayList(this.lesChainesActives);
+		return chaineA;
+
+	}
+	
+	
 	public void setniveau(ChaineProd lachaine, String n){
 		for(ChaineProd c : listeChaineP) {
 			if(c.getCode().equals(lachaine.getCode())) {
@@ -58,7 +77,24 @@ public class MainApp extends Application {
 			}
 
 		}
+	
 		
+	}
+	
+	public ArrayList<ChaineProd> getChainesActives(){
+		for(ChaineProd c : listeChaineP) {
+			if(c.getNiveauActivation()>0) {
+				lesChainesActives.add(c);
+				System.out.println(c.toString());
+			}
+
+		}
+		
+		return lesChainesActives;
+	}
+	
+	public void supprimerChaineActive() {
+		lesChainesActives.clear();
 	}
 	
 	public ObservableList<ChaineProd> getChaineP() {
@@ -109,6 +145,8 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	public void showChaineDeProd() {
 		try {
@@ -125,7 +163,24 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public void showSimulation() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/SimulationOverview.fxml"));
+			AnchorPane simul = (AnchorPane) loader.load();
+			
+			rootLayout.setCenter(simul);
+			SimulationController controller = loader.getController();
+			controller.setMainApp(this);
 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public void showStock() {
 		try {
 
