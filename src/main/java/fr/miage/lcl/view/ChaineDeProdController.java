@@ -111,7 +111,7 @@ public class ChaineDeProdController {
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-		chaineTable.setItems(mainApp.getChaine());
+		chaineTable.setItems(mainApp.getChaineP());
 
 	}
 	
