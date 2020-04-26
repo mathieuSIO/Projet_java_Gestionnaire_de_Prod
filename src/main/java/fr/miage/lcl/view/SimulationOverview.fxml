@@ -15,13 +15,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="400.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.lcl.view.ChaineDeProdController">
+<AnchorPane minHeight="400.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.lcl.view.SimulationController">
    <children>
       <SplitPane dividerPositions="0.16606498194945848" orientation="VERTICAL" prefHeight="556.0" prefWidth="906.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="241.0" layoutY="20.0" prefHeight="49.0" prefWidth="422.0" text="Chaine de Production" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="241.0" AnchorPane.topAnchor="20.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="241.0" layoutY="20.0" prefHeight="49.0" prefWidth="422.0" text="Simulation" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="241.0" AnchorPane.topAnchor="20.0">
                      <font>
                         <Font name="System Bold" size="33.0" />
                      </font>
@@ -52,10 +52,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
                               <Button fx:id="goAccueil" layoutX="66.0" layoutY="374.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Accueil" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="66.0" />
-                              <Button fx:id="changeLevel" layoutX="26.0" layoutY="229.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="180.0" text="Changer le niveau d'activation" />
-                              <TextField fx:id="levelChange" layoutX="56.0" layoutY="183.0" prefHeight="25.0" prefWidth="120.0" />
-                              <Label layoutX="62.0" layoutY="157.0" text="Niveau d'activation :" />
-                              <Button fx:id="viewSimulation" layoutX="26.0" layoutY="297.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="180.0" text="Simulation" />
+                              <Button fx:id="viewChaineProd" layoutX="65.0" layoutY="296.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Retour" />
                            </children>
                         </AnchorPane>
                     </items>

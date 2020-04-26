@@ -37,6 +37,8 @@ public class CommandeOverviewController {
 		viewAccueil.setOnAction(eventAccederAccueil);
 	}
 	
+	
+	
 	public void setMainApp(MainApp mainApp) {
 		// TODO Auto-generated method stub
 		this.mainApp = mainApp;
