@@ -42,11 +42,24 @@ public class SimulationController {
 	private Button viewChaineProd;
 	
 	@FXML
-	private TextField levelChange;
+	private Button simulProduct;
 	
 	@FXML
-	private Button changeLevel;
-
+	private Button simulEmployee;
+	
+	@FXML
+	private void employeeButtonAction(ActionEvent event) {
+		System.out.println("test");
+		System.out.println(chaineTable.getSelectionModel().getSelectedItems());
+		System.out.println(chaineTable.getItems());
+	}
+	
+	@FXML
+	private void productButtonAction(ActionEvent event) {
+		System.out.println("test");
+		System.out.println(chaineTable.getSelectionModel().getSelectedItems());
+		System.out.println(chaineTable.getItems());
+	}
 	
 	public ChaineProd laChaine = new ChaineProd();
 
@@ -64,6 +77,12 @@ public class SimulationController {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
 			}
+			
+			EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+					mainApp.showSimulation();
+				}
+			};
 		};
 		
 		EventHandler<ActionEvent> eventAccederProd = new EventHandler<ActionEvent>() {
@@ -73,7 +92,6 @@ public class SimulationController {
 		};
 		// event associé au bouton
 		goAccueil.setOnAction(eventAccederAccueil);
-		viewChaineProd.setOnAction(eventAccederProd);
 
 		// Initialize the person table with the two columns.
 		codeC.setCellValueFactory(cellData -> cellData.getValue().getCodeProperty());
@@ -81,12 +99,7 @@ public class SimulationController {
 		entreesC.setCellValueFactory(cellData -> cellData.getValue().getEntreesCodeQuantite());
 		sortiesC.setCellValueFactory(cellData -> cellData.getValue().getSortieCodeQuantite());
 		level.setCellValueFactory(cellData -> cellData.getValue().getLevelProperty());
-		
-		//On appuie sur le bouton pour changer le niveau
-		
-
-		
-		
+				
 	}
 	
 	/**
@@ -109,11 +122,7 @@ public class SimulationController {
 		        laChaine = cp;
 		        //System.out.println(laChaine.toString());
 		    }
-		    
-		    
-		    //On affiche la valeur du niveau dans l'input niveau d'activation
-		    levelChange.setText(Integer.toString(lvI));
-		    
+		    		    
 	}
 	
 	public void setMainApp(MainApp mainApp) {
