@@ -18,7 +18,7 @@ public class CSVReader {
 	public final static String CHEMIN_FIC_ELEMENTS_CSV = "./elements.csv";
 	public final static String CHEMIN_FIC_CHAINES_CSV = "./chaines.csv";
 	public final static String CHEMIN_FIC_PRIX_CSV = "./prix.csv";
-	public final static String CHEMIN_FIC_PRODUCTION_CSV = "./production.csv";
+	public final static String CHEMIN_FIC_PERSONNEL_CSV = "./personnel.csv";
 
 	public static ArrayList<Element> lireStocks() {
 		ArrayList<Element> listeElement = new ArrayList<Element>();
@@ -36,7 +36,43 @@ public class CSVReader {
 		}
 		return listeElement;
 	}
+	
+	public static ArrayList<Personne> lirePersonnel() {
+		ArrayList<Personne> listePersonne = new ArrayList<Personne>();
+		try {
+			listePersonne = definirPersonne();
+		} catch (FileNotFoundException e) {
+			System.out.println("Fichier introuvable !");
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			System.out.println("Erreur de lecture !");
+			e.printStackTrace();
+			return null;
+		}
+		return listePersonne;
+	}
 
+	private static ArrayList<Personne> definirPersonne() throws FileNotFoundException, IOException {
+		FileInputStream ficPersonne = new FileInputStream(CSVReader.CHEMIN_FIC_PERSONNEL_CSV);
+		BufferedReader srcPersonne = new BufferedReader(new InputStreamReader(ficPersonne));
+		ArrayList<Personne> liste = new ArrayList<>();
+
+		String lignePersonne;
+		// On lit la première ligne "dans le vide"
+		lignePersonne= srcPersonne.readLine();
+
+		// Le while commence donc à lire à partir de la deuxième ligne
+		while ((lignePersonne = srcPersonne.readLine()) != null) {
+			String[] tab = lignePersonne.split(";");
+			
+
+			Personne personneAAJouter = new Personne(tab[0], tab[1], Integer.parseInt(tab[2]));
+			liste.add(personneAAJouter);
+		}
+		srcPersonne.close();
+		return liste;
+	}
 	/**
 	 * Permet de créer la liste d'élément à partir du fichier element.csv
 	 * 
@@ -144,7 +180,9 @@ public class CSVReader {
 					Element element = trouverElementEnFonctionDuCode(listeElements, tabSortie[i]);
 					mapSortie.put(element, Float.parseFloat(tabSortie[i + 1]));
 				}
-				listeChaine.add(new ChaineProd(tabLigne[0], tabLigne[1], mapEntree, mapSortie));
+				listeChaine.add(new ChaineProd(tabLigne[0], tabLigne[1], mapEntree, mapSortie,tabLigne[4]
+						,tabLigne[5],tabLigne[6]));
+				
 			}
 			srcChaine.close();
 
