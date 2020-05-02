@@ -1,9 +1,12 @@
 package fr.miage.lcl.view;
 
+import java.util.ArrayList;
+
 import com.sun.javafx.collections.MappingChange.Map;
 
 import fr.miage.lcl.MainApp;
 import fr.miage.lcl.model.ChaineProd;
+import fr.miage.lcl.model.Personne;
 import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,10 +51,13 @@ public class SimulationController {
 	private Button simulEmployee;
 	
 	@FXML
+	private ArrayList <Personne> listePersonne;
+	
+	
+	
+	@FXML
 	private void employeeButtonAction(ActionEvent event) {
-		System.out.println("test");
-		System.out.println(chaineTable.getSelectionModel().getSelectedItems());
-		System.out.println(chaineTable.getItems());
+
 	}
 	
 	@FXML
@@ -89,10 +95,20 @@ public class SimulationController {
 			public void handle(ActionEvent event) {
 				mainApp.showChaineDeProd();
 			}
+						
+		};
+		
+		EventHandler<ActionEvent> eventAccederSimulationEmployee = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mainApp.showSimulEmployee();
+	
+			}
+						
 		};
 		// event associé au bouton
 		goAccueil.setOnAction(eventAccederAccueil);
-
+		simulEmployee.setOnAction(eventAccederSimulationEmployee);
+		viewChaineProd.setOnAction(eventAccederProd);
 		// Initialize the person table with the two columns.
 		codeC.setCellValueFactory(cellData -> cellData.getValue().getCodeProperty());
 		nomC.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());

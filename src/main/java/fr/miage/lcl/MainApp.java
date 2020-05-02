@@ -5,11 +5,13 @@ import fr.miage.lcl.model.CSVReader;
 import fr.miage.lcl.model.ChaineProd;
 
 import fr.miage.lcl.model.Element;
+import fr.miage.lcl.model.Personne;
 import fr.miage.lcl.view.AccueilOverviewController;
 import fr.miage.lcl.view.ChaineDeProdController;
 import fr.miage.lcl.view.CommandeOverviewController;
 import fr.miage.lcl.view.PersonnelOverviewController;
 import fr.miage.lcl.view.SimulationController;
+import fr.miage.lcl.view.SimulationEmployesController;
 import fr.miage.lcl.view.StockOverviewController;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class MainApp extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	ArrayList<Element> listeElement = CSVReader.lireStocks();
+	ArrayList<Personne> listePersonnel = CSVReader.lirePersonnel();
 	ArrayList<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
 	ArrayList<ChaineProd> listeChaineP = CSVReader.lireChaine(listeElement);
 	ArrayList<ChaineProd> lesChainesActives = new ArrayList<ChaineProd>();
@@ -45,6 +48,20 @@ public class MainApp extends Application {
 		
 	}
 
+	public ArrayList<Personne> getPersonnel(){
+		return listePersonnel;
+	}
+	
+	public void test() {
+		System.out.println("test");
+	}
+	
+	public void AfficheToutLePersonnel() {
+		for(Personne p: listePersonnel) {
+			System.out.println(p.toString());
+		}
+	}
+	
 	
 	public ArrayList<ChaineProd> getListeChaineP(){
 		return listeChaineP;
@@ -85,11 +102,15 @@ public class MainApp extends Application {
 		for(ChaineProd c : listeChaineP) {
 			if(c.getNiveauActivation()>0) {
 				lesChainesActives.add(c);
-				System.out.println(c.toString());
+//				System.out.println(c.toString());
 			}
 
 		}
 		
+		return lesChainesActives;
+	}
+	
+	public ArrayList<ChaineProd> getLesChainesSimulation(){			
 		return lesChainesActives;
 	}
 	
@@ -173,6 +194,21 @@ public class MainApp extends Application {
 			
 			rootLayout.setCenter(simul);
 			SimulationController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void showSimulEmployee() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/SimulationEmployesOverview.fxml"));
+			AnchorPane simulE = (AnchorPane) loader.load();
+			
+			rootLayout.setCenter(simulE);
+			SimulationEmployesController controller = loader.getController();
 			controller.setMainApp(this);
 
 		} catch (IOException e) {

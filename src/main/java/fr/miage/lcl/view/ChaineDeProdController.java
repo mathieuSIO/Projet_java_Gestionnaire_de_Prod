@@ -128,7 +128,7 @@ public class ChaineDeProdController {
 	}
 	
 	public void changerNiveau(ChaineProd lachaine, String n){
-		System.out.println(n);
+//		System.out.println(n);
 		mainApp.setniveau(lachaine, n);
 		chaineTable.refresh();
 		chaineTable.setItems(mainApp.getChaineP());

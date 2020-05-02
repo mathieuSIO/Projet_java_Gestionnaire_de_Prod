@@ -21,7 +21,9 @@ public class ChaineProd {
 	private MapProperty<Element, Float> entrees;
 	private MapProperty<Element, Float> sorties;
 	private int activationLevel;
-
+	private IntegerProperty temps;
+	private IntegerProperty nbPersonnelNonQualif;
+	private IntegerProperty nbPersonnelQualif;
 	/// Constructeur
 
 	public ChaineProd() {
@@ -30,7 +32,8 @@ public class ChaineProd {
 	public ChaineProd(String C) {
 		this.code = new SimpleStringProperty(C);
 	}
-	public ChaineProd(String code, String nom, Map<Element, Float> mapE, Map<Element, Float> mapS) {
+	public ChaineProd(String code, String nom, Map<Element, Float> mapE, Map<Element, Float> mapS, String temps, 
+			String nbPNonQ, String nbPQ) {
 		this.code = new SimpleStringProperty(code);
 		this.nom = new SimpleStringProperty(nom);
 		this.activationLevel = 0;
@@ -44,8 +47,17 @@ public class ChaineProd {
 				FXCollections.observableHashMap());
 		mapSortie.putAll(mapS);
 		this.sorties = mapSortie;
+		
+		int tmpT, tmpPNQ, tmpnbQ;
+		tmpT = Integer.parseInt(temps);
+		tmpPNQ = Integer.parseInt(nbPNonQ);
+		tmpnbQ = Integer.parseInt(nbPQ);
+		this.temps = ConverterProperty.integerToIntegerProperty(tmpT);
+		this.nbPersonnelNonQualif = ConverterProperty.integerToIntegerProperty(tmpPNQ);
+		this.nbPersonnelQualif = ConverterProperty.integerToIntegerProperty(tmpnbQ);
 		//this.niveauActivation = new SimpleIntegerProperty(10);
 	}
+
 
 	/**
 	 * Permet d'afficher ce que contient la chaine de production
@@ -64,7 +76,9 @@ public class ChaineProd {
 			chaine = chaine + "\n " + this.sorties.get(e) + " " + e.getUnite() + " " + e.getNom();
 		}
 
-		chaine = chaine + "\n" + " Niveau :  " + this.getLevel().getValue().intValue() + " ]";
+		chaine = chaine + "\n" + " Niveau :  " + this.getLevel().getValue().intValue() + "\nTemps : "
+				+this.getTemps()+"\nPersonnel non qualifiés : "+
+				this.getNbNonQualifie()+"\nPersonnel qualifié :"+this.getNbQualifie()+"]";
 		return chaine;
 	}
 
@@ -89,7 +103,30 @@ public class ChaineProd {
 		IntegerProperty ip = new SimpleIntegerProperty(this.getNiveauActivation());
 		return ip;
 	}
+	
+	public Integer getTemps() {
+		return ConverterProperty.integerPropertyToInteger(this.temps);
+	}
 
+	public IntegerProperty getTempsProperty() {
+		return ConverterProperty.integerToIntegerProperty(getTemps());
+	}
+
+	public Integer getNbNonQualifie() {
+		return ConverterProperty.integerPropertyToInteger(this.nbPersonnelNonQualif);
+	}
+
+	public IntegerProperty getNbNonQualifieProperty() {
+		return ConverterProperty.integerToIntegerProperty(getNbNonQualifie());
+	}
+	
+	public Integer getNbQualifie() {
+		return ConverterProperty.integerPropertyToInteger(this.nbPersonnelQualif);
+	}
+
+	public IntegerProperty getNbQualifieProperty() {
+		return ConverterProperty.integerToIntegerProperty(getNbQualifie());
+	}
 //	public void setNiveauActivation(Integer niveau) {
 //		this.niveauActivation = ConverterProperty.integerToIntegerProperty(niveau);
 //	}
