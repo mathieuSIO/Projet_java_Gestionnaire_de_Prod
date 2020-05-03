@@ -53,7 +53,7 @@
                               <Button fx:id="goAccueil" layoutX="66.0" layoutY="374.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Accueil" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="66.0" />
                               <Button fx:id="viewChaineProd" layoutX="65.0" layoutY="296.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Retour" />
                               <Button fx:id="simulProduct" layoutX="48.0" layoutY="66.0" mnemonicParsing="false" onAction="#productButtonAction" prefHeight="25.0" prefWidth="134.0" text="Produit" />
-                              <Button fx:id="simulEmployee" layoutX="49.0" layoutY="122.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Employé" />
+                              <Button fx:id="simulEmployee" layoutX="49.0" layoutY="122.0" mnemonicParsing="false" onAction="#employeeButtonAction" prefHeight="25.0" prefWidth="134.0" text="Employé" />
                            </children>
                         </AnchorPane>
                     </items>

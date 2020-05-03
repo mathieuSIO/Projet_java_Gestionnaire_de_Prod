@@ -110,7 +110,15 @@ public class MainApp extends Application {
 		return lesChainesActives;
 	}
 	
-	public ArrayList<ChaineProd> getLesChainesSimulation(){			
+	public ArrayList<ChaineProd> getLesChainesSimulation(){		
+		lesChainesActives.clear();
+		for(ChaineProd c : listeChaineP) {
+			if(c.getNiveauActivation()>0) {
+				lesChainesActives.add(c);
+				System.out.println(c.toString());
+			}
+		
+		}
 		return lesChainesActives;
 	}
 	

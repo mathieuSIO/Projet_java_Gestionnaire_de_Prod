@@ -19,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class SimulationEmployesController {
 
@@ -34,9 +35,19 @@ public class SimulationEmployesController {
 	@FXML
 	private Label possedeNonQualif;
 
+	@FXML
+	private Label resume;
 	
 	@FXML
 	private Button goAccueil;
+	
+	@FXML
+	private Button chargerButton;
+	
+	@FXML
+	private Button retourSimul;
+	
+	private int besoinNbQualifie= 0, besoinNbNonQualifie = 0, nbPersonneQualif = Personne.nbQualifie, nbPersonneNonQualif = Personne.nbNonQualifie;
 	
 	private MainApp mainApp;
 	
@@ -45,16 +56,7 @@ public class SimulationEmployesController {
 	}
 	
 	
-	
-	public int getNbQ() {
-		int cpt = 0;
-		mainApp.test();
-//		ArrayList <ChaineProd> lesChaines = mainApp.getLesChainesSimulation();
-//		for(ChaineProd c : lesChaines) {
-//		cpt+= c.getNbQualifie()*c.getNiveauActivation();
-//	}
-		return cpt;
-	}
+
 	
 	
 	@FXML
@@ -66,8 +68,49 @@ public class SimulationEmployesController {
 			}
 		};
 		
+		EventHandler<ActionEvent> eventCalculerQualif = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				ArrayList <ChaineProd> lesChaines = mainApp.getLesChainesSimulation();
+				for(ChaineProd c : lesChaines) {
+				besoinNbQualifie+= c.getNbQualifie()*c.getNiveauActivation();
+				besoinNbNonQualifie += c.getNbNonQualifie()*c.getNiveauActivation();
+				
+				String conclusion = "";
+				
+				if(besoinNbQualifie >	nbPersonneQualif ) {
+					conclusion+= "Il vous manque "+ (besoinNbQualifie-nbPersonneQualif)+" personnes qualifiés pour réaliser ces chaînes.";
+				}
+				else {
+					conclusion+="Vous avez assez de personnes qualifiés pour réaliser ces chaînes.";
+				}
+				
+				conclusion+=" ";
+				if(besoinNbNonQualifie > nbPersonneNonQualif) {
+					conclusion+= "\nIl vous manque "+ (besoinNbNonQualifie-nbPersonneNonQualif)+" personnes non qualifiés pour réaliser ces chaînes.";
+				}
+				else {
+					conclusion+="\nVous avez assez de personnes non qualifiés pour réaliser ces chaînes.";
+				}
+				
+				
+				
+				besoinQualif.setText(Integer.toString(besoinNbQualifie));
+				besoinNonQualif.setText(Integer.toString(besoinNbNonQualifie));;
+				resume.setText(conclusion);
+				}
+			}
+		};
+		
+		EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mainApp.showSimulation();
+			}
+		};
+		
+		chargerButton.setOnAction(eventCalculerQualif);
+		retourSimul.setOnAction(eventAccederSimulation);
 		goAccueil.setOnAction(eventAccederAccueil);
-		int besoinNbQualifie= 0, besoinNbNonQualifie = 0;
+	
 
 //		mainApp.AfficheToutLePersonnel();
 //		ArrayList <ChaineProd> lesChaines = mainApp.getLesChainesSimulation();
@@ -81,13 +124,13 @@ public class SimulationEmployesController {
 //		//mainApp.AfficheToutLePersonnel();
 //		
 		besoinQualif.setText(Integer.toString(besoinNbQualifie));
-		besoinNonQualif.setText(Integer.toString(besoinNbNonQualifie));
+		besoinNonQualif.setText(Integer.toString(besoinNbNonQualifie));;
 		
 		
 		possedeQualif.setText(Integer.toString(Personne.nbQualifie));
 		possedeNonQualif.setText(Integer.toString(Personne.nbNonQualifie));
-		System.out.println("Nombre de personne qualifié possédé : "+Personne.nbQualifie);
-		System.out.println("Nombre de personne non qualifié possédé :"+Personne.nbNonQualifie);
+		System.out.println("Nombre de personne qualifié disponible : "+ this.nbPersonneQualif);
+		System.out.println("Nombre de personne non qualifié disponible :"+this.nbPersonneNonQualif);
 		
 
 	}
