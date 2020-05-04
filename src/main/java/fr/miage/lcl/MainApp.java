@@ -31,6 +31,7 @@ public class MainApp extends Application {
 	private ObservableList<Element> elementData = FXCollections.observableArrayList();
 	private ObservableList<ChaineProd> chaineData = FXCollections.observableArrayList();
 	private ObservableList<ChaineProd> chainePrevision = FXCollections.observableArrayList();
+	private ObservableList<Personne> lepersonnelObserv = FXCollections.observableArrayList();
 	
 
 	private Stage primaryStage;
@@ -44,9 +45,11 @@ public class MainApp extends Application {
 	public MainApp() {
 		elementData = FXCollections.observableArrayList(listeElement);
 		chaineData = FXCollections.observableArrayList(listeChaine);
-
+		lepersonnelObserv = FXCollections.observableArrayList(listePersonnel);
 		
 	}
+	
+	
 
 	public ArrayList<Personne> getPersonnel(){
 		return listePersonnel;
@@ -65,6 +68,10 @@ public class MainApp extends Application {
 	
 	public ArrayList<ChaineProd> getListeChaineP(){
 		return listeChaineP;
+	}
+	
+	public ObservableList<Personne> getPersonnelObservable() {
+		return lepersonnelObserv;
 	}
 	
 	public ObservableList<Element> getElem() {

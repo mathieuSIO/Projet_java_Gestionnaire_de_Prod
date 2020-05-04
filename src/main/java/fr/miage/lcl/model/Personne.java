@@ -70,6 +70,11 @@ public class Personne {
 		return ConverterProperty.stringPropertyToString(qualification);
 	}
 
+	public StringProperty getQualificationProperty() {
+		StringProperty sp = new SimpleStringProperty(this.getQualification());
+		return sp;
+	}
+	
 	public StringProperty getNomProperty() {
 		StringProperty sp = new SimpleStringProperty(this.getQualification());
 		return sp;
