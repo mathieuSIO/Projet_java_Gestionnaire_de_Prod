@@ -49,15 +49,15 @@ public class MainApp extends Application {
 		
 	}
 	
-	
+	public ArrayList<Element> getLeStock(){
+		return listeElement;
+	}
 
 	public ArrayList<Personne> getPersonnel(){
 		return listePersonnel;
 	}
 	
-	public void test() {
-		System.out.println("test");
-	}
+
 	
 	public void AfficheToutLePersonnel() {
 		for(Personne p: listePersonnel) {
@@ -122,7 +122,7 @@ public class MainApp extends Application {
 		for(ChaineProd c : listeChaineP) {
 			if(c.getNiveauActivation()>0) {
 				lesChainesActives.add(c);
-				System.out.println(c.toString());
+//				System.out.println(c.toString());
 			}
 		
 		}

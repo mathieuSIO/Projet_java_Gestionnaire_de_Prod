@@ -209,7 +209,7 @@ public class ChaineProd {
 	public MapProperty getSortieCodeQuantite() {
 		// On crée une hashMap
 		Map mapCodeQuantite = new HashMap();
-
+	
 		// On parcourt les entrées
 		for (Element element : this.sorties.keySet()) {
 			mapCodeQuantite.put(element.getCode(), this.sorties.get(element));
@@ -220,5 +220,13 @@ public class ChaineProd {
 
 		return map;
 	}
+	
+	public MapProperty<Element, Float> getEntrees() {
+		return entrees;
+	}
+	public MapProperty<Element, Float> getSorties() {
+		return sorties;
+	}
+
 
 }
