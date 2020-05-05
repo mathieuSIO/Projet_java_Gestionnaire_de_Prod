@@ -1,13 +1,16 @@
 package fr.miage.lcl.view;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import com.sun.javafx.collections.MappingChange.Map;
 
 import fr.miage.lcl.MainApp;
 import fr.miage.lcl.model.ChaineProd;
+import fr.miage.lcl.model.Element;
 import fr.miage.lcl.model.Personne;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.MapProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -62,9 +65,24 @@ public class SimulationController {
 	
 	@FXML
 	private void productButtonAction(ActionEvent event) {
-		System.out.println("test");
-		System.out.println(chaineTable.getSelectionModel().getSelectedItems());
-		System.out.println(chaineTable.getItems());
+		MapProperty<Element, Float> lesentrees;
+
+		ArrayList <Element> leStockApresSimulation = mainApp.getLeStock();
+		ArrayList <ChaineProd> lesChainesActives = mainApp.getLesChainesSimulation();
+		for(int i =0; i<lesChainesActives.size();i++) {
+			ChaineProd laC = lesChainesActives.get(i);
+			lesentrees = laC.getEntrees();
+			for (Element e : lesentrees.keySet()) {
+				lesentrees.valueAt(e);
+				System.out.println(e.getCode()+" "+lesentrees.valueAt(e).toString());
+			}
+		}
+		
+
+//		for (Element e : setElementEntree) {
+//			chaine = chaine + "\n " + this.entrees.get(e) + " " + e.getUnite() + " " + e.getNom();
+//		}
+
 	}
 	
 	public ChaineProd laChaine = new ChaineProd();
