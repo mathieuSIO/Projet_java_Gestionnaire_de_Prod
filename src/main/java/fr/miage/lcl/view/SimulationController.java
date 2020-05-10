@@ -66,15 +66,36 @@ public class SimulationController {
 	@FXML
 	private void productButtonAction(ActionEvent event) {
 		MapProperty<Element, Float> lesentrees;
+		Map<Element, Float> lesentrees2;
 
 		ArrayList <Element> leStockApresSimulation = mainApp.getLeStock();
 		ArrayList <ChaineProd> lesChainesActives = mainApp.getLesChainesSimulation();
+		int lvChaine = 0;
 		for(int i =0; i<lesChainesActives.size();i++) {
 			ChaineProd laC = lesChainesActives.get(i);
 			lesentrees = laC.getEntrees();
+			
+			//On recupere le niveau d'activation de la chaine en cours
+			lvChaine = laC.getActivationLevel();
+			
+			
+			//On recupere les produits de la chaine 
+			System.out.println(laC.getEntreesCodeQuantite().getClass().getName());
+			System.out.println(( laC.getEntreesCodeQuantite()));
+			
+//			 for (Map<Element, String> mE : laC.getEntreesCodeQuantite())
+			     
+//			for(Map el : laC.getEntreesCodeQuantite().keySet()) {
+//				
+//			}
+			
+			
+			
+			//System.out.println("Le niveau d'activation est de " + laC.getActivationLevel());
+			//System.out.println("Pour une chaine il faut " + laC.getEntreesCodeQuantite());
 			for (Element e : lesentrees.keySet()) {
 				lesentrees.valueAt(e);
-				System.out.println(e.getCode()+" "+lesentrees.valueAt(e).toString());
+				//System.out.println(e.getCode()+" quantité disponible : " + e.getQuantite() + " " + e.getUnite());
 			}
 		}
 		

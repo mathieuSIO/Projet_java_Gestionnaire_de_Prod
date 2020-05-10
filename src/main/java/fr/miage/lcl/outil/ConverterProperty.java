@@ -40,6 +40,10 @@ public class ConverterProperty {
 		map.putAll(m);
 		return map;
 	}
+	
+	public static Map mapPropertyToMap(SimpleMapProperty m) {
+		return m.get();
+	}
 
 	public static ListProperty listToListProperty(List l) {
 		ListProperty liste = new SimpleListProperty(FXCollections.observableArrayList());

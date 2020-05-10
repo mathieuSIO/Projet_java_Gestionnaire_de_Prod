@@ -200,6 +200,8 @@ public class ChaineProd {
 		return map;
 	}
 	
+
+	
 	/**
 	 * Permet de retourner une hashmap contenant toutes les sorties (code, quantité)
 	 * associé à la chaine
