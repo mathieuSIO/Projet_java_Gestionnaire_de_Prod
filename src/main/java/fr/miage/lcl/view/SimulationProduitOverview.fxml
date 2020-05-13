@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane fx:id="anchorpane" prefHeight="634.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.lcl.view.SimulationProduitController">
    <children>
-      <Label layoutX="179.0" layoutY="155.0" text="Label" />
+      <Label fx:id="label1" layoutX="24.0" layoutY="260.0" prefHeight="155.0" prefWidth="500.0" text="Label" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="260.0" />
+      <Text layoutX="23.0" layoutY="62.6103515625" strokeType="OUTSIDE" strokeWidth="0.0" text="Faites la simulation :" wrappingWidth="407.205078125" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="27.0">
+         <font>
+            <Font size="33.0" />
+         </font></Text>
+      <Button fx:id="retourSimul" layoutX="511.0" layoutY="519.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="78.0" text="Retour" AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="519.0" />
+      <Button fx:id="goAccueil" layoutX="641.0" layoutY="519.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="Accueil" AnchorPane.leftAnchor="641.0" AnchorPane.topAnchor="519.0" />
+      <Text layoutX="23.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résumé :" wrappingWidth="518.205078125" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="149.0">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Text>
+      <Label fx:id="resume" layoutX="24.0" layoutY="198.0" prefHeight="62.0" prefWidth="719.0" text="Veuillez charger la simulation afin de calculer le nombre de personnel nécéssaire" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="198.0" />
+      <Button layoutX="339.0" layoutY="88.0" mnemonicParsing="false" onAction="#productButtonAction" text="Charger" />
    </children>
 </AnchorPane>
