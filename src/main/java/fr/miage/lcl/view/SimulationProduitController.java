@@ -118,7 +118,7 @@ public class SimulationProduitController {
 
 	@FXML
 	private void productButtonAction(ActionEvent event) {
-
+		String stockRestant = "";
 		ArrayList <Element> cl = mainApp.getLeStock();
 
 		transfererStock(cl);
@@ -136,26 +136,28 @@ public class SimulationProduitController {
 			lvChaine = c.getActivationLevel();
 			
 			for (Element element : c.getEntrees().keySet()) {
-				System.out.println(element.getCode() +" "+ c.getEntrees().get(element));
-				System.out.println("Le stock est de : "+ getQuantiteStockSelonElement(element));
+				stockRestant+="\n"+element.getCode() +" "+ c.getEntrees().get(element);
+				stockRestant+="\nLe stock était de : "+ getQuantiteStockSelonElement(element);
 				int qte = Math.round(c.getEntrees().get(element))*lvChaine;
 				setQuantiteSelonElement(element,qte);
-				System.out.println("Le stock est désormais : "+ getQuantiteStockSelonElement(element));
+				stockRestant+="\nLe stock est désormais : "+ getQuantiteStockSelonElement(element);
 			
 			}
 		}
 		if(stocksuffisant) {
 			leres="Le stock est suffisant";
+			label1.setText(stockRestant);
 		}
 		else {
 			leres = "Le stock n'est pas suffisant";
 			lesQTEmanquants();
+			label1.setText(leManquedeStock);
 		}
 		
 		resume.setText(leres);
-		label1.setText(leManquedeStock);
 		
 		
+		stockRestant = " ";
 		leManquedeStock= " ";
 		
 		leStockApresSimulation.clear();

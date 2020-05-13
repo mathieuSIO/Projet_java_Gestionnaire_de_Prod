@@ -20,7 +20,7 @@
             <Font size="33.0" />
          </font>
       </Text>
-      <Label fx:id="resume" layoutX="24.0" layoutY="198.0" prefHeight="62.0" prefWidth="719.0" text="Veuillez charger la simulation afin de calculer le nombre de personnel nécéssaire" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="198.0" />
+      <Label fx:id="resume" layoutX="24.0" layoutY="198.0" prefHeight="62.0" prefWidth="719.0" text="Veuillez charger la simulation afin de vérifier l'état des stocks" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="198.0" />
       <Button layoutX="339.0" layoutY="88.0" mnemonicParsing="false" onAction="#productButtonAction" text="Charger" />
    </children>
 </AnchorPane>
