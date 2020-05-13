@@ -12,6 +12,7 @@ import fr.miage.lcl.view.CommandeOverviewController;
 import fr.miage.lcl.view.PersonnelOverviewController;
 import fr.miage.lcl.view.SimulationController;
 import fr.miage.lcl.view.SimulationEmployesController;
+import fr.miage.lcl.view.SimulationProduitController;
 import fr.miage.lcl.view.StockOverviewController;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,10 +33,12 @@ public class MainApp extends Application {
 	private ObservableList<ChaineProd> chaineData = FXCollections.observableArrayList();
 	private ObservableList<ChaineProd> chainePrevision = FXCollections.observableArrayList();
 	private ObservableList<Personne> lepersonnelObserv = FXCollections.observableArrayList();
+	private ObservableList<Element> stockP = FXCollections.observableArrayList();
 	
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
+	ArrayList<Element> leStock = CSVReader.lireStocks();
 	ArrayList<Element> listeElement = CSVReader.lireStocks();
 	ArrayList<Personne> listePersonnel = CSVReader.lirePersonnel();
 	ArrayList<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
@@ -50,7 +53,9 @@ public class MainApp extends Application {
 	}
 	
 	public ArrayList<Element> getLeStock(){
-		return listeElement;
+		leStock.clear();
+		leStock = CSVReader.lireStocks();
+		return leStock;
 	}
 
 	public ArrayList<Personne> getPersonnel(){
@@ -106,6 +111,7 @@ public class MainApp extends Application {
 	}
 	
 	public ArrayList<ChaineProd> getChainesActives(){
+		lesChainesActives.clear();
 		for(ChaineProd c : listeChaineP) {
 			if(c.getNiveauActivation()>0) {
 				lesChainesActives.add(c);
@@ -138,6 +144,10 @@ public class MainApp extends Application {
 		return chainePrevision;
 	}
 
+	public ObservableList<Element> getStockP() {
+		stockP = FXCollections.observableArrayList(listeElement);
+		return stockP;
+	}
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -225,6 +235,21 @@ public class MainApp extends Application {
 			
 			rootLayout.setCenter(simulE);
 			SimulationEmployesController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void showSimulProduit() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/SimulationProduitOverview.fxml"));
+			AnchorPane simulE = (AnchorPane) loader.load();
+			
+			rootLayout.setCenter(simulE);
+			SimulationProduitController controller = loader.getController();
 			controller.setMainApp(this);
 
 		} catch (IOException e) {

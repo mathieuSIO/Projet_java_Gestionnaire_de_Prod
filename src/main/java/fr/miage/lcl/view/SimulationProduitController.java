@@ -6,6 +6,7 @@ import com.sun.javafx.collections.MappingChange.Map;
 
 import fr.miage.lcl.MainApp;
 import fr.miage.lcl.model.ChaineProd;
+import fr.miage.lcl.model.Element;
 import fr.miage.lcl.model.Personne;
 import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
@@ -24,10 +25,38 @@ import javafx.scene.layout.AnchorPane;
 public class SimulationProduitController {
 
 	@FXML
-	private Label leresultat;
+	private Label label1;
+
+	@FXML
+	private Label label2;
+
+	@FXML
+	private Label label3;
+
+	@FXML
+	private Label label4;
+
+	@FXML
+	private Label resume;
+	
+	@FXML
+	private Button goAccueil;
 	
 	@FXML
 	private Button chargerButton;
+	
+	@FXML
+	private Button retourSimul;
+	
+	private ArrayList <Element> leStockApresSimulation = new ArrayList <Element>();
+	
+	private ArrayList <Element> lesElementsManquants = new ArrayList <Element>();
+	
+	private ArrayList <ChaineProd> lesChainesActives = new ArrayList<ChaineProd>();
+	
+	private boolean stocksuffisant = true;
+	
+	private String leManquedeStock = "";
 	
 	private MainApp mainApp;
 	
@@ -35,8 +64,103 @@ public class SimulationProduitController {
 		
 	}
 	
-	
 
+	
+	public void setQuantiteSelonElement(Element elem, int qte) {
+		
+		for(Element e: leStockApresSimulation) {
+			if(e.getCode().equals(elem.getCode())) {
+				e.setQuantite(e.getQuantite()-qte);
+			}
+		
+			
+			if(e.getQuantite()<0) {
+				stocksuffisant= false;
+				}
+		
+		}
+		
+	}
+
+	public void lesQTEmanquants() {
+		for(Element elem: leStockApresSimulation) {
+			if((elem.getQuantite()<0)&&(!lesElementsManquants.contains(elem))){
+				lesElementsManquants.add(elem);
+				}
+			
+		}
+
+		for(Element e: lesElementsManquants) {
+			this.leManquedeStock += "\nIl vous manque "+Math.abs(e.getQuantite())+" "+e.getUnite()+" de '"+e.getNom()+"'";
+
+		}
+		
+		
+	}
+	
+	public void transfererStock(ArrayList <Element> ar1) {
+		for(Element e : ar1) {
+			this.leStockApresSimulation.add(e);
+		}
+	}
+	
+	public int getQuantiteStockSelonElement(Element elem) {
+		int res = 0;
+
+		
+		for(Element e: leStockApresSimulation) {
+			if(elem.getCode().equals(e.getCode())) {
+				res = e.getQuantite();
+			}
+		}
+		return res;
+	}
+
+	@FXML
+	private void productButtonAction(ActionEvent event) {
+
+		ArrayList <Element> cl = mainApp.getLeStock();
+
+		transfererStock(cl);
+		lesChainesActives = mainApp.getChainesActives();
+
+		String leres ="";
+		
+//		ArrayList <Element> leStockApresSimulation = mainApp.getLeStock();
+
+		int lvChaine = 0;
+		for(ChaineProd c: this.lesChainesActives) {
+
+			
+			//On recupere le niveau d'activation de la chaine en cours
+			lvChaine = c.getActivationLevel();
+			
+			for (Element element : c.getEntrees().keySet()) {
+				System.out.println(element.getCode() +" "+ c.getEntrees().get(element));
+				System.out.println("Le stock est de : "+ getQuantiteStockSelonElement(element));
+				int qte = Math.round(c.getEntrees().get(element))*lvChaine;
+				setQuantiteSelonElement(element,qte);
+				System.out.println("Le stock est désormais : "+ getQuantiteStockSelonElement(element));
+			
+			}
+		}
+		if(stocksuffisant) {
+			leres="Le stock est suffisant";
+		}
+		else {
+			leres = "Le stock n'est pas suffisant";
+			lesQTEmanquants();
+		}
+		
+		resume.setText(leres);
+		label1.setText(leManquedeStock);
+		
+		
+		leManquedeStock= " ";
+		
+		leStockApresSimulation.clear();
+		lesElementsManquants.clear();
+		}
 	
 	
 	@FXML
@@ -48,27 +172,17 @@ public class SimulationProduitController {
 			}
 		};
 		
+		label1.setText("");
 		EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showSimulation();
 			}
 		};
 		
-		
-		EventHandler<ActionEvent> eventCalculerProduit = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				String conclusion = "";
-				ArrayList <ChaineProd> lesChainesActives = mainApp.getLesChainesSimulation();
-				leresultat.setText(conclusion);
-			}
-		};
-		
-
-		chargerButton.setOnAction(eventCalculerProduit);
-//		retourSimul.setOnAction(eventAccederSimulation);
-//		goAccueil.setOnAction(eventAccederAccueil);
-
-		
+//		chargerButton.setOnAction(eventCalculerQualif);
+		retourSimul.setOnAction(eventAccederSimulation);
+		goAccueil.setOnAction(eventAccederAccueil);
+	
 
 	}
 	
@@ -76,6 +190,8 @@ public class SimulationProduitController {
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
+
+
 	}
 
 }

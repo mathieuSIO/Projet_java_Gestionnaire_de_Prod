@@ -79,6 +79,11 @@ public class Element {
 		return ConverterProperty.integerPropertyToInteger(quantite);
 	}
 
+
+
+	public void setQuantite(int quantite) {
+		this.quantite = ConverterProperty.integerToIntegerProperty(quantite);
+	}
 	public IntegerProperty getQuantiteProperty() {
 		return ConverterProperty.integerToIntegerProperty(getQuantite());
 	}

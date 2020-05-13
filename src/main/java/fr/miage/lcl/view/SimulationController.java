@@ -1,6 +1,7 @@
 package fr.miage.lcl.view;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Set;
 
 import com.sun.javafx.collections.MappingChange.Map;
@@ -56,54 +57,61 @@ public class SimulationController {
 	@FXML
 	private ArrayList <Personne> listePersonne;
 	
-	
+	private ArrayList <Element> leStockApresSimulation;
 	
 	@FXML
 	private void employeeButtonAction(ActionEvent event) {
 		mainApp.AfficheToutLePersonnel();
 	}
 	
-	@FXML
-	private void productButtonAction(ActionEvent event) {
-		MapProperty<Element, Float> lesentrees;
-		Map<Element, Float> lesentrees2;
-
-		ArrayList <Element> leStockApresSimulation = mainApp.getLeStock();
-		ArrayList <ChaineProd> lesChainesActives = mainApp.getLesChainesSimulation();
-		int lvChaine = 0;
-		for(int i =0; i<lesChainesActives.size();i++) {
-			ChaineProd laC = lesChainesActives.get(i);
-			lesentrees = laC.getEntrees();
-			
-			//On recupere le niveau d'activation de la chaine en cours
-			lvChaine = laC.getActivationLevel();
-			
-			
-			//On recupere les produits de la chaine 
-			System.out.println(laC.getEntreesCodeQuantite().getClass().getName());
-			System.out.println(( laC.getEntreesCodeQuantite()));
-			
-//			 for (Map<Element, String> mE : laC.getEntreesCodeQuantite())
-			     
-//			for(Map el : laC.getEntreesCodeQuantite().keySet()) {
-//				
-//			}
-			
-			
-			
-			//System.out.println("Le niveau d'activation est de " + laC.getActivationLevel());
-			//System.out.println("Pour une chaine il faut " + laC.getEntreesCodeQuantite());
-			for (Element e : lesentrees.keySet()) {
-				lesentrees.valueAt(e);
-				//System.out.println(e.getCode()+" quantité disponible : " + e.getQuantite() + " " + e.getUnite());
+	
+	public int getQuantiteStockSelonElement(Element elem) {
+		int res = 0;
+		ArrayList <Element> leStock = mainApp.getLeStock();
+		
+		for(Element e: leStock) {
+			if(elem == e) {
+				res = e.getQuantite();
 			}
 		}
+		return res;
 		
+	}
+	
+	public void setQuantiteSelonElement(Element elem, int qte) {
+		
+		for(Element e: this.leStockApresSimulation) {
+			if(elem == e) {
+				e.setQuantite(e.getQuantite()-qte);
+			}
+		}
+	}
 
-//		for (Element e : setElementEntree) {
-//			chaine = chaine + "\n " + this.entrees.get(e) + " " + e.getUnite() + " " + e.getNom();
+	@FXML
+	private void productButtonAction(ActionEvent event) {
+//		leStockApresSimulation = mainApp.getLeStock();
+//
+//
+//		ArrayList <Element> leStockApresSimulation = mainApp.getLeStock();
+//		ArrayList <ChaineProd> lesChainesActives = mainApp.getLesChainesSimulation();
+//		int lvChaine = 0;
+//		boolean stocksuffisant = true;
+//		for(int i =0; i<lesChainesActives.size();i++) {
+//			ChaineProd laC = lesChainesActives.get(i);
+//
+//			
+//			//On recupere le niveau d'activation de la chaine en cours
+//			lvChaine = laC.getActivationLevel();
+//			
+//			for (Element element : laC.getEntrees().keySet()) {
+//				System.out.println(element.getCode() +" "+ laC.getEntrees().get(element));
+//				System.out.println("Le stock est de : "+ getQuantiteStockSelonElement(element));
+//				int qte = Math.round(laC.getEntrees().get(element));
+//				setQuantiteSelonElement(element,qte);
+//				System.out.println("Le stock est désormais : "+ getQuantiteStockSelonElement(element));
+//			
+//			}
 //		}
-
 	}
 	
 	public ChaineProd laChaine = new ChaineProd();
@@ -144,7 +152,14 @@ public class SimulationController {
 			}
 						
 		};
+		
+		EventHandler<ActionEvent> eventAccederSimulationProduit= new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mainApp.showSimulProduit();
+			}
+		};
 		// event associé au bouton
+		simulProduct.setOnAction(eventAccederSimulationProduit);
 		goAccueil.setOnAction(eventAccederAccueil);
 		simulEmployee.setOnAction(eventAccederSimulationEmployee);
 		viewChaineProd.setOnAction(eventAccederProd);
