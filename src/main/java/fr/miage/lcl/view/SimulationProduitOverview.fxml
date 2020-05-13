@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="anchorpane" prefHeight="634.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.lcl.view.SimulationProduitController">
    <children>
-      <Label fx:id="label1" layoutX="24.0" layoutY="260.0" prefHeight="155.0" prefWidth="500.0" text="Label" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="260.0" />
+      <Label fx:id="label1" layoutX="24.0" layoutY="260.0" prefHeight="314.0" prefWidth="500.0" text="Label" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="260.0" />
       <Text layoutX="23.0" layoutY="62.6103515625" strokeType="OUTSIDE" strokeWidth="0.0" text="Faites la simulation :" wrappingWidth="407.205078125" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="27.0">
          <font>
             <Font size="33.0" />
