@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class Personne {
 
 	/// LES ATTRIBUTS
-	private StringProperty code;
+	public StringProperty code;
 	private StringProperty qualification;
 	private IntegerProperty nbH;
 	public static int nbQualifie = 0;
@@ -52,7 +52,7 @@ public class Personne {
 	}
 
 	public String toString() {
-		return "\nL'employé numéro : " + this.getCode() + "\n Qualification : " + this.getQualification() + 
+		return "L'employé numéro : " + this.getCode() + "\n Qualification : " + this.getQualification() + 
 				"\n Possède nombre d'heures : " + this.getNbH()+"\n";
 	}
 

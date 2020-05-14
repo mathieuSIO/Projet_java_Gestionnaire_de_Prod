@@ -1,5 +1,6 @@
 package fr.miage.lcl.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -24,6 +25,8 @@ public class ChaineProd {
 	private IntegerProperty temps;
 	private IntegerProperty nbPersonnelNonQualif;
 	private IntegerProperty nbPersonnelQualif;
+	
+	public ArrayList<Personne> personnelChoisi = new ArrayList <Personne>();
 	/// Constructeur
 
 	public ChaineProd() {
@@ -230,5 +233,19 @@ public class ChaineProd {
 		return sorties;
 	}
 
+
+
+	public String getCodePersonne() {
+		String lecode = "";
+		for(Personne p : this.personnelChoisi) {
+			lecode+= p.getCode()+" ";
+		}
+		return lecode;
+	}
+
+	public StringProperty getCodePropertyPersonne() {
+		StringProperty sp = new SimpleStringProperty(getCodePersonne());
+		return sp;
+	}
 
 }

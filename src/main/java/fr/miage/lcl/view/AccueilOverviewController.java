@@ -20,6 +20,9 @@ public class AccueilOverviewController {
 	@FXML
 	private Button viewPersonnel;
 	
+	@FXML
+	private Button affecterPersonnel;
+	
 	// Reference to the main application.
 	private MainApp mainApp;
 
@@ -39,6 +42,12 @@ public class AccueilOverviewController {
 		EventHandler<ActionEvent> eventAccederStock = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showStock();
+			}
+		};
+		
+		EventHandler<ActionEvent> eventAffecterPersonnel = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mainApp.showAffecterPersonnel();
 			}
 		};
 		EventHandler<ActionEvent> eventAccederCommande = new EventHandler<ActionEvent>() {
@@ -61,6 +70,7 @@ public class AccueilOverviewController {
 		viewProd.setOnAction(eventAccederProd);
 		viewCommande.setOnAction(eventAccederCommande);
 		viewPersonnel.setOnAction(eventAccederPersonnel);
+		affecterPersonnel.setOnAction(eventAffecterPersonnel);
 	}
 
 	/**
