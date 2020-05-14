@@ -7,6 +7,7 @@ import fr.miage.lcl.model.ChaineProd;
 import fr.miage.lcl.model.Element;
 import fr.miage.lcl.model.Personne;
 import fr.miage.lcl.view.AccueilOverviewController;
+import fr.miage.lcl.view.AffecterPersonnelController;
 import fr.miage.lcl.view.ChaineDeProdController;
 import fr.miage.lcl.view.CommandeOverviewController;
 import fr.miage.lcl.view.PersonnelOverviewController;
@@ -99,6 +100,7 @@ public class MainApp extends Application {
 	}
 	
 	
+	
 	public void setniveau(ChaineProd lachaine, String n){
 		for(ChaineProd c : listeChaineP) {
 			if(c.getCode().equals(lachaine.getCode())) {
@@ -109,6 +111,8 @@ public class MainApp extends Application {
 	
 		
 	}
+	
+	
 	
 	public ArrayList<ChaineProd> getChainesActives(){
 		lesChainesActives.clear();
@@ -211,6 +215,22 @@ public class MainApp extends Application {
 		}
 	}
 	
+	
+	public void showAffecterPersonnel() {
+		try {
+			
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/AffecterPersonnelOverview.fxml"));
+			AnchorPane chaineProd = (AnchorPane) loader.load();
+			
+			rootLayout.setCenter(chaineProd);
+			AffecterPersonnelController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void showSimulation() {
 		try {

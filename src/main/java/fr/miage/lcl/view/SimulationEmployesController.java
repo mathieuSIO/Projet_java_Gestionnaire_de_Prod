@@ -45,6 +45,9 @@ public class SimulationEmployesController {
 	private Button chargerButton;
 	
 	@FXML
+	private Button repartirPersonnel;
+	
+	@FXML
 	private Button retourSimul;
 	
 	private int besoinNbQualifie= 0, besoinNbNonQualifie = 0, nbPersonneQualif = Personne.nbQualifie, nbPersonneNonQualif = Personne.nbNonQualifie;
@@ -61,7 +64,7 @@ public class SimulationEmployesController {
 	
 	@FXML
 	private void initialize() {
-		
+		repartirPersonnel.setDisable(true);
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
@@ -70,6 +73,7 @@ public class SimulationEmployesController {
 		
 		EventHandler<ActionEvent> eventCalculerQualif = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
+				boolean aAssez = true;
 				ArrayList <ChaineProd> lesChaines = mainApp.getLesChainesSimulation();
 				for(ChaineProd c : lesChaines) {
 				besoinNbQualifie+= c.getNbQualifie()*c.getNiveauActivation();
@@ -78,6 +82,7 @@ public class SimulationEmployesController {
 				String conclusion = "";
 				
 				if(besoinNbQualifie >	nbPersonneQualif ) {
+					aAssez=false;
 					conclusion+= "Il vous manque "+ (besoinNbQualifie-nbPersonneQualif)+" personnes qualifiés pour réaliser ces chaînes.";
 				}
 				else {
@@ -86,13 +91,17 @@ public class SimulationEmployesController {
 				
 				conclusion+=" ";
 				if(besoinNbNonQualifie > nbPersonneNonQualif) {
+					aAssez = false;
 					conclusion+= "\nIl vous manque "+ (besoinNbNonQualifie-nbPersonneNonQualif)+" personnes non qualifiés pour réaliser ces chaînes.";
 				}
 				else {
 					conclusion+="\nVous avez assez de personnes non qualifiés pour réaliser ces chaînes.";
 				}
 				
-				
+				if(aAssez) {
+					repartirPersonnel.setDisable(false);
+					System.out.println("je mange");
+				}
 				
 				besoinQualif.setText(Integer.toString(besoinNbQualifie));
 				besoinNonQualif.setText(Integer.toString(besoinNbNonQualifie));;
@@ -107,10 +116,16 @@ public class SimulationEmployesController {
 			}
 		};
 		
+		EventHandler<ActionEvent> eventAffecterPersonnel = new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				mainApp.showAffecterPersonnel();
+			}
+		};
+		
 		chargerButton.setOnAction(eventCalculerQualif);
 		retourSimul.setOnAction(eventAccederSimulation);
 		goAccueil.setOnAction(eventAccederAccueil);
-	
+		repartirPersonnel.setOnAction(eventAffecterPersonnel);
 
 //		mainApp.AfficheToutLePersonnel();
 //		ArrayList <ChaineProd> lesChaines = mainApp.getLesChainesSimulation();

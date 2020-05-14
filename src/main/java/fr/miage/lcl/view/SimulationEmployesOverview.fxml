@@ -33,5 +33,6 @@
       </Text>
       <Label fx:id="resume" layoutX="19.0" layoutY="464.0" prefHeight="32.0" prefWidth="719.0" text="Veuillez charger la simulation afin de calculer le nombre de personnel nécéssaire" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="464.0" />
       <Button fx:id="chargerButton" layoutX="614.0" layoutY="101.0" mnemonicParsing="false" text="Charger" />
+      <Button fx:id="repartirPersonnel" layoutX="41.0" layoutY="527.0" mnemonicParsing="false" text="Répartir les employés sur les chaînes" />
    </children>
 </AnchorPane>

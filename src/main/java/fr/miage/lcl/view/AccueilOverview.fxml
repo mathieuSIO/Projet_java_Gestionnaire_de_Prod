@@ -32,5 +32,6 @@
             <Image url="./Pictures/UT3.png" />
          </image>
       </ImageView>
+      <Button fx:id="affecterPersonnel" layoutX="333.0" layoutY="132.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="220.0" text="Test pour affecter personnel" />
    </children>
 </AnchorPane>

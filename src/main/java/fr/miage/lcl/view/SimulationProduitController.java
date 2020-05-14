@@ -45,6 +45,8 @@ public class SimulationProduitController {
 	@FXML
 	private Button chargerButton;
 	
+
+	
 	@FXML
 	private Button retourSimul;
 	
@@ -167,7 +169,7 @@ public class SimulationProduitController {
 	
 	@FXML
 	private void initialize() {
-		
+
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
@@ -181,10 +183,12 @@ public class SimulationProduitController {
 			}
 		};
 		
+
+		
 //		chargerButton.setOnAction(eventCalculerQualif);
 		retourSimul.setOnAction(eventAccederSimulation);
 		goAccueil.setOnAction(eventAccederAccueil);
-	
+		
 
 	}
 	
