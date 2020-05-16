@@ -22,6 +22,7 @@ public class Personne {
 	public StringProperty code;
 	private StringProperty qualification;
 	private IntegerProperty nbH;
+	private int nbHdisponible;
 	public static int nbQualifie = 0;
 	public static int nbNonQualifie = 0;
 
@@ -47,14 +48,22 @@ public class Personne {
 		this.code = ConverterProperty.stringToStringProperty(code);
 		this.qualification = ConverterProperty.stringToStringProperty(pqualification);
 		this.nbH = ConverterProperty.integerToIntegerProperty(nbH);
-		
+		nbHdisponible = nbH;
 	
 	}
-
+	
+	public Personne() {}
+	
+	
+	public void changerNbHdispo(int x) {
+		this.nbHdisponible-=x;
+	}
+	
 	public String toString() {
 		return "L'employé numéro : " + this.getCode() + "\n Qualification : " + this.getQualification() + 
-				"\n Possède nombre d'heures : " + this.getNbH()+"\n";
+				"\n Possède nombre d'heures : " + this.getNbH()+"\n Heures disponibles : "+getNbHdisponible();
 	}
+	
 
 	public String getCode() {
 		return ConverterProperty.stringPropertyToString(code);
@@ -88,6 +97,16 @@ public class Personne {
 	public IntegerProperty getNbHProperty() {
 		return ConverterProperty.integerToIntegerProperty(getNbH());
 	}
+	
+
+	public Integer getNbHdisponible() {
+		return this.nbHdisponible;
+	}
+
+	public IntegerProperty getNbHdisponibleProperty() {
+		return ConverterProperty.integerToIntegerProperty(getNbHdisponible());
+	}
+
 
 	
 }

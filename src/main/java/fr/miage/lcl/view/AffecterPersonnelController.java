@@ -92,7 +92,7 @@ public class AffecterPersonnelController {
 		nomC.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
 		nbQ.setCellValueFactory(cellData -> cellData.getValue().getNbQualifieProperty().asObject());
 		nbNonQ.setCellValueFactory(cellData -> cellData.getValue().getNbNonQualifieProperty().asObject());
-		temps.setCellValueFactory(cellData -> cellData.getValue().getNbNonQualifieProperty().asObject());
+		temps.setCellValueFactory(cellData -> cellData.getValue().getTempsProperty().asObject());
 		level.setCellValueFactory(cellData -> cellData.getValue().getLevelProperty());
 
 		comboBox.valueProperty().addListener(observable -> System.out.printf("Valeur sélectionnée: %s", comboBox.getValue()).println());
@@ -101,7 +101,9 @@ public class AffecterPersonnelController {
 		choixPersonne.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	Personne lapersonne = comboBox.getValue();
+		    	retirerHpersonne(lapersonne);
 		    	laChaine.personnelChoisi.add(lapersonne);
+		    	System.out.println(lapersonne.toString());
 		    	afficherPersonne(laChaine);
 
 		    }
@@ -123,17 +125,14 @@ public class AffecterPersonnelController {
 		    	//System.out.println(cp.toString());
 		    	
 		    	//On recupere la valeur du niveau
-		        IntegerProperty lv = cp.getLevel();
 		        
 		        //On met transforme la valeur en int
-		        lvI = lv.getValue().intValue();
 		        laChaine = cp;
 		        //System.out.println(laChaine.toString());
 		    }
 		    
 		    
 		    //On affiche la valeur du niveau dans l'input niveau d'activation
-		    levelChange.setText(Integer.toString(lvI));
 		    
 	}
 	
@@ -146,10 +145,25 @@ public class AffecterPersonnelController {
 	public void afficherPersonne(ChaineProd lachaine){
 //		System.out.println(n);
 //		mainApp.setniveau(lachaine, n);
-		System.out.println(laChaine.getCodePersonne());
 		personneSelectionne.setCellValueFactory(cellData -> cellData.getValue().getCodePropertyPersonne());
 		chaineTable.refresh();
-		chaineTable.setItems(mainApp.getChaineActiveObservable());
+
+
+	
 		
 	}
+	
+	public void retirerHpersonne(Personne lapersonne) {
+		for(Personne p:mainApp.getPersonnel()) {
+			if(lapersonne.getCode().equals(p.getCode())) {
+//				System.out.println(laChaine.getCode()+" "+laChaine.getTemps()+" "+laChaine.getNiveauActivation());
+				p.changerNbHdispo(laChaine.getTemps()*laChaine.getNiveauActivation());
+			}
+		}
+		
+
+	}
+	
+	
+	
 }

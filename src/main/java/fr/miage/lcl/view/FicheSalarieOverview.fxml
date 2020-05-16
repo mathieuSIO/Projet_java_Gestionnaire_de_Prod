@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorpane" prefHeight="634.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.lcl.view.FicheSalarieController">
+   <children>
+      <Text layoutX="23.0" layoutY="62.6103515625" strokeType="OUTSIDE" strokeWidth="0.0" text="Fiche du salarié : " wrappingWidth="407.205078125" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="27.0">
+         <font>
+            <Font size="33.0" />
+         </font></Text>
+      <Button fx:id="retourPersonnel" layoutX="511.0" layoutY="519.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="78.0" text="Retour" AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="519.0" />
+      <Button fx:id="retourAccueil" layoutX="641.0" layoutY="519.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="Accueil" AnchorPane.leftAnchor="641.0" AnchorPane.topAnchor="519.0" />
+      <Label layoutX="325.0" layoutY="38.0" text="Code salarié" />
+   </children>
+</AnchorPane>
