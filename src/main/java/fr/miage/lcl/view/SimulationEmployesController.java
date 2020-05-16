@@ -82,6 +82,7 @@ public class SimulationEmployesController {
 				String conclusion = "";
 				
 				if(besoinNbQualifie >	nbPersonneQualif ) {
+				
 					aAssez=false;
 					conclusion+= "Il vous manque "+ (besoinNbQualifie-nbPersonneQualif)+" personnes qualifiés pour réaliser ces chaînes.";
 				}
@@ -92,21 +93,22 @@ public class SimulationEmployesController {
 				conclusion+=" ";
 				if(besoinNbNonQualifie > nbPersonneNonQualif) {
 					aAssez = false;
+
 					conclusion+= "\nIl vous manque "+ (besoinNbNonQualifie-nbPersonneNonQualif)+" personnes non qualifiés pour réaliser ces chaînes.";
 				}
 				else {
 					conclusion+="\nVous avez assez de personnes non qualifiés pour réaliser ces chaînes.";
 				}
 				
-				if(aAssez) {
-					repartirPersonnel.setDisable(false);
-					System.out.println("je mange");
-				}
-				
+			
 				besoinQualif.setText(Integer.toString(besoinNbQualifie));
 				besoinNonQualif.setText(Integer.toString(besoinNbNonQualifie));;
 				resume.setText(conclusion);
 				}
+				if(aAssez) {
+					repartirPersonnel.setDisable(false);
+				}
+				
 			}
 		};
 		

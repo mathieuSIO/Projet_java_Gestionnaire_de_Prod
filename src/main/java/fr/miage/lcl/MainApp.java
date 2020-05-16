@@ -15,6 +15,8 @@ import fr.miage.lcl.view.SimulationController;
 import fr.miage.lcl.view.SimulationEmployesController;
 import fr.miage.lcl.view.SimulationProduitController;
 import fr.miage.lcl.view.StockOverviewController;
+import fr.miage.lcl.view.FicheSalarieController;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class MainApp extends Application {
 	private ObservableList<ChaineProd> chaineData = FXCollections.observableArrayList();
 	private ObservableList<ChaineProd> chainePrevision = FXCollections.observableArrayList();
 	private ObservableList<Personne> lepersonnelObserv = FXCollections.observableArrayList();
+	private ObservableList<Personne> lepersonnelDispoObserv = FXCollections.observableArrayList();
 	private ObservableList<Element> stockP = FXCollections.observableArrayList();
 	
 
@@ -42,6 +45,7 @@ public class MainApp extends Application {
 	ArrayList<Element> leStock = CSVReader.lireStocks();
 	ArrayList<Element> listeElement = CSVReader.lireStocks();
 	ArrayList<Personne> listePersonnel = CSVReader.lirePersonnel();
+	ArrayList<Personne> listePersonnelDisponible = CSVReader.lirePersonnel();
 	ArrayList<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
 	ArrayList<ChaineProd> listeChaineP = CSVReader.lireChaine(listeElement);
 	ArrayList<ChaineProd> lesChainesActives = new ArrayList<ChaineProd>();
@@ -50,7 +54,7 @@ public class MainApp extends Application {
 		elementData = FXCollections.observableArrayList(listeElement);
 		chaineData = FXCollections.observableArrayList(listeChaine);
 		lepersonnelObserv = FXCollections.observableArrayList(listePersonnel);
-		
+		lepersonnelDispoObserv = FXCollections.observableArrayList(listePersonnelDisponible);
 	}
 	
 	public ArrayList<Element> getLeStock(){
@@ -63,15 +67,25 @@ public class MainApp extends Application {
 		return listePersonnel;
 	}
 	
-
+//	public ArrayList<Personne> getPersonnelDispo(){
+//		return listePersonnelDisponible;
+//	}
 	
-	public void AfficheToutLePersonnel() {
-		for(Personne p: listePersonnel) {
-			System.out.println(p.toString());
+
+//	public ObservableList<Personne> getPersonnelDispoObservable() {
+//	miseAjourPersonnel();
+//	return lepersonnelDispoObserv;
+//}
+
+	public void miseAjourPersonnel() {
+		for(Personne p:listePersonnelDisponible) {
+			if(p.getNbHdisponible()<0) {
+				listePersonnelDisponible.remove(p);
+			}
 		}
 	}
 	
-	
+
 	public ArrayList<ChaineProd> getListeChaineP(){
 		return listeChaineP;
 	}
@@ -178,6 +192,20 @@ public class MainApp extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void showSalarie() {
+		try {
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/ficheSalarieOverview.fxml"));
+			AnchorPane c = (AnchorPane) loader.load();
+			rootLayout.setCenter(c);
+			FicheSalarieController controller = loader.getController();
+			controller.setMainApp(this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
