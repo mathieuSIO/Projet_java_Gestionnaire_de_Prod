@@ -101,7 +101,7 @@ public class ChaineDeProdController {
 	public void clickedColumn(MouseEvent e){
 		 ObservableList<ChaineProd> selected;
 		 int lvI = 0;
-		    selected = chaineTable.getSelectionModel().getSelectedItems();
+		 selected = chaineTable.getSelectionModel().getSelectedItems();
 		    //System.out.println(selected.toString());
 		    for (ChaineProd cp : selected) {
 		    	//System.out.println(cp.toString());

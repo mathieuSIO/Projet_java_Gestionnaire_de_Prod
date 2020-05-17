@@ -157,7 +157,7 @@ public class AffecterPersonnelController {
 		for(Personne p:mainApp.getPersonnel()) {
 			if(lapersonne.getCode().equals(p.getCode())) {
 //				System.out.println(laChaine.getCode()+" "+laChaine.getTemps()+" "+laChaine.getNiveauActivation());
-				p.changerNbHdispo(laChaine.getTemps()*laChaine.getNiveauActivation());
+				p.changerNbHdispo(laChaine.getTemps()*laChaine.getNiveauActivation(), laChaine);
 			}
 		}
 		
