@@ -14,6 +14,16 @@
          </font></Text>
       <Button fx:id="retourPersonnel" layoutX="511.0" layoutY="519.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="78.0" text="Retour" AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="519.0" />
       <Button fx:id="retourAccueil" layoutX="641.0" layoutY="519.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="Accueil" AnchorPane.leftAnchor="641.0" AnchorPane.topAnchor="519.0" />
-      <Label layoutX="325.0" layoutY="38.0" text="Code salarié" />
+      <Label fx:id="lecode" layoutX="297.0" layoutY="22.0" prefHeight="53.0" prefWidth="274.0" text="Code salarié" textOverrun="WORD_ELLIPSIS">
+         <font>
+            <Font size="33.0" />
+         </font></Label>
+      <TextArea fx:id="resume" layoutX="41.0" layoutY="127.0" prefHeight="334.0" prefWidth="626.0" />
+      <Text layoutX="90.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qualification :" wrappingWidth="185.205078125">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Label fx:id="laqualification" layoutX="276.0" layoutY="93.0" text="Label" />
    </children>
 </AnchorPane>

@@ -68,9 +68,9 @@ public class AccueilOverviewController {
 		// event associé au bouton
 		viewStock.setOnAction(eventAccederStock);
 		viewProd.setOnAction(eventAccederProd);
-		viewCommande.setOnAction(eventAccederCommande);
+//		viewCommande.setOnAction(eventAccederCommande);
 		viewPersonnel.setOnAction(eventAccederPersonnel);
-		affecterPersonnel.setOnAction(eventAffecterPersonnel);
+//		affecterPersonnel.setOnAction(eventAffecterPersonnel);
 	}
 
 	/**

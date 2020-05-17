@@ -19,9 +19,8 @@
          </font>
       </Label>
       <Button fx:id="viewProd" layoutX="183.0" layoutY="235.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="220.0" text="Chaine de Prod." AnchorPane.leftAnchor="183.0" />
-      <Button fx:id="viewCommande" layoutX="183.0" layoutY="362.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="220.0" text="Gestion des commandes" AnchorPane.leftAnchor="183.0" />
       <Button fx:id="viewStock" layoutX="497.0" layoutY="235.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="220.0" text="Stock" AnchorPane.rightAnchor="183.0" />
-      <Button fx:id="viewPersonnel" layoutX="497.0" layoutY="362.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="220.0" text="Personnel" AnchorPane.rightAnchor="183.0" />
+      <Button fx:id="viewPersonnel" layoutX="340.0" layoutY="366.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="220.0" text="Personnel" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="366.0" />
       <ImageView fitHeight="35.0" fitWidth="165.0" layoutX="14.0" layoutY="21.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="20.0">
          <image>
             <Image url="./Pictures/miage.png" />
@@ -32,6 +31,5 @@
             <Image url="./Pictures/UT3.png" />
          </image>
       </ImageView>
-      <Button fx:id="affecterPersonnel" layoutX="333.0" layoutY="132.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="220.0" text="Test pour affecter personnel" />
    </children>
 </AnchorPane>

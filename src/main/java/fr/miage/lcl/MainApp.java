@@ -45,18 +45,28 @@ public class MainApp extends Application {
 	ArrayList<Element> leStock = CSVReader.lireStocks();
 	ArrayList<Element> listeElement = CSVReader.lireStocks();
 	ArrayList<Personne> listePersonnel = CSVReader.lirePersonnel();
-	ArrayList<Personne> listePersonnelDisponible = CSVReader.lirePersonnel();
+//	ArrayList<Personne> listePersonnelDisponible = CSVReader.lirePersonnel();
 	ArrayList<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
 	ArrayList<ChaineProd> listeChaineP = CSVReader.lireChaine(listeElement);
 	ArrayList<ChaineProd> lesChainesActives = new ArrayList<ChaineProd>();
-
+	Personne lapersonneSelectionne;
+	
 	public MainApp() {
 		elementData = FXCollections.observableArrayList(listeElement);
 		chaineData = FXCollections.observableArrayList(listeChaine);
 		lepersonnelObserv = FXCollections.observableArrayList(listePersonnel);
-		lepersonnelDispoObserv = FXCollections.observableArrayList(listePersonnelDisponible);
+//		lepersonnelDispoObserv = FXCollections.observableArrayList(listePersonnelDisponible);
 	}
 	
+	
+	public void setSelectionnePersonne(Personne p) {
+		this.lapersonneSelectionne = p;
+		System.out.println(lapersonneSelectionne);
+	}
+	
+	public Personne getSelectionnePersonne() {
+		return this.lapersonneSelectionne;
+	}
 	public ArrayList<Element> getLeStock(){
 		leStock.clear();
 		leStock = CSVReader.lireStocks();
@@ -77,13 +87,13 @@ public class MainApp extends Application {
 //	return lepersonnelDispoObserv;
 //}
 
-	public void miseAjourPersonnel() {
-		for(Personne p:listePersonnelDisponible) {
-			if(p.getNbHdisponible()<0) {
-				listePersonnelDisponible.remove(p);
-			}
-		}
-	}
+//	public void miseAjourPersonnel() {
+//		for(Personne p:listePersonnelDisponible) {
+//			if(p.getNbHdisponible()<0) {
+//				listePersonnelDisponible.remove(p);
+//			}
+//		}
+//	}
 	
 
 	public ArrayList<ChaineProd> getListeChaineP(){
