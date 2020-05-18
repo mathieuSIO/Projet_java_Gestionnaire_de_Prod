@@ -67,15 +67,19 @@ public class AffecterPersonnelController {
 	}
 
 	@FXML
+	/**
+	 * Méthode permettant d'initialiser la vue
+	 */
 	private void initialize() {
-    	//Initialize button
-		// on crée l'event
+		
+		// event permettant d'accéder à la vue : accueil 
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
 			}
 		};
 		
+		// event permettant d'accéder à la vue : simuation 
 		EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showSimulation();
@@ -84,9 +88,7 @@ public class AffecterPersonnelController {
 		
 		// event associé au bouton
 		goAccueil.setOnAction(eventAccederAccueil);
-
 		
-		// Initialize the person table with the two columns.
 		codeC.setCellValueFactory(cellData -> cellData.getValue().getCodeProperty());
 		nomC.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
 		nbQ.setCellValueFactory(cellData -> cellData.getValue().getNbQualifieProperty().asObject());
@@ -104,65 +106,54 @@ public class AffecterPersonnelController {
 		    	laChaine.personnelChoisi.add(lapersonne);
 		    	System.out.println(lapersonne.toString());
 		    	afficherPersonne(laChaine);
-
 		    }
 		});
-		
-		
+			
 	}
 	
 	/**
-	 * Fonction qui recupere une colonne cliqué et affecte la valeur du niveau dans le champ pour pouvoir le changer
+	 * Fonction qui récupère une colonne cliqué et affecte la valeur du niveau dans le champ 
+	 * pour pouvoir changer celui-ci
 	 * @param e
 	 */
 	public void clickedColumn(MouseEvent e){
 		 ObservableList<ChaineProd> selected;
 		 int lvI = 0;
 		    selected = chaineTable.getSelectionModel().getSelectedItems();
-		    //System.out.println(selected.toString());
 		    for (ChaineProd cp : selected) {
-		    	//System.out.println(cp.toString());
-		    	
-		    	//On recupere la valeur du niveau
-		        
-		        //On met transforme la valeur en int
 		        laChaine = cp;
-		        //System.out.println(laChaine.toString());
-		    }
-		    
-		    
-		    //On affiche la valeur du niveau dans l'input niveau d'activation
-		    
+		    }		    		    		    
 	}
 	
+	/** Méthode appelé par le main pour se faire une référence à lui même
+	 * 
+	 * @param mainApp
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		chaineTable.setItems(mainApp.getChaineActiveObservable());
 		comboBox.setItems(mainApp.getPersonnelObservable());
 	}
 	
+	/** Méthode permettant d'initialiser le tableau avec des personnes
+	 * 
+	 * @param lachaine
+	 */
 	public void afficherPersonne(ChaineProd lachaine){
-//		System.out.println(n);
-//		mainApp.setniveau(lachaine, n);
 		personneSelectionne.setCellValueFactory(cellData -> cellData.getValue().getCodePropertyPersonne());
-		chaineTable.refresh();
-
-
-	
-		
+		chaineTable.refresh();		
 	}
 	
+	/** Méthode permettant de retirer les heures de la personnes mis en paramètre
+	 * 
+	 * @param lapersonne
+	 */
 	public void retirerHpersonne(Personne lapersonne) {
 		for(Personne p:mainApp.getPersonnel()) {
 			if(lapersonne.getCode().equals(p.getCode())) {
-//				System.out.println(laChaine.getCode()+" "+laChaine.getTemps()+" "+laChaine.getNiveauActivation());
 				p.changerNbHdispo(laChaine.getTemps()*laChaine.getNiveauActivation(), laChaine);
 			}
 		}
-		
-
 	}
-	
-	
-	
+		
 }
