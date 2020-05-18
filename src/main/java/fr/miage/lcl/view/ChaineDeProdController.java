@@ -55,34 +55,42 @@ public class ChaineDeProdController {
 
 	}
 
+	/**
+	 * Méthode initialisant la vue
+	 */
 	@FXML
 	private void initialize() {
-    	//Initialize button
-		// on crée l'event
+   
+		/**
+		 * 
+		 */
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
 			}
 		};
 		
+		/**
+		 * 
+		 */
 		EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showSimulation();
 			}
 		};
 		
-		// event associé au bouton
+		// Relie les boutons aux évènements
 		goAccueil.setOnAction(eventAccederAccueil);
 		viewSimulation.setOnAction(eventAccederSimulation);
 		
-		// Initialize the person table with the two columns.
+		// Initialise les colones selon les attributs de la chaîne prod
 		codeC.setCellValueFactory(cellData -> cellData.getValue().getCodeProperty());
 		nomC.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
 		entreesC.setCellValueFactory(cellData -> cellData.getValue().getEntreesCodeQuantite());
 		sortiesC.setCellValueFactory(cellData -> cellData.getValue().getSortieCodeQuantite());
 		level.setCellValueFactory(cellData -> cellData.getValue().getLevelProperty());
 		
-		//On appuie sur le bouton pour changer le niveau
+
 		changeLevel.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	String newLv = levelChange.getText();
@@ -96,7 +104,7 @@ public class ChaineDeProdController {
 	
 	/**
 	 * Fonction qui recupere une colonne cliqué et affecte la valeur du niveau dans le champ pour pouvoir le changer
-	 * @param e
+	 * @param e : la ligne sélectionné par la souris
 	 */
 	public void clickedColumn(MouseEvent e){
 		 ObservableList<ChaineProd> selected;
@@ -121,14 +129,22 @@ public class ChaineDeProdController {
 		    
 	}
 	
+	/**
+	 * Méthode appelé par le mainApp pour se faire une référence à lui même
+	 * @param mainApp
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		chaineTable.setItems(mainApp.getChaineP());
 
 	}
 	
+	/**
+	 * Méthode permettant de changer le niveau d'activation de la chaîne mis en paramètre
+	 * @param lachaine : la chaîne de prod mis en paramètre
+	 * @param n : le niveau à mettre
+	 */
 	public void changerNiveau(ChaineProd lachaine, String n){
-//		System.out.println(n);
 		mainApp.setniveau(lachaine, n);
 		chaineTable.refresh();
 		chaineTable.setItems(mainApp.getChaineP());

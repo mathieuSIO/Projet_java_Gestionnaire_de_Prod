@@ -23,21 +23,21 @@ public class AccueilOverviewController {
 	@FXML
 	private Button affecterPersonnel;
 	
-	// Reference to the main application.
+
 	private MainApp mainApp;
 
 	/**
-	 * The constructor. The constructor is called before the initialize() method.
+	 * Le constructeur de la classe. Le constructeur est appelé avant la méthode initialize().
 	 */
 	public AccueilOverviewController() {
 	}
 
 	/**
-	 * Initializes the controller class. This method is automatically called after
-	 * the fxml file has been loaded.
+	 * Méthode initialisant la vue
 	 */
 	@FXML
 	private void initialize() {
+		
 		/**
 		 * Evenement ramenant à la page affichant le stock
 		 */
@@ -47,36 +47,42 @@ public class AccueilOverviewController {
 			}
 		};
 		
+		/**
+		 * Evenement ramenant à la page affichant la page affecter le personnel
+		 */
 		EventHandler<ActionEvent> eventAffecterPersonnel = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAffecterPersonnel();
 			}
 		};
-		EventHandler<ActionEvent> eventAccederCommande = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				mainApp.showCommande();
-			}
-		};
+		
+		/**
+		 * Evenement ramenant à la page affichant les chaînes de production
+		 */
 		EventHandler<ActionEvent> eventAccederProd = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showChaineDeProd();
 			}
 		};
+		
+		/**
+		 * Evenement ramenant à la page affichant le personnel
+		 */
 		EventHandler<ActionEvent> eventAccederPersonnel = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showPersonnel();
 			}
 		};
-		// event associé au bouton
+		
+		// Relier les boutons aux évènements
 		viewStock.setOnAction(eventAccederStock);
 		viewProd.setOnAction(eventAccederProd);
-//		viewCommande.setOnAction(eventAccederCommande);
 		viewPersonnel.setOnAction(eventAccederPersonnel);
 		affecterPersonnel.setOnAction(eventAffecterPersonnel);
 	}
 
 	/**
-	 * Is called by the main application to give a reference back to itself.
+	 * Méthode appelé par le mainApp pour se faire une référence à lui même
 	 * 
 	 * @param mainApp
 	 */

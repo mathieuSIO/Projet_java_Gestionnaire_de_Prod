@@ -63,48 +63,52 @@ public class PersonnelOverviewController {
 
 	}
 
+	/**
+	 * Méthode initialisant la vue
+	 */
 	@FXML
 	private void initialize() {
-    	//Initialize button
-		// on crée l'event
+		/**
+		 * Evenement ramenant à la page affichant l'accueil
+		 */
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
 			}
 		};
 		
+		/**
+		 * Evenement ramenant à la page affichant la simulation
+		 */
 		EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showSimulation();
 			}
 		};
 		
+		/**
+		 * Evenement ramenant à la page affichant le salarié
+		 */
 		EventHandler<ActionEvent> eventAfficherSalarie = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showSalarie();		
 				}
 		};
-		// event associé au bouton
+
+		// Relier les boutons aux évènements
 		goAccueil.setOnAction(eventAccederAccueil);
 
-		
-		// Initialize the person table with the two columns.
-
+		// Remplir le tableview selon le personnel 
 		code.setCellValueFactory(cellData -> cellData.getValue().getCodeProperty());
 		nbH.setCellValueFactory(cellData -> cellData.getValue().getNbHProperty());
 		qualification.setCellValueFactory(cellData -> cellData.getValue().getQualificationProperty());
 		nbHdispo.setCellValueFactory(cellData -> cellData.getValue().getNbHdisponibleProperty());
-		// event associ� au bouton
-//    	this.ficheSalarie.setOnAction(eventAccederSalarie);
-    	
-		//On appuie sur le bouton pour changer le niveau
-
-		
 		
 	}
 	
 	/**
-	 * Fonction qui recupere une colonne cliqué et affecte la valeur du niveau dans le champ pour pouvoir le changer
+	 * Fonction qui recupere une ligne cliqué et récupère les données de la personne
+	 * Affiche ensuite la fiche de temps du salarié
 	 * @param e
 	 */
 	public void clickedColumn(MouseEvent e){
@@ -121,11 +125,15 @@ public class PersonnelOverviewController {
 		    mainApp.setSelectionnePersonne(laPersonne);
 			mainApp.showSalarie();	
 
-		    //On affiche la valeur du niveau dans l'input niveau d'activation
-//		    levelChange.setText(Integer.toString(lvI));
 		    
 	}
 	
+	
+	/**
+	 * Méthode appelé par le mainApp pour se faire une référence à lui même
+	 * 
+	 * @param mainApp
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		personneTable.setItems(mainApp.getPersonnelObservable());
