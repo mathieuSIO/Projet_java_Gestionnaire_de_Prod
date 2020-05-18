@@ -1,6 +1,9 @@
-# Project Title
+# Gestionnaire de production
+## L3 MIAGE, projet de programmation
 
-One Paragraph of project description goes here
+Ce projet concerne une application dédiée à la gestion de la production d’une usine. L’application devra per-
+mettre de connaître les stocks d’une usine, de planifier les achats et surtout de programmer l’activité des différentes
+chaînes de production.
 
 ## Getting Started
 
