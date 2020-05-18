@@ -37,9 +37,9 @@
                               <TableView fx:id="personneTable" onMouseClicked="#clickedColumn" prefHeight="457.0" prefWidth="665.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="code" text="Code" />
-                                  <TableColumn fx:id="nbH" prefWidth="130.0" text="Nom" />
-                                    <TableColumn fx:id="qualification" prefWidth="75.0" text="Entrées" />
-                                    <TableColumn fx:id="nbHdispo" prefWidth="75.0" text="Sorties" />
+                                  <TableColumn fx:id="nbH" prefWidth="130.0" text="Quota horraire" />
+                                    <TableColumn fx:id="qualification" prefWidth="75.0" text="Personnel qualifié" />
+                                    <TableColumn fx:id="nbHdispo" prefWidth="75.0" text="Heures disponibles" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

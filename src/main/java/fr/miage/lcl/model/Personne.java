@@ -35,15 +35,12 @@ public class Personne {
 	public HashMap<ChaineProd, Integer> lesChaineTravailler = new HashMap<ChaineProd, Integer>();
 
 	/**
-	 * Constructeur Element
-	 * 
-	 * @param code
-	 * @param nom
-	 * @param quantite
-	 * @param unite
+	 * Constructeur de la classe Personne
+	 * @param code : le code de la personne
+	 * @param pqualification : la qualification de la personne
+	 * @param nbH : le quota horraire de la semaine
 	 */
 	public Personne(String code, String pqualification, int nbH) {
-	
 		
 		if(pqualification.equals("oui")) {
 			nbQualifie++;
@@ -62,6 +59,12 @@ public class Personne {
 	public Personne() {}
 	
 	
+	/**
+	 * Fonction qui enregistre le nombre d'heure et la chaîne sur laquelle il va travailler
+	 * et soustraire son nombre d'heure disponible selon le temps de travail de la chaîne.
+	 * @param x : le nombre d'heure à soustraire au heures disponible du salarié
+	 * @param lac : la chaîne sur laquelle il va travailler
+	 */
 	public void changerNbHdispo(int x, ChaineProd lac) {
 		this.nbHdisponible-=x;
 		
@@ -80,6 +83,7 @@ public class Personne {
 		}
 	}
 	
+
 
 	public String toString() {
 		return "L'employé numéro : " + this.getCode() + "\n Qualification : " + this.getQualification() + 

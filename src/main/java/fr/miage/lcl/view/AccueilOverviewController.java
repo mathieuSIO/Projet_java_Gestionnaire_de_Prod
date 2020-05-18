@@ -38,7 +38,9 @@ public class AccueilOverviewController {
 	 */
 	@FXML
 	private void initialize() {
-		// on crée l'event
+		/**
+		 * Evenement ramenant à la page affichant le stock
+		 */
 		EventHandler<ActionEvent> eventAccederStock = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showStock();
@@ -70,7 +72,7 @@ public class AccueilOverviewController {
 		viewProd.setOnAction(eventAccederProd);
 //		viewCommande.setOnAction(eventAccederCommande);
 		viewPersonnel.setOnAction(eventAccederPersonnel);
-//		affecterPersonnel.setOnAction(eventAffecterPersonnel);
+		affecterPersonnel.setOnAction(eventAffecterPersonnel);
 	}
 
 	/**
