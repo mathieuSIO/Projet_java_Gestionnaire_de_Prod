@@ -57,20 +57,28 @@ public class SimulationEmployesController {
 	public SimulationEmployesController(){
 		
 	}
-	
-	
-
-	
-	
+		
+	/**
+	 * Méthode initialisant la vue
+	 */
 	@FXML
 	private void initialize() {
+		
+		//Bouton désactivé puisque production impossible
 		repartirPersonnel.setDisable(true);
+		
+		/**
+		 * Evenement ramenant à la page affichant l'accueil
+		 */
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
 			}
 		};
 		
+		/**
+		 * Evenement permettant de calculer et définir si le besoin est supérieur ou non au nombre d'employés disponible
+		 */
 		EventHandler<ActionEvent> eventCalculerQualif = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				boolean aAssez = true;
@@ -112,38 +120,33 @@ public class SimulationEmployesController {
 			}
 		};
 		
+		/**
+		 * Evenement ramenant à la page affichant la simulation
+		 */
 		EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showSimulation();
 			}
 		};
 		
+		/**
+		 * Evenement ramenant à la page affichant la page affecter le personnel
+		 */
 		EventHandler<ActionEvent> eventAffecterPersonnel = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAffecterPersonnel();
 			}
 		};
 		
+		// Relier les boutons aux évènements
 		chargerButton.setOnAction(eventCalculerQualif);
 		retourSimul.setOnAction(eventAccederSimulation);
 		goAccueil.setOnAction(eventAccederAccueil);
 		repartirPersonnel.setOnAction(eventAffecterPersonnel);
 
-//		mainApp.AfficheToutLePersonnel();
-//		ArrayList <ChaineProd> lesChaines = mainApp.getLesChainesSimulation();
-		
-//		for(ChaineProd c : lesChaines) {
-//			System.out.println(c.getNiveauActivation());
-//			besoinNbQualifie+= c.getNbQualifie()*c.getNiveauActivation();
-//			besoinNbNonQualifie = c.getNbNonQualifie()*c.getNiveauActivation();
-//		}
-//		
-//		//mainApp.AfficheToutLePersonnel();
-//		
+		// 
 		besoinQualif.setText(Integer.toString(besoinNbQualifie));
-		besoinNonQualif.setText(Integer.toString(besoinNbNonQualifie));;
-		
-		
+		besoinNonQualif.setText(Integer.toString(besoinNbNonQualifie));
 		possedeQualif.setText(Integer.toString(Personne.nbQualifie));
 		possedeNonQualif.setText(Integer.toString(Personne.nbNonQualifie));
 		System.out.println("Nombre de personne qualifié disponible : "+ this.nbPersonneQualif);
@@ -153,7 +156,11 @@ public class SimulationEmployesController {
 	}
 	
 
-	
+	/**
+	 * Méthode appelé par le mainApp pour se faire une référence à lui même
+	 * 
+	 * @param mainApp
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}

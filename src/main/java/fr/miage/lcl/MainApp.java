@@ -45,75 +45,94 @@ public class MainApp extends Application {
 	ArrayList<Element> leStock = CSVReader.lireStocks();
 	ArrayList<Element> listeElement = CSVReader.lireStocks();
 	ArrayList<Personne> listePersonnel = CSVReader.lirePersonnel();
-//	ArrayList<Personne> listePersonnelDisponible = CSVReader.lirePersonnel();
 	ArrayList<ChaineProd> listeChaine = CSVReader.lireChaine(listeElement);
 	ArrayList<ChaineProd> listeChaineP = CSVReader.lireChaine(listeElement);
 	ArrayList<ChaineProd> lesChainesActives = new ArrayList<ChaineProd>();
 	Personne lapersonneSelectionne;
 	
+	
+	/**
+	 * Créer les listes observables selon les listes récupérer depuis les fichiers csv
+	 */
 	public MainApp() {
 		elementData = FXCollections.observableArrayList(listeElement);
 		chaineData = FXCollections.observableArrayList(listeChaine);
 		lepersonnelObserv = FXCollections.observableArrayList(listePersonnel);
-//		lepersonnelDispoObserv = FXCollections.observableArrayList(listePersonnelDisponible);
 	}
 	
-	
+	/**
+	 * Fonction affectant à la variable personneSelectionne la personne mis en paramètre
+	 * @param p : la personne sélecionné
+	 */
 	public void setSelectionnePersonne(Personne p) {
 		this.lapersonneSelectionne = p;
 		System.out.println(lapersonneSelectionne);
 	}
 	
+	/**
+	 * Fonction retournant la personne sélectionné
+	 * @return une personne
+	 */
 	public Personne getSelectionnePersonne() {
 		return this.lapersonneSelectionne;
 	}
+	
+	/**
+	 * Fonction permettant de retourner le stock
+	 * @return une liste d'élément : le stock
+	 */
 	public ArrayList<Element> getLeStock(){
 		leStock.clear();
 		leStock = CSVReader.lireStocks();
 		return leStock;
 	}
 
+	/**
+	 * Fonction retournant la liste du personnel
+	 * @return une liste de personne
+	 */
 	public ArrayList<Personne> getPersonnel(){
 		return listePersonnel;
 	}
 	
-//	public ArrayList<Personne> getPersonnelDispo(){
-//		return listePersonnelDisponible;
-//	}
-	
-
-//	public ObservableList<Personne> getPersonnelDispoObservable() {
-//	miseAjourPersonnel();
-//	return lepersonnelDispoObserv;
-//}
-
-//	public void miseAjourPersonnel() {
-//		for(Personne p:listePersonnelDisponible) {
-//			if(p.getNbHdisponible()<0) {
-//				listePersonnelDisponible.remove(p);
-//			}
-//		}
-//	}
-	
-
+	/**
+	 * Fonction retournant une liste de chaîne de production
+	 * @return une liste de chaîneProd
+	 */
 	public ArrayList<ChaineProd> getListeChaineP(){
 		return listeChaineP;
 	}
 	
+	/**
+	 * Fonction retournant la liste Observable du personnel 
+	 * @return une ObservableList du personnel
+	 */
 	public ObservableList<Personne> getPersonnelObservable() {
 		return lepersonnelObserv;
 	}
 	
+	/**
+	 * Fonction retournant la liste Observable du stock 
+	 * @return une ObservableList des éléments
+	 */
 	public ObservableList<Element> getElem() {
 		return elementData;
 	}
 	
+	/**
+	 * Fonction retournant la liste Observable des chaînes de production
+	 * @return une ObservableList des chaînes de prod
+	 */
 	public ObservableList<ChaineProd> getChaine() {
-		
 		return chaineData;
 	}
 	
 	
+	/**
+	 * Fonction retournant la liste Observable des chaînes de productions ayant un niveau
+	 * d'activation > 0 
+	 * @return une ObservableList des chaînes de productions actives pour la simulation
+	 */
 	public ObservableList<ChaineProd> getChaineActiveObservable() {
 		lesChainesActives.clear();
 		lesChainesActives = this.getChainesActives();
@@ -124,7 +143,11 @@ public class MainApp extends Application {
 	}
 	
 	
-	
+	/**
+	 * Fonction affectant le niveau d'activation à la chaîne de prod
+	 * @param lachaine : la chaîne sélectionné
+	 * @param n : le niveau d'activation renseigné
+	 */
 	public void setniveau(ChaineProd lachaine, String n){
 		for(ChaineProd c : listeChaineP) {
 			if(c.getCode().equals(lachaine.getCode())) {
@@ -132,64 +155,76 @@ public class MainApp extends Application {
 			}
 
 		}
-	
 		
 	}
 	
 	
-	
+	/**
+	 * Fonction retournant la liste  des chaînes de productions ayant un niveau
+	 * d'activation > 0 
+	 * @return une liste des chaînes de productions actives pour la simulation
+	 */
 	public ArrayList<ChaineProd> getChainesActives(){
 		lesChainesActives.clear();
 		for(ChaineProd c : listeChaineP) {
 			if(c.getNiveauActivation()>0) {
 				lesChainesActives.add(c);
-//				System.out.println(c.toString());
 			}
 
 		}
-		
 		return lesChainesActives;
 	}
+	
 	
 	public ArrayList<ChaineProd> getLesChainesSimulation(){		
 		lesChainesActives.clear();
 		for(ChaineProd c : listeChaineP) {
 			if(c.getNiveauActivation()>0) {
-				lesChainesActives.add(c);
-//				System.out.println(c.toString());
 			}
-		
 		}
 		return lesChainesActives;
 	}
 	
+	/**
+	 * Méthode supprimant toutes les chaînes actives
+	 */
 	public void supprimerChaineActive() {
 		lesChainesActives.clear();
 	}
 	
+	/**
+	 * Fonction retournant une ObserableList des chaîne de production
+	 * @return ObserableList des chaînes de production
+	 */
 	public ObservableList<ChaineProd> getChaineP() {
 		chainePrevision = FXCollections.observableArrayList(listeChaineP);
 		return chainePrevision;
 	}
 
+	/**
+	 * Fonction retournant une ObserableList des stocks prévisionnel
+	 * @return ObserableList du stock restant selon la simulation
+	 */
 	public ObservableList<Element> getStockP() {
 		stockP = FXCollections.observableArrayList(listeElement);
 		return stockP;
 	}
 
+	/**
+	 * Méthode initialisant l'application
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("GestionProd");
 
 		initRootLayout();
-
-		//showStock();
-		//showChaineDeProd();
 		 showAccueil();
-
 	}
 
+	/**
+	 * Méthode créant l'interface de la page d'accueil
+	 */
 	public void initRootLayout() {
 		try {
 			// Load root layout from fxml file.
@@ -207,6 +242,10 @@ public class MainApp extends Application {
 		}
 	}
 	
+	/**
+	 * Méthode reliant le controller FicheSalarieController à la view ficheSalarieOverview
+	 * et affichant la page
+	 */
 	public void showSalarie() {
 		try {
 
@@ -221,6 +260,10 @@ public class MainApp extends Application {
 		}
 	}
 
+	/**
+	 * Méthode reliant le controller AccueilOverviewController à la view AccueilOverview
+	 * et affichant la page
+	 */
 	public void showAccueil() {
 		try {
 
@@ -235,8 +278,10 @@ public class MainApp extends Application {
 		}
 	}
 	
-	
-
+	/**
+	 * Méthode reliant le controller ChaineDeProdController à la view ChaineDeProdOverview
+	 * et affichant la page
+	 */
 	public void showChaineDeProd() {
 		try {
 			
@@ -253,7 +298,10 @@ public class MainApp extends Application {
 		}
 	}
 	
-	
+	/**
+	 * Méthode reliant le controller AffecterPersonnelController à la view AffecterPersonnelOverview
+	 * et affichant la page
+	 */
 	public void showAffecterPersonnel() {
 		try {
 			
@@ -270,6 +318,10 @@ public class MainApp extends Application {
 		}
 	}
 	
+	/**
+	 * Méthode reliant le controller SimulationController à la view SimulationOverview
+	 * et affichant la page
+	 */
 	public void showSimulation() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -285,6 +337,10 @@ public class MainApp extends Application {
 		}
 	}
 	
+	/**
+	 * Méthode reliant le controller SimulationEmployesController à la view SimulationEmployesOverview
+	 * et affichant la page
+	 */
 	public void showSimulEmployee() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -300,6 +356,10 @@ public class MainApp extends Application {
 		}
 	}
 	
+	/**
+	 * Méthode reliant le controller SimulationProduitController à la view SimulationProduitOverview
+	 * et affichant la page
+	 */
 	public void showSimulProduit() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -315,7 +375,10 @@ public class MainApp extends Application {
 		}
 	}
 	
-	
+	/**
+	 * Méthode reliant le controller StockOverviewController à la view StockOverview
+	 * et affichant la page
+	 */
 	public void showStock() {
 		try {
 
@@ -330,22 +393,11 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
-	public void showCommande() {
-		try {
-
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/CommandeOverview.fxml"));
-			AnchorPane commande = (AnchorPane) loader.load();
-			rootLayout.setCenter(commande);
-			CommandeOverviewController controller = loader.getController();
-			controller.setMainApp(this);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	
+	/**
+	 * Méthode reliant le controller PersonnelOverviewController à la view PersonnelOverview
+	 * et affichant la page
+	 */
 	public void showPersonnel() {
 		try {
 
@@ -360,6 +412,7 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public Stage getPrimaryStage() {
 		return primaryStage;

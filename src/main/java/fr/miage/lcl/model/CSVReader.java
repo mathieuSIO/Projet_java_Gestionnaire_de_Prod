@@ -20,6 +20,10 @@ public class CSVReader {
 	public final static String CHEMIN_FIC_PRIX_CSV = "./prix.csv";
 	public final static String CHEMIN_FIC_PERSONNEL_CSV = "./personnel.csv";
 
+	/**
+	 * Fonction qui retourne une liste d'élément en les récupérant depuis la source du fichier
+	 * @return une arraylist d'éléments
+	 */
 	public static ArrayList<Element> lireStocks() {
 		ArrayList<Element> listeElement = new ArrayList<Element>();
 		try {
@@ -37,6 +41,10 @@ public class CSVReader {
 		return listeElement;
 	}
 	
+	/**
+	 * Fonction qui retourne une liste de personne en les récupérant depuis la source du fichier
+	 * @return une arraylist de personne
+	 */
 	public static ArrayList<Personne> lirePersonnel() {
 		ArrayList<Personne> listePersonne = new ArrayList<Personne>();
 		try {
@@ -53,6 +61,12 @@ public class CSVReader {
 		return listePersonne;
 	}
 
+	/**
+	 * Permet de créer la liste de personne à partir du fichier personne.csv
+	 * @return une arraylist de personne
+	 * @throws FileNotFoundException : le fichier n'est pas trouvé
+	 * @throws IOException 
+	 */
 	private static ArrayList<Personne> definirPersonne() throws FileNotFoundException, IOException {
 		FileInputStream ficPersonne = new FileInputStream(CSVReader.CHEMIN_FIC_PERSONNEL_CSV);
 		BufferedReader srcPersonne = new BufferedReader(new InputStreamReader(ficPersonne));
@@ -76,7 +90,7 @@ public class CSVReader {
 	/**
 	 * Permet de créer la liste d'élément à partir du fichier element.csv
 	 * 
-	 * @return
+	 * @return une arraylist d'éléments
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
@@ -104,7 +118,7 @@ public class CSVReader {
 	 * Permet de modifier la liste passée en paramètre pour définir les prix des
 	 * éléments
 	 * 
-	 * @param listeElement
+	 * @param listeElement : la liste d'éléments
 	 * @throws IOException
 	 */
 	private static void definirPrixElement(List<Element> listeElement) throws IOException {
@@ -136,9 +150,9 @@ public class CSVReader {
 	 * Permet de trouver l'élément correspondant au code passé en paramètre, dans la
 	 * liste des elements
 	 * 
-	 * @param listeElement
-	 * @param code
-	 * @return
+	 * @param listeElement : la liste d'éléments
+	 * @param code : le code de l'élément
+	 * @return l'élément correspondant au code
 	 */
 	private static Element trouverElementEnFonctionDuCode(List<Element> listeElement, String code) {
 		for (Element element : listeElement) {
@@ -149,6 +163,12 @@ public class CSVReader {
 		return null;
 	}
 
+	
+	/**
+	 * Fonction qui permet de créer une liste de chaine à partir du fichier chaines.csv
+	 * @param listeElements : la liste d'éléments pour créer une hashmap pour les entrées et sorties
+	 * @return une arraylist de chaineProd
+	 */
 	public static ArrayList<ChaineProd> lireChaine(ArrayList<Element> listeElements) {
 		FileInputStream ficChaine;
 		try {
@@ -203,8 +223,7 @@ public class CSVReader {
 	}
 
 	/**
-	 * Suppression des parentheses dans le tableau passé en paramètre On veut
-	 * manipuler "3" et non "(3" ou encore "3)"
+	 * Suppression des parentheses dans le tableau passé en paramètre
 	 * 
 	 * @param tab
 	 * @param i
@@ -216,6 +235,12 @@ public class CSVReader {
 		tab[i + 1] = tab[i + 1].replace("(", "");
 	}
 
+	/**
+	 * Fonction permettant de trouver une chaîne en fonction de son code
+	 * @param listeChaine : la liste de chaines de prod
+	 * @param code : le code de la chaîne
+	 * @return une chaineProd correspondant au code renseigné en paramètre
+	 */
 	private static ChaineProd trouverChaineEnFonctionDuCode(List<ChaineProd> listeChaine, String code) {
 		for (ChaineProd chaine : listeChaine) {
 			if (chaine.getCode().compareTo(code) == 0) {
@@ -225,67 +250,4 @@ public class CSVReader {
 		return null;
 	}
 
-	/**
-	 * Permet de retourner une map décrivant le nombre de demande par Element
-	 * 
-	 * @return
-	 */
-	private static HashMap<Element, Integer> getMapDemandeParElement(ArrayList<Element> listeElement) {
-		FileInputStream ficPrix;
-		try {
-			ficPrix = new FileInputStream(CSVReader.CHEMIN_FIC_PRIX_CSV);
-			BufferedReader srcDemande = new BufferedReader(new InputStreamReader(ficPrix));
-
-			String ligneDemande;
-			ligneDemande = srcDemande.readLine();
-
-			HashMap<Element, Integer> mapDemandeParElement = new HashMap<Element, Integer>();
-
-			while ((ligneDemande = srcDemande.readLine()) != null) {
-				String[] tab = ligneDemande.split(";");
-				Element element = trouverElementEnFonctionDuCode(listeElement, tab[0]);
-				if (tab[3].compareTo("NA") != 0) {
-					mapDemandeParElement.put(element, Integer.parseInt(tab[3]));
-				}
-			}
-			srcDemande.close();
-			return mapDemandeParElement;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-
-	}
-
-	/**
-	 * Permet de connaitre la demande pour un element passé en paramètre
-	 * 
-	 * @return
-	 */
-	public static Integer getDemandePourUnElement(Element element) {
-		// Permet de parcourir la map des demande des elements
-		try {
-			// Permet de parcourir la hashmap connaissant la demande pour chaque element
-			for (Entry<Element, Integer> e : CSVReader.getMapDemandeParElement(CSVReader.definirElements())
-					.entrySet()) {
-				System.out.println("Passage obucles");
-				if (element.getCode().compareTo(e.getKey().getCode()) == 0) {
-					System.out.println("e.getValue : " + e.getValue());
-					return e.getValue();
-				}
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// Si on a pas trouvé, alors l'element n'a pas de demande --> on retourne 0
-		return 0;
-	}
 }

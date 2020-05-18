@@ -63,12 +63,20 @@ public class SimulationProduitController {
 	
 	private MainApp mainApp;
 	
+	/**
+	 * Constructeur de la classe
+	 */
 	public SimulationProduitController(){
 		
 	}
 	
 
-	
+	/**
+	 * Méthode enlevant au stock la quantité nécéssaire pour réaliser 
+	 * la chaîne et de définir si simulation possible ou non
+	 * @param elem : Element concerné
+	 * @param qte : Quantité à soustraire du stock
+	 */
 	public void setQuantiteSelonElement(Element elem, int qte) {
 		
 		for(Element e: leStockApresSimulation) {
@@ -85,6 +93,10 @@ public class SimulationProduitController {
 		
 	}
 
+	/**
+	 * Ajoute à la liste des éléments manquants, les éléments que nous avons pas assez en
+	 * stock pour réaliser cette simulation 
+	 */
 	public void lesQTEmanquants() {
 		for(Element elem: leStockApresSimulation) {
 			if((elem.getQuantite()<0)&&(!lesElementsManquants.contains(elem))){
@@ -94,19 +106,28 @@ public class SimulationProduitController {
 		}
 
 		for(Element e: lesElementsManquants) {
-			this.leManquedeStock += "\nIl vous manque "+Math.abs(e.getQuantite())+" "+e.getUnite()+" de '"+e.getNom()+"'";
+			this.leManquedeStock += "Il vous manque "+Math.abs(e.getQuantite())+" "+e.getUnite()+" de '"+e.getNom()+"'.\n";
 
 		}
 		
 		
 	}
 	
+	/**
+	 * Clone la liste de stock, pour avoir un stock temporaire
+	 * @param ar1 : la liste de stock
+	 */
 	public void transfererStock(ArrayList <Element> ar1) {
 		for(Element e : ar1) {
 			this.leStockApresSimulation.add(e);
 		}
 	}
 	
+	/**
+	 * Fonction retournant la quantité de stock selon l'élément
+	 * @param elem : l'élément 
+	 * @return un integer : la quantité de l'élément en stock
+	 */
 	public int getQuantiteStockSelonElement(Element elem) {
 		int res = 0;
 
@@ -119,6 +140,11 @@ public class SimulationProduitController {
 		return res;
 	}
 
+	/**
+	 * Evenement calculant si le stock est suffisant pour
+	 * produire cette simulation
+	 * @param event
+	 */
 	@FXML
 	private void productButtonAction(ActionEvent event) {
 		String stockRestant = "";
@@ -129,7 +155,6 @@ public class SimulationProduitController {
 
 		String leres ="";
 		
-//		ArrayList <Element> leStockApresSimulation = mainApp.getLeStock();
 
 		int lvChaine = 0;
 		for(ChaineProd c: this.lesChainesActives) {
@@ -167,17 +192,26 @@ public class SimulationProduitController {
 		lesElementsManquants.clear();
 		}
 	
-	
+	/**
+	 * Méthode initialisant la vue
+	 */
 	@FXML
 	private void initialize() {
 
+		/**
+		 * Evenement ramenant à la page 
+		 * affichant l'accueil
+		 */
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
 			}
 		};
 		
-//		label1.setText("");
+		/**
+		 * Evenement ramenant à la page 
+		 * affichant la simulation
+		 */
 		EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showSimulation();
@@ -186,7 +220,7 @@ public class SimulationProduitController {
 		
 
 		
-//		chargerButton.setOnAction(eventCalculerQualif);
+		//Relier les évènements aux boutons
 		retourSimul.setOnAction(eventAccederSimulation);
 		goAccueil.setOnAction(eventAccederAccueil);
 		
@@ -194,7 +228,11 @@ public class SimulationProduitController {
 	}
 	
 
-	
+	/**
+	 * Méthode appelé par le mainApp pour se faire une référence à lui même
+	 * 
+	 * @param mainApp
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 
