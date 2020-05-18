@@ -84,9 +84,10 @@ public class SimulationEmployesController {
 				boolean aAssez = true;
 				ArrayList <ChaineProd> lesChaines = mainApp.getLesChainesSimulation();
 				for(ChaineProd c : lesChaines) {
+
 				besoinNbQualifie+= c.getNbQualifie()*c.getNiveauActivation();
 				besoinNbNonQualifie += c.getNbNonQualifie()*c.getNiveauActivation();
-				
+				}
 				String conclusion = "";
 				
 				if(besoinNbQualifie >	nbPersonneQualif ) {
@@ -108,11 +109,13 @@ public class SimulationEmployesController {
 					conclusion+="\nVous avez assez de personnes non qualifiés pour réaliser ces chaînes.";
 				}
 				
-			
+
+				besoinQualif.setText("dqsdq");
+
 				besoinQualif.setText(Integer.toString(besoinNbQualifie));
 				besoinNonQualif.setText(Integer.toString(besoinNbNonQualifie));;
 				resume.setText(conclusion);
-				}
+				
 				if(aAssez) {
 					repartirPersonnel.setDisable(false);
 				}
