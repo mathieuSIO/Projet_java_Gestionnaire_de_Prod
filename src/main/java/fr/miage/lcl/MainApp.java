@@ -254,7 +254,7 @@ public class MainApp extends Application {
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/ficheSalarieOverview.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/FicheSalarieOverview.fxml"));
 			AnchorPane c = (AnchorPane) loader.load();
 			rootLayout.setCenter(c);
 			FicheSalarieController controller = loader.getController();
