@@ -97,7 +97,7 @@ public class AffecterPersonnelController {
 		level.setCellValueFactory(cellData -> cellData.getValue().getLevelProperty());
 
 		comboBox.valueProperty().addListener(observable -> System.out.printf("Valeur sélectionnée: %s", comboBox.getValue()).println());
-		
+		personneSelectionne.setCellValueFactory(cellData -> cellData.getValue().getCodePropertyPersonne());
 		//On appuie sur le bouton pour changer le niveau
 		choixPersonne.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
