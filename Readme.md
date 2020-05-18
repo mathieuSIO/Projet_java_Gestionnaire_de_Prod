@@ -1,4 +1,4 @@
-# Gestionnaire de production
+# Gestionnaire de production V1.0
 ## L3 MIAGE, projet de programmation
 
 Ce projet concerne une application dédiée à la gestion de la production d’une usine. L’application devra per-
@@ -26,71 +26,30 @@ prix.csv
 ```
 
 ### Installation
-Afin de pouvoir faire marcher l'application, 
+Afin de pouvoir faire marcher l'application, il faut déposer les fichiers .csv dans le dossier où se trouve l'application en .jar
+
+
+## Lancer l'application
+
+Pour lancer il faut ouvrir un cmd ou niveau de l'application en .jar et executer cette commmande
 
 ```
-Give the example
+java -jar GestionProd.jar
 ```
 
-And repeat
 
-```
-until finished
-```
+## Fait Avec
 
-End with an example of getting some data out of the system or using it for a little demo
+* [JavaFx](https://openjfx.io/) - Bibliothèque java pour l'interface graphique
+* [Maven](https://maven.apache.org/) - Outil de gestion et d'automatisation
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+https://github.com/mathieuSIO/Projet_java_Gestionnaire_de_Prod
 
-## Authors
+## Auteurs
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
+* **Carvajal Mathieu** 
+* **Lacroix Valentin** 
+* **Ly Axel** 
