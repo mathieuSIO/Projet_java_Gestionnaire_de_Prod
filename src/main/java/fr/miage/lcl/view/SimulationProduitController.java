@@ -18,14 +18,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class SimulationProduitController {
+	@FXML
+	private Label resume;
+
 
 	@FXML
-	private Label label1;
+	private TextArea label1;
 
 	@FXML
 	private Label label2;
@@ -35,9 +39,6 @@ public class SimulationProduitController {
 
 	@FXML
 	private Label label4;
-
-	@FXML
-	private Label resume;
 	
 	@FXML
 	private Button goAccueil;
@@ -138,11 +139,11 @@ public class SimulationProduitController {
 			lvChaine = c.getActivationLevel();
 			
 			for (Element element : c.getEntrees().keySet()) {
-				stockRestant+="\n"+element.getCode() +" "+ c.getEntrees().get(element);
+				stockRestant+="La chaine numéro "+element.getCode() +" : "+ element.getNom();
 				stockRestant+="\nLe stock était de : "+ getQuantiteStockSelonElement(element);
 				int qte = Math.round(c.getEntrees().get(element))*lvChaine;
 				setQuantiteSelonElement(element,qte);
-				stockRestant+="\nLe stock est désormais : "+ getQuantiteStockSelonElement(element);
+				stockRestant+="\nLe stock est désormais : "+ getQuantiteStockSelonElement(element)+"\n\n";
 			
 			}
 		}
@@ -176,7 +177,7 @@ public class SimulationProduitController {
 			}
 		};
 		
-		label1.setText("");
+//		label1.setText("");
 		EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showSimulation();

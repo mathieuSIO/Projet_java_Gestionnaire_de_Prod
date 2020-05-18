@@ -8,7 +8,6 @@
 
 <AnchorPane fx:id="anchorpane" prefHeight="634.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.lcl.view.SimulationProduitController">
    <children>
-      <Label fx:id="label1" layoutX="24.0" layoutY="260.0" prefHeight="314.0" prefWidth="500.0" text="Label" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="260.0" />
       <Text layoutX="23.0" layoutY="62.6103515625" strokeType="OUTSIDE" strokeWidth="0.0" text="Faites la simulation :" wrappingWidth="407.205078125" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="27.0">
          <font>
             <Font size="33.0" />
@@ -22,5 +21,6 @@
       </Text>
       <Label fx:id="resume" layoutX="24.0" layoutY="198.0" prefHeight="62.0" prefWidth="719.0" text="Veuillez charger la simulation afin de vérifier l'état des stocks" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="198.0" />
       <Button layoutX="339.0" layoutY="88.0" mnemonicParsing="false" onAction="#productButtonAction" text="Charger" />
+      <TextArea fx:id="label1" layoutX="46.0" layoutY="278.0" prefHeight="200.0" prefWidth="608.0" />
    </children>
 </AnchorPane>
