@@ -28,25 +28,18 @@ public class StockOverviewController {
     @FXML
     private Button goAccueil;
 
-
     // Reference to the main application.
     private MainApp mainApp;
 
-    /**
-     * The constructor.
-     * The constructor is called before the initialize() method.
-     */
+    // constructeur vide
     public StockOverviewController() {
     }
 
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */
     @FXML
+    // Méthode permettant d'initialiser la vue
     private void initialize() {
-    	//Initialize button
-		// on crée l'event
+
+		// event permettant d'accéder à la vue : accueil 
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
@@ -56,8 +49,6 @@ public class StockOverviewController {
 		// event associé au bouton
 		goAccueil.setOnAction(eventAccederAccueil);
     	
-    	
-        // Initialize the person table with the two columns.
         code.setCellValueFactory(cellData -> cellData.getValue().getCodeProperty());
         nom.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
         qte.setCellValueFactory(cellData -> cellData.getValue().getQuantiteProperty());
@@ -66,16 +57,12 @@ public class StockOverviewController {
         prixV.setCellValueFactory(cellData -> cellData.getValue().getPrixVenteProperty());
     }
 
-    /**
-     * Is called by the main application to give a reference back to itself.
+	/** Méthode appelé par le main pour se faire une référence à lui même
      * 
      * @param mainApp
      */
     public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-
-        // Add observable list data to the table
-        
+        this.mainApp = mainApp;        
         personTable.setItems(mainApp.getStockP());
     }
 }

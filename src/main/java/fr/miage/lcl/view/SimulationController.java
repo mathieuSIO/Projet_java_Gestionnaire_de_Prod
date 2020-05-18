@@ -64,7 +64,11 @@ public class SimulationController {
 //		mainApp.AfficheToutLePersonnel();
 	}
 	
-	
+	/** Méthode permettant de définir une quantité d'un élément après une simulation
+	 * 
+	 * @param elem
+	 * @return
+	 */
 	public int getQuantiteStockSelonElement(Element elem) {
 		int res = 0;
 		ArrayList <Element> leStock = mainApp.getLeStock();
@@ -74,63 +78,41 @@ public class SimulationController {
 				res = e.getQuantite();
 			}
 		}
-		return res;
-		
+		return res;	
 	}
 	
+	/** Méthode permettant de récupérer une quantité selon l'élément après une simulation 
+	 * 
+	 * @param elem
+	 * @param qte
+	 */
 	public void setQuantiteSelonElement(Element elem, int qte) {
-		
 		for(Element e: this.leStockApresSimulation) {
 			if(elem == e) {
 				e.setQuantite(e.getQuantite()-qte);
 			}
 		}
 	}
-
-	@FXML
-	private void productButtonAction(ActionEvent event) {
-//		leStockApresSimulation = mainApp.getLeStock();
-//
-//
-//		ArrayList <Element> leStockApresSimulation = mainApp.getLeStock();
-//		ArrayList <ChaineProd> lesChainesActives = mainApp.getLesChainesSimulation();
-//		int lvChaine = 0;
-//		boolean stocksuffisant = true;
-//		for(int i =0; i<lesChainesActives.size();i++) {
-//			ChaineProd laC = lesChainesActives.get(i);
-//
-//			
-//			//On recupere le niveau d'activation de la chaine en cours
-//			lvChaine = laC.getActivationLevel();
-//			
-//			for (Element element : laC.getEntrees().keySet()) {
-//				System.out.println(element.getCode() +" "+ laC.getEntrees().get(element));
-//				System.out.println("Le stock est de : "+ getQuantiteStockSelonElement(element));
-//				int qte = Math.round(laC.getEntrees().get(element));
-//				setQuantiteSelonElement(element,qte);
-//				System.out.println("Le stock est désormais : "+ getQuantiteStockSelonElement(element));
-//			
-//			}
-//		}
-	}
 	
 	public ChaineProd laChaine = new ChaineProd();
 
 	private MainApp mainApp;
 
+	 // Constructeur vide
 	public void ChaineDeprod() {
-
 	}
 
 	@FXML
+	 //Méthode permettant d'initialiser la vue
 	private void initialize() {
-    	//Initialize button
-		// on crée l'event
+
+		// event permettant d'accéder à la vue : accueil 
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
 			}
 			
+			// event permettant d'accéder à la vue : simulation 
 			EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					mainApp.showSimulation();
@@ -138,63 +120,64 @@ public class SimulationController {
 			};
 		};
 		
+		// event permettant d'accéder à la vue : chaine de prod 
 		EventHandler<ActionEvent> eventAccederProd = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showChaineDeProd();
-			}
-						
+			}			
 		};
 		
+		// event permettant d'accéder à la vue : simulation employé 
 		EventHandler<ActionEvent> eventAccederSimulationEmployee = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showSimulEmployee();
-	
-			}
-						
+			}				
 		};
 		
+		// event permettant d'accéder à la vue : simulation produit 
 		EventHandler<ActionEvent> eventAccederSimulationProduit= new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showSimulProduit();
 			}
 		};
-		// event associé au bouton
+		
+		// event associé aux boutons
 		simulProduct.setOnAction(eventAccederSimulationProduit);
 		goAccueil.setOnAction(eventAccederAccueil);
 		simulEmployee.setOnAction(eventAccederSimulationEmployee);
 		viewChaineProd.setOnAction(eventAccederProd);
-		// Initialize the person table with the two columns.
+		
 		codeC.setCellValueFactory(cellData -> cellData.getValue().getCodeProperty());
 		nomC.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
 		entreesC.setCellValueFactory(cellData -> cellData.getValue().getEntreesCodeQuantite());
 		sortiesC.setCellValueFactory(cellData -> cellData.getValue().getSortieCodeQuantite());
-		level.setCellValueFactory(cellData -> cellData.getValue().getLevelProperty());
-				
+		level.setCellValueFactory(cellData -> cellData.getValue().getLevelProperty());	
 	}
 	
 	/**
-	 * Fonction qui recupere une colonne cliqué et affecte la valeur du niveau dans le champ pour pouvoir le changer
+	 * Fonction qui récupère une colonne cliquée et affecte la valeur du niveau 
+	 * dans le champz pour pouvoir le changer
 	 * @param e
 	 */
 	public void clickedColumn(MouseEvent e){
 		 ObservableList<ChaineProd> selected;
 		 int lvI = 0;
 		    selected = chaineTable.getSelectionModel().getSelectedItems();
-		    //System.out.println(selected.toString());
 		    for (ChaineProd cp : selected) {
-		    	//System.out.println(cp.toString());
 		    	
 		    	//On recupere la valeur du niveau
 		        IntegerProperty lv = cp.getLevel();
-		        
+		      
 		        //On met transforme la valeur en int
 		        lvI = lv.getValue().intValue();
 		        laChaine = cp;
-		        //System.out.println(laChaine.toString());
-		    }
-		    		    
+		    }    		    
 	}
 	
+	/** Méthode appelé par le main pour se faire une référence à lui même
+	 * 
+	 * @param mainApp
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		chaineTable.setItems(mainApp.getChaineActiveObservable());

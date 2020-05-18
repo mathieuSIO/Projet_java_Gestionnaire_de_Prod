@@ -18,7 +18,6 @@ public class ChaineProd {
 	/// Les attributs
 	private StringProperty code;
 	private StringProperty nom;
-	//private IntegerProperty niveauActivation;
 	private MapProperty<Element, Float> entrees;
 	private MapProperty<Element, Float> sorties;
 	private int activationLevel;
@@ -27,14 +26,28 @@ public class ChaineProd {
 	private IntegerProperty nbPersonnelQualif;
 	
 	public ArrayList<Personne> personnelChoisi = new ArrayList <Personne>();
-	/// Constructeur
-
-	public ChaineProd() {
-		
-	}
+	
+	// Constructeur vide
+	public ChaineProd() {}
+	
+	/** Constructeur contenant uniquement le nom de la chaîne
+	 * 
+	 * @param C
+	 */
 	public ChaineProd(String C) {
 		this.code = new SimpleStringProperty(C);
 	}
+	
+	/** Constructeur complet
+	 * 
+	 * @param code
+	 * @param nom
+	 * @param mapE
+	 * @param mapS
+	 * @param temps
+	 * @param nbPNonQ
+	 * @param nbPQ
+	 */
 	public ChaineProd(String code, String nom, Map<Element, Float> mapE, Map<Element, Float> mapS, String temps, 
 			String nbPNonQ, String nbPQ) {
 		this.code = new SimpleStringProperty(code);
@@ -58,7 +71,6 @@ public class ChaineProd {
 		this.temps = ConverterProperty.integerToIntegerProperty(tmpT);
 		this.nbPersonnelNonQualif = ConverterProperty.integerToIntegerProperty(tmpPNQ);
 		this.nbPersonnelQualif = ConverterProperty.integerToIntegerProperty(tmpnbQ);
-		//this.niveauActivation = new SimpleIntegerProperty(10);
 	}
 
 
@@ -130,9 +142,6 @@ public class ChaineProd {
 	public IntegerProperty getNbQualifieProperty() {
 		return ConverterProperty.integerToIntegerProperty(getNbQualifie());
 	}
-//	public void setNiveauActivation(Integer niveau) {
-//		this.niveauActivation = ConverterProperty.integerToIntegerProperty(niveau);
-//	}
 
 	public String getNom() {
 		return ConverterProperty.stringPropertyToString(this.nom);
@@ -146,14 +155,6 @@ public class ChaineProd {
 	public IntegerProperty getLevel() {
 		return ConverterProperty.integerToIntegerProperty(this.activationLevel);
 	}
-	
-	/**
-	 * Permet de mettre à jour le niveau
-	 * @param lv 
-	 */
-//	public void setLevel(int lv) {
-//		this.niveauActivation = ConverterProperty.integerToIntegerProperty(lv);
-//	}
 	
 	public IntegerProperty getLevelProperty() {
 		IntegerProperty sp = this.getLevel();
@@ -204,7 +205,6 @@ public class ChaineProd {
 	}
 	
 
-	
 	/**
 	 * Permet de retourner une hashmap contenant toutes les sorties (code, quantité)
 	 * associé à la chaine
@@ -232,8 +232,6 @@ public class ChaineProd {
 	public MapProperty<Element, Float> getSorties() {
 		return sorties;
 	}
-
-
 
 	public String getCodePersonne() {
 		String lecode = "";

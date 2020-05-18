@@ -51,31 +51,35 @@ public class FicheSalarieController {
 	}
 		
 	@FXML
+	/**
+	 * Méthode permettant d'initialiser la vue
+	 */
 	private void initialize() {
 		
-
-		
+		// event permettant d'accéder à la vue : accueil 
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
 			}
 		};
 		
+		// event permettant d'accéder à la vue : personnel 
 		EventHandler<ActionEvent> eventAccederPersonnel = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showPersonnel();
 			}
 		};
 		
-
-//		chargerButton.setOnAction(eventCalculerQualif);
+		// event associé aux boutons
 		retourPersonnel.setOnAction(eventAccederPersonnel);
 		retourAccueil.setOnAction(eventAccederAccueil);
 		
-
 	}
 	
-
+	/** Méthode retournant l'information si le salarié est qualifié ou non
+	 * 
+	 * @return
+	 */
 	public String ficheduSalarie() {
 		String qualif = "";
 		if(lesalarie.getQualification().equals("oui")) {
@@ -101,24 +105,22 @@ public class FicheSalarieController {
 				Integer cptt = (Integer) mapentry.getValue();
 				cpt+= cptt;
 				ccls+="\nLa chaine "+c.getCode()+" ("+c.getNom()+") pendant "+mapentry.getValue()+" heures.";
-			}
-			
+			}	
 			ccls+="\n\n\nLe salarié travaille un total de "+cpt+" heures cette semaine.\nIl est encore disponible pour"
-					+ " "+lesalarie.getNbHdisponible()+" heures cette semaine";
-			
+					+ " "+lesalarie.getNbHdisponible()+" heures cette semaine";	
 		}
-		
 		return ccls;
 	}
 	
+	/** Méthode appelé par le main pour se faire une référence à lui même
+	 * 
+	 * @param mainApp
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		lesalarie = mainApp.getSelectionnePersonne();
 		lecode.setText(lesalarie.getCode());
 		resume.setText(ficheduSalarie());
-		
-
-
 	}
 
 }
