@@ -9,7 +9,6 @@ import fr.miage.lcl.model.Personne;
 import fr.miage.lcl.view.AccueilOverviewController;
 import fr.miage.lcl.view.AffecterPersonnelController;
 import fr.miage.lcl.view.ChaineDeProdController;
-import fr.miage.lcl.view.CommandeOverviewController;
 import fr.miage.lcl.view.PersonnelOverviewController;
 import fr.miage.lcl.view.SimulationController;
 import fr.miage.lcl.view.SimulationEmployesController;
