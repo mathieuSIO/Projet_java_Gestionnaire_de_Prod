@@ -61,7 +61,7 @@ public class SimulationController {
 	
 	@FXML
 	private void employeeButtonAction(ActionEvent event) {
-		mainApp.AfficheToutLePersonnel();
+//		mainApp.AfficheToutLePersonnel();
 	}
 	
 	

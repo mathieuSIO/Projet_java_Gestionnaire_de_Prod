@@ -4,7 +4,6 @@ import com.sun.javafx.collections.MappingChange.Map;
 
 import fr.miage.lcl.MainApp;
 import fr.miage.lcl.model.ChaineProd;
-import fr.miage.lcl.model.Commande;
 import fr.miage.lcl.model.Personne;
 import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
