@@ -175,11 +175,16 @@ public class MainApp extends Application {
 		return lesChainesActives;
 	}
 	
-	
+	/**
+	 * Fonction retournant la liste  des chaînes de productions ayant un niveau
+	 * d'activation > 0 
+	 * @return une liste des chaînes de productions actives pour la simulation
+	 */
 	public ArrayList<ChaineProd> getLesChainesSimulation(){		
 		lesChainesActives.clear();
 		for(ChaineProd c : listeChaineP) {
 			if(c.getNiveauActivation()>0) {
+				lesChainesActives.add(c);
 			}
 		}
 		return lesChainesActives;

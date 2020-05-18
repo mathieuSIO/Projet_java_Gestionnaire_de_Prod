@@ -61,7 +61,7 @@ public class SimulationController {
 	
 	@FXML
 	private void employeeButtonAction(ActionEvent event) {
-//		mainApp.AfficheToutLePersonnel();
+
 	}
 	
 	/** Méthode permettant de définir une quantité d'un élément après une simulation
@@ -102,23 +102,24 @@ public class SimulationController {
 	public void ChaineDeprod() {
 	}
 
-	@FXML
-	 //Méthode permettant d'initialiser la vue
-	private void initialize() {
 
+	 //Méthode permettant d'initialiser la vue
+	@FXML
+	private void initialize() {
 		// event permettant d'accéder à la vue : accueil 
 		EventHandler<ActionEvent> eventAccederAccueil = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				mainApp.showAccueil();
 			}
+		};
 			
-			// event permettant d'accéder à la vue : simulation 
-			EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
+		// event permettant d'accéder à la vue : simulation 
+		EventHandler<ActionEvent> eventAccederSimulation = new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					mainApp.showSimulation();
 				}
 			};
-		};
+
 		
 		// event permettant d'accéder à la vue : chaine de prod 
 		EventHandler<ActionEvent> eventAccederProd = new EventHandler<ActionEvent>() {
@@ -156,7 +157,7 @@ public class SimulationController {
 	
 	/**
 	 * Fonction qui récupère une colonne cliquée et affecte la valeur du niveau 
-	 * dans le champz pour pouvoir le changer
+	 * dans le champs pour pouvoir le changer
 	 * @param e
 	 */
 	public void clickedColumn(MouseEvent e){
