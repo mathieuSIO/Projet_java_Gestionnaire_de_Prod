@@ -5,23 +5,28 @@ Ce projet concerne une application dédiée à la gestion de la production d’u
 mettre de connaître les stocks d’une usine, de planifier les achats et surtout de programmer l’activité des différentes
 chaînes de production.
 
-## Getting Started
+## Pour commencer
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+### Prérequis
 
-What things you need to install the software and how to install them
-
+Afin de lancer et faire fonctionner l'application vous avez besoin du JKDK
 ```
-Give examples
+JDK 1.80
+```
+Du fichier en .jar
+
+Et de 4 fichiers csv
+```
+chaines.csv
+element.csv
+personnel.csv
+prix.csv
 ```
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+### Installation
+Afin de pouvoir faire marcher l'application, 
 
 ```
 Give the example
